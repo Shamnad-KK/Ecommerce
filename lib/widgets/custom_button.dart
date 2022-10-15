@@ -7,29 +7,48 @@ class CustomButtonWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.onTap,
-    this.inverted = false,
   });
   final String text;
   final VoidCallback onTap;
-  final bool inverted;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: inverted ? Colors.white : AppColors.customButtonColor,
-        side: const BorderSide(color: Colors.black, width: 0.1),
-        minimumSize: const Size(double.infinity, 50),
-      ),
-      onPressed: () {
+    final size = MediaQuery.of(context).size;
+    return InkWell(
+      onTap: () {
         onTap();
       },
-      child: Text(
-        text,
-        style: inverted
-            ? AppTextStyle.customButtonBlackStyle
-            : AppTextStyle.customButtonWhiteStyle,
+      child: Container(
+        height: 50,
+        width: size.width,
+        decoration: BoxDecoration(
+          color: AppColors.customButtonColor,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: AppTextStyle.buttonBlackText,
+          ),
+        ),
       ),
     );
+    //  ElevatedButton(
+    //   style: ElevatedButton.styleFrom(
+    //     padding: EdgeInsets.zero,
+    //     backgroundColor: inverted ? Colors.white : AppColors.customButtonColor,
+    //     side: const BorderSide(color: Colors.black, width: 0.1),
+    //     minimumSize: const Size(double.infinity, 50),
+    //   ),
+    //   onPressed: () {
+    //     onTap();
+    //   },
+    //   child: Text(
+    //     text,
+    //     style: inverted
+    //         ? AppTextStyle.customButtonBlackStyle
+    //         : AppTextStyle.customButtonWhiteStyle,
+    //   ),
+    // );
   }
 }
