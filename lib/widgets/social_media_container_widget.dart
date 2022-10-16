@@ -4,8 +4,8 @@ import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:flutter/material.dart';
 
-class SocialMediaSignInWidget extends StatelessWidget {
-  const SocialMediaSignInWidget({
+class SocialMediaContainerWidget extends StatelessWidget {
+  const SocialMediaContainerWidget({
     Key? key,
     required this.text,
     required this.onTap,

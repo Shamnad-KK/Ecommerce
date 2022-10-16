@@ -1,9 +1,10 @@
 import 'package:ecommerce/controller/onboarding_controller.dart';
+import 'package:ecommerce/controller/signup_controller.dart';
 import 'package:ecommerce/controller/splash_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
-import 'package:ecommerce/view/login/login_screen.dart';
+import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (ctx) => SplashController()),
         ChangeNotifierProvider(create: (ctx) => OnboardingController()),
+        ChangeNotifierProvider(create: (ctx) => SignUpController()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
-        home: const LoginScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

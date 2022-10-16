@@ -10,4 +10,8 @@ class AppColors {
   static const Color mediaButtonBg = Color(0xFF1F222A);
   static const Color dullWhite = Color.fromARGB(206, 245, 245, 245);
   static const Color borderColor = Color(0xFF35383F);
+  static const Color textFieldFillColor = Color(0xFF1F222A);
+  static const Color prefixIconColor = Color(0xFF9E9E9E);
+  static const Color suffixIconColor = Color(0xFF9E9E9E);
+  static const Color hintTextColor = Color.fromARGB(183, 245, 245, 245);
 }

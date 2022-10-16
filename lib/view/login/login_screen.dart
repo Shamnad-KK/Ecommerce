@@ -2,8 +2,10 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/view/login/widgets/social_media_signin_widget.dart';
+import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/widgets/social_media_container_widget.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/login_or_signup_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -31,38 +33,34 @@ class LoginScreen extends StatelessWidget {
                     style: AppTextStyle.whiteLargeTextStyle,
                   ),
                   AppSpacing.kHeight30,
-                  SocialMediaSignInWidget(
+                  SocialMediaContainerWidget(
                     image: "assets/social_media_icons/facebook-logo-3-1.png",
                     text: "Continue with Facebook",
                     onTap: () {},
                   ),
                   AppSpacing.kHeight10,
-                  SocialMediaSignInWidget(
+                  SocialMediaContainerWidget(
                     image: "assets/social_media_icons/google-logo.png",
                     text: "Continue with Google",
                     onTap: () {},
                   ),
                   AppSpacing.kHeight30,
-                  const Text("or"),
+                  const Text(
+                    "or",
+                    style: AppTextStyle.bodyText1,
+                  ),
                   AppSpacing.kHeight30,
                   CustomButtonWidget(
                     text: "Sign in with password",
                     onTap: () {},
                   ),
                   AppSpacing.kHeight30,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Don't have an account?",
-                        style: AppTextStyle.dullWhiteNormalTextStyle,
-                      ),
-                      AppSpacing.kWidth10,
-                      Text(
-                        "Sign up",
-                        style: AppTextStyle.bodyText1,
-                      ),
-                    ],
+                  LoginOrSignUpTextWidget(
+                    leadingText: "Don't have an account?",
+                    mainText: "Sign up",
+                    onTap: () {
+                      Navigator.pushNamed(context, RouteNames.signUpScreen);
+                    },
                   )
                 ],
               ),

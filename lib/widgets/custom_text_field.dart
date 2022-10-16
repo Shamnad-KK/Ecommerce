@@ -1,3 +1,5 @@
+import 'package:ecommerce/helpers/app_colors.dart';
+import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,15 +15,14 @@ class CustomTextField extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.hint,
-    this.hintStyle,
     this.isDense,
     this.prefixIcon,
     this.prefix,
     this.suffixIcon,
     this.suffix,
     this.filled,
-    this.fillColor,
-    this.border,
+    this.fillColor = AppColors.textFieldFillColor,
+    this.onchanged,
   });
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -32,7 +33,6 @@ class CustomTextField extends StatelessWidget {
   final int? maxLines;
   final List<TextInputFormatter>? inputFormatters;
   final String? hint;
-  final TextStyle? hintStyle;
   final bool? isDense;
   final Widget? prefixIcon;
   final Widget? prefix;
@@ -40,7 +40,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffix;
   final bool? filled;
   final Color? fillColor;
-  final InputBorder? border;
+  final Function(String)? onchanged;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +53,10 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       maxLines: maxLines,
       inputFormatters: inputFormatters,
+      onChanged: onchanged,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: hintStyle,
+        hintStyle: AppTextStyle.hintTextStyle,
         isDense: isDense,
         prefixIcon: prefixIcon,
         prefix: prefix,
@@ -63,7 +64,21 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         filled: filled,
         fillColor: fillColor,
-        border: border,
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.borderColor,
+          ),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.borderColor,
+          ),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.borderColor,
+          ),
+        ),
       ),
     );
   }

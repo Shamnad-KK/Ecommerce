@@ -22,6 +22,7 @@ class OnboardingScreen extends StatelessWidget {
         child: PageView.builder(
           controller: onboardingController.pageController,
           itemCount: onboardingList.length,
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,

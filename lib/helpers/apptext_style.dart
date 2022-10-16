@@ -11,6 +11,10 @@ class AppTextStyle {
     fontSize: 14,
   );
 
+  static const bodySmallText = TextStyle(
+    fontSize: 12,
+  );
+
   static const appbarTextStyle = TextStyle(
     fontSize: 15,
     //fontWeight: FontWeight.bold,
@@ -28,6 +32,11 @@ class AppTextStyle {
 
   static const dullWhiteNormalTextStyle = TextStyle(
     color: AppColors.dullWhite,
+    fontSize: 14,
+  );
+
+  static const hintTextStyle = TextStyle(
+    color: AppColors.hintTextColor,
     fontSize: 14,
   );
 }
