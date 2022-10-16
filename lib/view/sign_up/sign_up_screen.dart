@@ -98,7 +98,10 @@ class SignUpScreen extends StatelessWidget {
                   AppSpacing.kHeight10,
                   CustomButtonWidget(
                     text: "Sign up",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamedAndRemoveUntil(context,
+                          RouteNames.accountSetupScreen, (route) => false);
+                    },
                   ),
                   AppSpacing.kHeight30,
                   const Text(

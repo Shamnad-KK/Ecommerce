@@ -1,4 +1,5 @@
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/view/account_setup/account_setup_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
@@ -33,6 +34,10 @@ class AppRoutes {
       case RouteNames.forgotPasswordScreen:
         return MaterialPageRoute(
           builder: (context) => const ForgotPasswordScreen(),
+        );
+      case RouteNames.accountSetupScreen:
+        return MaterialPageRoute(
+          builder: (context) => const AccountSetupScreen(),
         );
       default:
         return MaterialPageRoute(

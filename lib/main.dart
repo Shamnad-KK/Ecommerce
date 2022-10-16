@@ -1,3 +1,4 @@
+import 'package:ecommerce/controller/account_setup_controller.dart';
 import 'package:ecommerce/controller/forgot_password_controller.dart';
 import 'package:ecommerce/controller/login_controller.dart';
 import 'package:ecommerce/controller/onboarding_controller.dart';
@@ -6,6 +7,7 @@ import 'package:ecommerce/controller/splash_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
+import 'package:ecommerce/view/account_setup/account_setup_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => SignUpController()),
         ChangeNotifierProvider(create: (ctx) => LoginController()),
         ChangeNotifierProvider(create: (ctx) => ForgotPasswordController()),
+        ChangeNotifierProvider(create: (ctx) => AccountSetupController()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
