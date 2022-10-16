@@ -62,9 +62,10 @@ flutter:
     - assets/onboarding/RADDESTLOOKS_NET-removebg-preview.png
     - assets/onboarding/f.png
     - assets/onboarding/An_Unexpected_Fairytale_-_CHAPTER_FOUR-removebg-preview.png
-    - assets/login/circle.png
+    - assets/welcome/circle.png
     - assets/social_media_icons/facebook-logo-3-1.png
     - assets/social_media_icons/google-logo.png
+    - assets/forgot_password/forgotpassword-removebg-preview.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

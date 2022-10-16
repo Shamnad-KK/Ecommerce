@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SignUpController extends ChangeNotifier {
+class LoginController extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

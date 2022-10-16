@@ -3,6 +3,7 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:ecommerce/widgets/login_or_signup_text_widget.dart';
@@ -45,22 +46,33 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   AppSpacing.kHeight10,
-                  CustomTextField(
-                    controller: signUpController.passwordController,
-                    hint: "Password",
-                    keyboardType: TextInputType.emailAddress,
-                    filled: true,
-                    prefixIcon: const Icon(
-                      Icons.lock_outline_rounded,
-                      color: AppColors.prefixIconColor,
-                      size: 18,
-                    ),
-                    suffixIcon: const Icon(
-                      Icons.visibility_off,
-                      color: AppColors.suffixIconColor,
-                      size: 18,
-                    ),
-                  ),
+                  Consumer<SignUpController>(
+                      builder: (BuildContext context, value, Widget? child) {
+                    return CustomTextField(
+                      controller: signUpController.passwordController,
+                      hint: "Password",
+                      obscureText: value.isObscure,
+                      keyboardType: TextInputType.visiblePassword,
+                      filled: true,
+                      prefixIcon: const Icon(
+                        Icons.lock_outline_rounded,
+                        color: AppColors.prefixIconColor,
+                        size: 18,
+                      ),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          value.setObscureTextVisibility();
+                        },
+                        child: Icon(
+                          value.isObscure
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: AppColors.suffixIconColor,
+                          size: 18,
+                        ),
+                      ),
+                    );
+                  }),
                   AppSpacing.kHeight10,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +126,8 @@ class SignUpScreen extends StatelessWidget {
                     leadingText: "Already have an account?",
                     mainText: "Sign in",
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context)
+                          .pushReplacementNamed(RouteNames.loginScreen);
                     },
                   )
                 ],

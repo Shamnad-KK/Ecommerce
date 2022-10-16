@@ -1,8 +1,10 @@
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
 import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
+import 'package:ecommerce/view/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -16,13 +18,21 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const OnboardingScreen(),
         );
-      case RouteNames.loginScreen:
+      case RouteNames.welcomeScreen:
         return MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => const WelcomeScreen(),
         );
       case RouteNames.signUpScreen:
         return MaterialPageRoute(
           builder: (context) => const SignUpScreen(),
+        );
+      case RouteNames.loginScreen:
+        return MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        );
+      case RouteNames.forgotPasswordScreen:
+        return MaterialPageRoute(
+          builder: (context) => const ForgotPasswordScreen(),
         );
       default:
         return MaterialPageRoute(

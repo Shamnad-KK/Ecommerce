@@ -14,4 +14,5 @@ class AppColors {
   static const Color prefixIconColor = Color(0xFF9E9E9E);
   static const Color suffixIconColor = Color(0xFF9E9E9E);
   static const Color hintTextColor = Color.fromARGB(183, 245, 245, 245);
+  static const Color choiceChipBg = Color(0xFF1F222A);
 }

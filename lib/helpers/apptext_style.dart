@@ -13,16 +13,17 @@ class AppTextStyle {
 
   static const bodySmallText = TextStyle(
     fontSize: 12,
+    color: AppColors.whiteColor,
   );
 
   static const appbarTextStyle = TextStyle(
-    fontSize: 15,
+    fontSize: 20,
     //fontWeight: FontWeight.bold,
   );
 
   static const whiteLargeTextStyle = TextStyle(
-    fontSize: 50,
-    fontWeight: FontWeight.w900,
+    fontSize: 45,
+    fontWeight: FontWeight.w700,
   );
 
   static const whiteMediumTextStyle = TextStyle(
