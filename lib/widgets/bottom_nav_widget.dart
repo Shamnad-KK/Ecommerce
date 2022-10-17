@@ -9,7 +9,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
     final bottomnavController =
         Provider.of<BottomNavController>(context, listen: false);
     return Scaffold(

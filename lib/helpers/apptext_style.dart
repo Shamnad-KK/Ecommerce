@@ -27,6 +27,11 @@ class AppTextStyle {
     color: AppColors.whiteColor,
   );
 
+  static const labelSmall = TextStyle(
+    fontSize: 10,
+    color: AppColors.whiteColor,
+  );
+
   //Used for Appbar
   static const headLine6 = TextStyle(
     fontSize: 20,
