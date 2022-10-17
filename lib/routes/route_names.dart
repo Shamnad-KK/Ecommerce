@@ -5,5 +5,7 @@ class RouteNames {
   static const signUpScreen = "signUp";
   static const loginScreen = "login";
   static const forgotPasswordScreen = "forgotPassword";
+  static const otpScreen = "otp";
   static const accountSetupScreen = "accountSetup";
+  static const homeScreen = "homescreen";
 }

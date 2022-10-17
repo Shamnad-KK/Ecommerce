@@ -1,8 +1,10 @@
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/account_setup/account_setup_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
+import 'package:ecommerce/view/home/home_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
+import 'package:ecommerce/view/otp/otp_screen.dart';
 import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
 import 'package:ecommerce/view/welcome/welcome_screen.dart';
@@ -35,9 +37,17 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const ForgotPasswordScreen(),
         );
+      case RouteNames.otpScreen:
+        return MaterialPageRoute(
+          builder: (context) => const OtpScreen(),
+        );
       case RouteNames.accountSetupScreen:
         return MaterialPageRoute(
           builder: (context) => const AccountSetupScreen(),
+        );
+      case RouteNames.homeScreen:
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
         );
       default:
         return MaterialPageRoute(

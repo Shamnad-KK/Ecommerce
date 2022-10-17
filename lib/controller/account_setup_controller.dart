@@ -1,4 +1,3 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:ecommerce/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -11,8 +10,6 @@ class AccountSetupController extends ChangeNotifier {
   String? dropDownValue;
 
   DateTime? dateTime;
-
-  Country? country;
 
   String? code;
 

@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   const Text(
                     "Create your\naccount",
-                    style: AppTextStyle.whiteLargeTextStyle,
+                    style: AppTextStyle.headline3,
                   ),
                   AppSpacing.kHeight30,
                   CustomTextField(
@@ -91,7 +91,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       const Text(
                         "Remember me",
-                        style: AppTextStyle.bodySmallText,
+                        style: AppTextStyle.bodySmall,
                       )
                     ],
                   ),
@@ -106,7 +106,7 @@ class SignUpScreen extends StatelessWidget {
                   AppSpacing.kHeight30,
                   const Text(
                     "or continue with",
-                    style: AppTextStyle.bodyText1,
+                    style: AppTextStyle.body2,
                   ),
                   AppSpacing.kHeight30,
                   Row(

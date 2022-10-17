@@ -43,7 +43,7 @@ class SocialMediaContainerWidget extends StatelessWidget {
             AppSpacing.kWidth10,
             Text(
               text,
-              style: AppTextStyle.bodyText1,
+              style: AppTextStyle.body2,
             )
           ],
         ),

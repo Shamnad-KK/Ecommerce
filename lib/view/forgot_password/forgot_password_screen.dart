@@ -42,7 +42,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 AppSpacing.kHeight30,
                 const Text(
                   "Select which contact should we use to reset your password",
-                  style: AppTextStyle.bodyText1,
+                  style: AppTextStyle.body2,
                 ),
                 AppSpacing.kHeight30,
                 Consumer<ForgotPasswordController>(
@@ -79,7 +79,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                 AppSpacing.kHeight30,
                 CustomButtonWidget(
                   text: "Continue",
-                  onTap: () {},
+                  onTap: () {
+                    forgotPasswordController.onContinue(context);
+                  },
                 )
               ],
             ),

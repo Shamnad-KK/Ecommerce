@@ -20,7 +20,7 @@ class LoginOrSignUpTextWidget extends StatelessWidget {
       children: [
         Text(
           leadingText,
-          style: AppTextStyle.dullWhiteNormalTextStyle,
+          style: AppTextStyle.subtitle2,
         ),
         AppSpacing.kWidth10,
         GestureDetector(
@@ -29,7 +29,7 @@ class LoginOrSignUpTextWidget extends StatelessWidget {
           },
           child: Text(
             mainText,
-            style: AppTextStyle.bodyText1,
+            style: AppTextStyle.body2,
           ),
         ),
       ],

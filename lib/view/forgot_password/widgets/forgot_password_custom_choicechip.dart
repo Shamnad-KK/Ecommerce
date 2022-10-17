@@ -59,11 +59,11 @@ class ForgotPasswordChoiceChipWidget extends StatelessWidget {
               ),
               title: Text(
                 tile,
-                style: AppTextStyle.bodySmallText,
+                style: AppTextStyle.bodySmall,
               ),
               subtitle: Text(
                 subtitle,
-                style: AppTextStyle.bodyText1,
+                style: AppTextStyle.body2,
               ),
             ),
           ),

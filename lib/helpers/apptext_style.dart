@@ -7,31 +7,44 @@ class AppTextStyle {
     color: AppColors.blackColor,
     fontSize: 14,
   );
-  static const bodyText1 = TextStyle(
+  static const body1 = TextStyle(
+    color: AppColors.whiteColor,
+    fontSize: 16,
+  );
+  static const body2 = TextStyle(
+    color: AppColors.whiteColor,
     fontSize: 14,
   );
 
-  static const bodySmallText = TextStyle(
+  static const titleMedium = TextStyle(
+    color: AppColors.whiteColor,
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const bodySmall = TextStyle(
     fontSize: 12,
     color: AppColors.whiteColor,
   );
 
-  static const appbarTextStyle = TextStyle(
+  //Used for Appbar
+  static const headLine6 = TextStyle(
     fontSize: 20,
-    //fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.bold,
   );
 
-  static const whiteLargeTextStyle = TextStyle(
-    fontSize: 45,
+  //Used for main large headlines in Welcome screen
+  static const headline3 = TextStyle(
+    fontSize: 48,
     fontWeight: FontWeight.w700,
   );
 
-  static const whiteMediumTextStyle = TextStyle(
+  static const headline4 = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w600,
   );
 
-  static const dullWhiteNormalTextStyle = TextStyle(
+  static const subtitle2 = TextStyle(
     color: AppColors.dullWhite,
     fontSize: 14,
   );

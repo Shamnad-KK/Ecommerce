@@ -23,6 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.filled,
     this.fillColor = AppColors.textFieldFillColor,
     this.onchanged,
+    this.isSearchField = false,
   });
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -41,6 +42,7 @@ class CustomTextField extends StatelessWidget {
   final bool? filled;
   final Color? fillColor;
   final Function(String)? onchanged;
+  final bool isSearchField;
 
   @override
   Widget build(BuildContext context) {
@@ -64,21 +66,21 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         filled: filled,
         fillColor: fillColor,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.borderColor,
-          ),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.borderColor,
-          ),
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.borderColor,
-          ),
-        ),
+        border: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.borderColor,
+            ),
+            borderRadius: BorderRadius.circular(isSearchField ? 30 : 0)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.borderColor,
+            ),
+            borderRadius: BorderRadius.circular(isSearchField ? 30 : 0)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.borderColor,
+            ),
+            borderRadius: BorderRadius.circular(isSearchField ? 30 : 0)),
       ),
     );
   }

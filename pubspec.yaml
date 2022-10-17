@@ -35,7 +35,9 @@ dependencies:
   flutter_native_splash: 2.2.11
   intl: 0.17.0
   provider: 6.0.4
-  country_picker: 2.0.16
+  flutter_otp_text_field: 1.1.1
+  fluttertoast: 8.1.1
+  carousel_slider: 4.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -62,6 +64,15 @@ flutter:
     - assets/social_media_icons/facebook-logo-3-1.png
     - assets/social_media_icons/google-logo.png
     - assets/forgot_password/forgotpassword-removebg-preview.png
+    - assets/home/icons8-basketball-jersey-96.png
+    - assets/home/icons8-coat-96.png
+    - assets/home/icons8-jeans-96.png
+    - assets/home/icons8-shirt-96.png
+    - assets/home/tshirt.png
+    - assets/home/download (1).jpg
+    - assets/home/download (2).jpg
+    - assets/home/download(3).jpg
+    - assets/home/download.jpg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

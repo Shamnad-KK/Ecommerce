@@ -30,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
                   AppSpacing.kHeight30,
                   const Text(
                     "Let's you in",
-                    style: AppTextStyle.whiteLargeTextStyle,
+                    style: AppTextStyle.headline3,
                   ),
                   AppSpacing.kHeight30,
                   SocialMediaContainerWidget(
@@ -47,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                   AppSpacing.kHeight30,
                   const Text(
                     "or",
-                    style: AppTextStyle.bodyText1,
+                    style: AppTextStyle.body2,
                   ),
                   AppSpacing.kHeight30,
                   CustomButtonWidget(

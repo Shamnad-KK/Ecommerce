@@ -5,6 +5,7 @@ import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/onboarding/utils/onboard_components_list.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,25 +49,14 @@ class OnboardingScreen extends StatelessWidget {
                       children: [
                         Text(
                           onboardingList[index].bodyText,
-                          style: AppTextStyle.whiteMediumTextStyle,
+                          style: AppTextStyle.headline4,
                           textAlign: TextAlign.center,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            3,
-                            (sliderIndex) => Container(
-                              height: 5,
-                              margin: AppPadding.sidePading5,
-                              width: index == sliderIndex ? 25 : 5,
-                              decoration: BoxDecoration(
-                                color: index == sliderIndex
-                                    ? AppColors.whiteColor
-                                    : AppColors.mainColor,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                          ),
+                        CustomIndicatorWidget(
+                          count: 3,
+                          index: index,
+                          activeColor: AppColors.whiteColor,
+                          inactiveColor: AppColors.mainColor,
                         ),
                         Padding(
                           padding: AppPadding.sidePading15,

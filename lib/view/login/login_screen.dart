@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const Text(
                     "Login to your\naccount",
-                    style: AppTextStyle.whiteLargeTextStyle,
+                    style: AppTextStyle.headline3,
                   ),
                   AppSpacing.kHeight30,
                   CustomTextField(
@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const Text(
                         "Remember me",
-                        style: AppTextStyle.bodySmallText,
+                        style: AppTextStyle.bodySmall,
                       )
                     ],
                   ),
@@ -109,13 +109,13 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: const Text(
                       "Forgot the password?",
-                      style: AppTextStyle.bodyText1,
+                      style: AppTextStyle.body2,
                     ),
                   ),
                   AppSpacing.kHeight30,
                   const Text(
                     "or continue with",
-                    style: AppTextStyle.bodyText1,
+                    style: AppTextStyle.body2,
                   ),
                   AppSpacing.kHeight30,
                   Row(
