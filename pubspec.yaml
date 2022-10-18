@@ -73,6 +73,8 @@ flutter:
     - assets/home/download (2).jpg
     - assets/home/download(3).jpg
     - assets/home/download.jpg
+    - assets/confirm_password/confirm_password.png
+    - assets/home/skirt.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -99,7 +99,10 @@ class LoginScreen extends StatelessWidget {
                   AppSpacing.kHeight10,
                   CustomButtonWidget(
                     text: "Sign in",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, RouteNames.bottomNavBar, (route) => false);
+                    },
                   ),
                   AppSpacing.kHeight30,
                   GestureDetector(

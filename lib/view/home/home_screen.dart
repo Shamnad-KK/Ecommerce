@@ -53,13 +53,13 @@ class HomeScreen extends StatelessWidget {
                           onTap: () {},
                         ),
                         HomeScreenCategoryWidget(
-                          title: "Jersey",
-                          image: "assets/home/icons8-basketball-jersey-96.png",
+                          title: "Skirt",
+                          image: "assets/home/skirt.png",
                           onTap: () {},
                         ),
                         HomeScreenCategoryWidget(
-                          title: "Coat",
-                          image: "assets/home/icons8-coat-96.png",
+                          title: "T-Shirt",
+                          image: "assets/home/tshirt.png",
                           onTap: () {},
                         ),
                       ],

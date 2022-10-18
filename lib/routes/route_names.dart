@@ -5,7 +5,9 @@ class RouteNames {
   static const signUpScreen = "signUp";
   static const loginScreen = "login";
   static const forgotPasswordScreen = "forgotPassword";
+  static const confirmPasswordScreen = "confirmPassword";
   static const otpScreen = "otp";
   static const accountSetupScreen = "accountSetup";
-  static const homeScreen = "homescreen";
+  static const bottomNavBar = "bottomNavBar";
+  static const productDetail = "productDetail";
 }

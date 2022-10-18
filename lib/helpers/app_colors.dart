@@ -24,4 +24,5 @@ class AppColors {
   static const Color bottomNavActiveColor = Colors.white;
   static const Color bottomNavInactiveColor =
       Color.fromARGB(107, 245, 245, 245);
+  static const Color divider = Color.fromARGB(255, 87, 92, 101);
 }

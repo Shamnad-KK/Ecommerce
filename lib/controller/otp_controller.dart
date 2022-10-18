@@ -42,8 +42,7 @@ class OtpController extends ChangeNotifier {
       await AppPopUps.showToast("Incorrect OTP", AppColors.errorColor);
       return;
     }
-    await AppPopUps.showToast("Otp verified", AppColors.successColor);
-    await Navigator.pushNamedAndRemoveUntil(
-        context, RouteNames.homeScreen, (route) => false);
+    // await AppPopUps.showToast("Otp verified", AppColors.successColor);
+    await Navigator.pushNamed(context, RouteNames.confirmPasswordScreen);
   }
 }

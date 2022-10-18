@@ -70,17 +70,17 @@ class CustomTextField extends StatelessWidget {
             borderSide: const BorderSide(
               color: AppColors.borderColor,
             ),
-            borderRadius: BorderRadius.circular(isSearchField ? 30 : 0)),
+            borderRadius: BorderRadius.circular(isSearchField ? 30 : 5)),
         focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: AppColors.borderColor,
             ),
-            borderRadius: BorderRadius.circular(isSearchField ? 30 : 0)),
+            borderRadius: BorderRadius.circular(isSearchField ? 30 : 5)),
         enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: AppColors.borderColor,
             ),
-            borderRadius: BorderRadius.circular(isSearchField ? 30 : 0)),
+            borderRadius: BorderRadius.circular(isSearchField ? 30 : 5)),
       ),
     );
   }

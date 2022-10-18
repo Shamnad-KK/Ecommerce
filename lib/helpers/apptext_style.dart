@@ -16,6 +16,12 @@ class AppTextStyle {
     fontSize: 14,
   );
 
+  static const titleLarge = TextStyle(
+    color: AppColors.whiteColor,
+    fontSize: 22,
+    // fontWeight: FontWeight.bold,
+  );
+
   static const titleMedium = TextStyle(
     color: AppColors.whiteColor,
     fontSize: 16,
@@ -28,7 +34,7 @@ class AppTextStyle {
   );
 
   static const labelSmall = TextStyle(
-    fontSize: 10,
+    fontSize: 11,
     color: AppColors.whiteColor,
   );
 
@@ -47,6 +53,11 @@ class AppTextStyle {
   static const headline4 = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w600,
+  );
+
+  static const subtitle1 = TextStyle(
+    color: AppColors.dullWhite,
+    fontSize: 16,
   );
 
   static const subtitle2 = TextStyle(

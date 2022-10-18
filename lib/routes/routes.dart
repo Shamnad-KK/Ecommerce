@@ -1,13 +1,16 @@
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/account_setup/account_setup_screen.dart';
+import 'package:ecommerce/view/confirm_password/confirm_password_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
-import 'package:ecommerce/view/home/home_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
 import 'package:ecommerce/view/otp/otp_screen.dart';
+import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
+import 'package:ecommerce/view/product_detail/product_detail_screen.dart';
 import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
 import 'package:ecommerce/view/welcome/welcome_screen.dart';
+import 'package:ecommerce/widgets/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -37,6 +40,10 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const ForgotPasswordScreen(),
         );
+      case RouteNames.confirmPasswordScreen:
+        return MaterialPageRoute(
+          builder: (context) => const ConfirmPasswordScreen(),
+        );
       case RouteNames.otpScreen:
         return MaterialPageRoute(
           builder: (context) => const OtpScreen(),
@@ -45,9 +52,18 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const AccountSetupScreen(),
         );
-      case RouteNames.homeScreen:
+      case RouteNames.bottomNavBar:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const BottomNavBar(),
+        );
+      case RouteNames.productDetail:
+        ProductDetailArguments args =
+            settings.arguments as ProductDetailArguments;
+        return MaterialPageRoute(
+          builder: (context) => ProductDetailScreen(
+            product: args.product,
+            index: args.index,
+          ),
         );
       default:
         return MaterialPageRoute(
