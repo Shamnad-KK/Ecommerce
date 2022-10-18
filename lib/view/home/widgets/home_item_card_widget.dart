@@ -78,8 +78,8 @@ class HomeItemCardWidget extends StatelessWidget {
                 child: ProductStatusWidget(product: product),
               ),
               Text(
-                "\$ ${product.price}",
-                style: AppTextStyle.body1,
+                " \$ ${product.price}",
+                style: AppTextStyle.body2,
               ),
             ],
           ),

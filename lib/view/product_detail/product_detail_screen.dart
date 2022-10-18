@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:ecommerce/controller/cart_controller.dart';
+import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
@@ -8,6 +10,8 @@ import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/model/home_product_model.dart';
 import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
+import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/product_quantity_customizer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,12 +27,8 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final productDetailController =
-        Provider.of<ProductDetailController>(context, listen: false);
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // productDetailController.setQuantity();
-    });
+    final cartController = Provider.of<CartController>(context, listen: false);
 
     log("hy");
     return SafeArea(
@@ -114,7 +114,7 @@ class ProductDetailScreen extends StatelessWidget {
                               })
                           ],
                         ),
-                        AppSpacing.kHeight20,
+                        AppSpacing.kHeight10,
                         Row(
                           children: [
                             const Text(
@@ -122,43 +122,36 @@ class ProductDetailScreen extends StatelessWidget {
                               style: AppTextStyle.body1,
                             ),
                             AppSpacing.kWidth10,
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: AppColors.mainColor,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      productDetailController
-                                          .decreaseQuantity();
-                                      product.price -= product.price;
-                                    },
-                                    icon: const Icon(
-                                      Icons.remove,
-                                    ),
-                                  ),
-                                  Text(
-                                      "${context.watch<ProductDetailController>().quantity}"),
-                                  IconButton(
-                                    onPressed: () {
-                                      productDetailController
-                                          .increaseQuantity();
-                                      int price = product.price;
-                                      product.price = product.price + price;
-                                      price = price;
-                                    },
-                                    icon: const Icon(
-                                      Icons.add,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            ProductQuantityCustomizerWidget(product: product),
                           ],
                         ),
-                        AppSpacing.kHeight20,
-                        Text("\$ ${product.price}")
+                        AppSpacing.kHeight10,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: size.width * 0.3,
+                              child: Consumer<HomeController>(
+                                builder: (BuildContext context, value,
+                                    Widget? child) {
+                                  return Text(
+                                    "\$ ${value.productList[index].price}",
+                                    style: AppTextStyle.titleMedium,
+                                  );
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomButtonWidget(
+                                text: "Add to cart",
+                                onTap: () {
+                                  cartController.addProductToCart(product);
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     )
                   ],

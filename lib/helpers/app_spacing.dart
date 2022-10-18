@@ -9,4 +9,5 @@ class AppSpacing {
   static const kHeight50 = SizedBox(height: 50);
   static const kHeight100 = SizedBox(height: 100);
   static const kWidth10 = SizedBox(width: 10);
+  static const kWidth30 = SizedBox(width: 30);
 }

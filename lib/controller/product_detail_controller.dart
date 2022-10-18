@@ -14,6 +14,9 @@ class ProductDetailController extends ChangeNotifier {
   }
 
   void decreaseQuantity() {
+    if (quantity == 1) {
+      return;
+    }
     quantity--;
     notifyListeners();
   }
