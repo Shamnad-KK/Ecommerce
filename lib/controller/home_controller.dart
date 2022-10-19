@@ -14,6 +14,7 @@ class HomeController extends ChangeNotifier {
       reviews: "1234",
       isFavorite: false,
       sizes: [30, 34, 36],
+      quantity: 1,
     ),
     Product(
       name: "Formal Shirt",
@@ -24,6 +25,7 @@ class HomeController extends ChangeNotifier {
       reviews: "4321",
       isFavorite: false,
       sizes: [34, 35, 38],
+      quantity: 1,
     ),
   ];
 

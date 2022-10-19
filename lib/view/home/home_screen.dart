@@ -1,3 +1,4 @@
+import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/view/home/widgets/home_appbar_widget.dart';
@@ -6,6 +7,7 @@ import 'package:ecommerce/view/home/widgets/home_category_widget.dart';
 import 'package:ecommerce/view/home/widgets/home_item_card_widget.dart';
 import 'package:ecommerce/view/home/widgets/home_row_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -72,7 +74,12 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {},
                   ),
                   AppSpacing.kHeight10,
-                  const HomeItemCardWidget()
+                  Consumer<HomeController>(
+                      builder: (BuildContext context, value, Widget? child) {
+                    return HomeItemCardWidget(
+                      list: value.productList,
+                    );
+                  })
                 ],
               ),
             ),

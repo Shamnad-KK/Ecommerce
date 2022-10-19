@@ -10,10 +10,11 @@ import 'package:ecommerce/controller/otp_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/controller/signup_controller.dart';
 import 'package:ecommerce/controller/splash_controller.dart';
+import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
-import 'package:ecommerce/view/splash/splash_screen.dart';
+import 'package:ecommerce/widgets/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => ConfirmPasswordController()),
         ChangeNotifierProvider(create: (ctx) => ProductDetailController()),
         ChangeNotifierProvider(create: (ctx) => CartController()),
+        ChangeNotifierProvider(create: (ctx) => WishlistController()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
-        home: const SplashScreen(),
+        home: const BottomNavBar(),
       ),
     );
   }

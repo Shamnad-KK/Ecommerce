@@ -1,4 +1,5 @@
 import 'package:ecommerce/controller/home_controller.dart';
+import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +16,8 @@ class AddorRemoveFavoriteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final wishlistController =
+        Provider.of<WishlistController>(context, listen: false);
     return Container(
       padding: AppPadding.allside2,
       decoration: BoxDecoration(
@@ -26,6 +29,12 @@ class AddorRemoveFavoriteWidget extends StatelessWidget {
           return InkWell(
             onTap: () {
               value.setFavorite(index);
+              if (value.productList[index].isFavorite == true) {
+                wishlistController.addItemToWishList(value.productList[index]);
+              } else {
+                wishlistController
+                    .removeItemFromWishList(value.productList[index]);
+              }
             },
             child: Icon(
               CupertinoIcons.heart_fill,

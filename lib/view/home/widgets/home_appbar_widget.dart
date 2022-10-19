@@ -2,6 +2,7 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,9 @@ class HomeAppBarWidget extends StatelessWidget {
               ],
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(RouteNames.wishlistScreen);
+              },
               child: const Icon(
                 CupertinoIcons.heart,
               ),

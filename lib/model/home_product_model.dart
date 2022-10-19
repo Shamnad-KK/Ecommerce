@@ -6,6 +6,7 @@ class Product {
   String rating;
   String reviews;
   bool isFavorite;
+  int quantity;
   List<int> sizes;
 
   Product({
@@ -17,5 +18,6 @@ class Product {
     required this.reviews,
     required this.isFavorite,
     required this.sizes,
+    required this.quantity,
   });
 }

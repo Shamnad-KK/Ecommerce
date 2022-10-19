@@ -1,6 +1,7 @@
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/account_setup/account_setup_screen.dart';
 import 'package:ecommerce/view/confirm_password/confirm_password_screen.dart';
+import 'package:ecommerce/view/favorites/wishlist_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
@@ -64,6 +65,10 @@ class AppRoutes {
             product: args.product,
             index: args.index,
           ),
+        );
+      case RouteNames.wishlistScreen:
+        return MaterialPageRoute(
+          builder: (context) => const WishlistScreen(),
         );
       default:
         return MaterialPageRoute(

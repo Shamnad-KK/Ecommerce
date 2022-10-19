@@ -10,4 +10,5 @@ class RouteNames {
   static const accountSetupScreen = "accountSetup";
   static const bottomNavBar = "bottomNavBar";
   static const productDetail = "productDetail";
+  static const wishlistScreen = "wishlist";
 }

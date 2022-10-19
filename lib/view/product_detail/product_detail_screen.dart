@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/controller/home_controller.dart';
-import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
@@ -27,9 +26,10 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    double price = product.price;
     final cartController = Provider.of<CartController>(context, listen: false);
 
+    product.quantity = 1;
     log("hy");
     return SafeArea(
       child: Scaffold(
@@ -94,29 +94,6 @@ class ProductDetailScreen extends StatelessWidget {
                         const Text("Size", style: AppTextStyle.body1),
                         Row(
                           children: [
-                            for (int i = 0; i < product.sizes.length; i++)
-                              Consumer<ProductDetailController>(builder:
-                                  (BuildContext context, value, Widget? child) {
-                                return ChoiceChip(
-                                  side: const BorderSide(
-                                    color: AppColors.whiteColor,
-                                  ),
-                                  onSelected: (valuee) {},
-                                  selected: true,
-                                  label: Text(
-                                    "${product.sizes[i]}",
-                                    style: AppTextStyle.bodySmall,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                );
-                              })
-                          ],
-                        ),
-                        AppSpacing.kHeight10,
-                        Row(
-                          children: [
                             const Text(
                               "Quantity",
                               style: AppTextStyle.body1,
@@ -145,7 +122,19 @@ class ProductDetailScreen extends StatelessWidget {
                               child: CustomButtonWidget(
                                 text: "Add to cart",
                                 onTap: () {
-                                  cartController.addProductToCart(product);
+                                  Product cartProduct = Product(
+                                    name: product.name,
+                                    price: product.price,
+                                    image: product.image,
+                                    description: product.description,
+                                    rating: product.rating,
+                                    reviews: product.reviews,
+                                    isFavorite: product.isFavorite,
+                                    sizes: product.sizes,
+                                    quantity: product.quantity,
+                                  );
+                                  cartController.addProductToCart(cartProduct);
+                                  product.price = price;
                                   Navigator.of(context).pop();
                                 },
                               ),
