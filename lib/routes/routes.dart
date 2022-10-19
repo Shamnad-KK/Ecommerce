@@ -62,7 +62,6 @@ class AppRoutes {
             settings.arguments as ProductDetailArguments;
         return MaterialPageRoute(
           builder: (context) => ProductDetailScreen(
-            product: args.product,
             index: args.index,
           ),
         );

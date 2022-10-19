@@ -1,4 +1,3 @@
-import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
@@ -41,7 +40,7 @@ class HomeItemCardWidget extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   ProductDetailArguments args =
-                      ProductDetailArguments(index: index, product: product);
+                      ProductDetailArguments(index: index);
                   Navigator.of(context).pushNamed(
                     RouteNames.productDetail,
                     arguments: args,

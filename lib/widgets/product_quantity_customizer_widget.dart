@@ -1,3 +1,4 @@
+import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/model/home_product_model.dart';
@@ -16,6 +17,7 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final productDetailController =
         Provider.of<ProductDetailController>(context, listen: false);
+    final cartController = Provider.of<CartController>(context, listen: false);
 
     double price = product.price;
     return Container(
@@ -29,6 +31,7 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
             onPressed: () {
               // productDetailController.decreaseQuantity();
               productDetailController.decreaseQuantity(product, price);
+              cartController.calculateTotalPrice();
               // product.quantity--;
               // product.price = product.price - price;
             },
@@ -43,6 +46,7 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
           IconButton(
             onPressed: () {
               productDetailController.increaseQuantity(product, price);
+              cartController.calculateTotalPrice();
               // product.quantity++;
               // product.price = product.price + price;
             },

@@ -3,6 +3,8 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_notfound_widget.dart';
 import 'package:ecommerce/widgets/product_quantity_customizer_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +30,17 @@ class CartScreen extends StatelessWidget {
       body: SafeArea(
         child: Consumer<CartController>(
             builder: (BuildContext context, value, Widget? child) {
-          return value.cartList.isEmpty
-              ? const Center(
-                  child: Text("Add Products"),
-                )
-              : ListView.separated(
+          if (value.cartList.isEmpty) {
+            return const Center(
+              child: CustomNotFoundWidget(
+                title: "Your cart is empty",
+                subtitle: "You haven't added any products",
+              ),
+            );
+          } else {
+            return Stack(
+              children: [
+                ListView.separated(
                   itemCount: value.cartList.length,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
@@ -69,10 +77,11 @@ class CartScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(product.name, style: AppTextStyle.body1),
+                                  AppSpacing.kWidth30,
                                   GestureDetector(
                                     onTap: () {
-                                      cartController
-                                          .removeProductFromCart(product);
+                                      cartController.removeProductFromCart(
+                                          product, context);
                                     },
                                     child: const Icon(Icons.delete_outline),
                                   )
@@ -83,14 +92,18 @@ class CartScreen extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: const [
+                                  children: [
                                     CircleAvatar(
-                                      backgroundColor: AppColors.mainColor,
+                                      backgroundColor: product.selectedColor,
                                       radius: 10,
                                     ),
-                                    Text("|"),
+                                    const Text("|"),
+                                    const Text(
+                                      "Size =",
+                                      style: AppTextStyle.labelSmall,
+                                    ),
                                     Text(
-                                      "Size-M",
+                                      "${product.selectedSize}",
                                       style: AppTextStyle.labelSmall,
                                     ),
                                   ],
@@ -118,7 +131,57 @@ class CartScreen extends StatelessWidget {
                   separatorBuilder: (context, index) {
                     return AppSpacing.kHeight20;
                   },
-                );
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: size.height * 0.1,
+                    padding: AppPadding.mainPading,
+                    decoration: BoxDecoration(
+                      color: AppColors.mediaButtonBg,
+                      border: Border.all(
+                        color: AppColors.borderColor,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Total Price",
+                              style: AppTextStyle.subtitle2,
+                            ),
+                            Consumer<CartController>(
+                              builder:
+                                  (BuildContext context, value, Widget? child) {
+                                return SizedBox(
+                                  width: size.width * 0.35,
+                                  child: Text(
+                                    "\$ ${value.totalPrice}",
+                                    style: AppTextStyle.body1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                        AppSpacing.kWidth10,
+                        Expanded(
+                          child: CustomButtonWidget(
+                            text: "Checkout",
+                            onTap: () {},
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            );
+          }
         }),
       ),
     );

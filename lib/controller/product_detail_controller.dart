@@ -1,8 +1,27 @@
+import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/model/home_product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailController extends ChangeNotifier {
-  void setProduct() {}
+  List<Product> productList = HomeController().productList;
+  int selectedChipIndex = 0;
+  int selectedColorIndex = 0;
+
+  void setChip(int newValue) {
+    selectedChipIndex = newValue;
+    notifyListeners();
+  }
+
+  void setColor(int newValue) {
+    selectedColorIndex = newValue;
+    notifyListeners();
+  }
+
+  void setProduct(int index) {
+    productList[index].quantity = 1;
+    notifyListeners();
+  }
+
   void setQuantity(Product product) {
     product.quantity = 1;
     notifyListeners();

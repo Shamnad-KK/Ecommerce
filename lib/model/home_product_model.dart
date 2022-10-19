@@ -1,3 +1,5 @@
+import 'package:flutter/animation.dart';
+
 class Product {
   String name;
   double price;
@@ -7,7 +9,10 @@ class Product {
   String reviews;
   bool isFavorite;
   int quantity;
-  List<int> sizes;
+  List<dynamic>? sizes;
+  List<Color>? colors;
+  dynamic selectedSize;
+  Color selectedColor;
 
   Product({
     required this.name,
@@ -17,7 +22,10 @@ class Product {
     required this.rating,
     required this.reviews,
     required this.isFavorite,
-    required this.sizes,
+    this.sizes,
     required this.quantity,
+    required this.selectedSize,
+    this.colors,
+    required this.selectedColor,
   });
 }

@@ -14,6 +14,13 @@ class HomeController extends ChangeNotifier {
       reviews: "1234",
       isFavorite: false,
       sizes: [30, 34, 36],
+      colors: [
+        Colors.green,
+        Colors.white,
+        Colors.blue,
+      ],
+      selectedColor: Colors.green,
+      selectedSize: 30,
       quantity: 1,
     ),
     Product(
@@ -25,6 +32,13 @@ class HomeController extends ChangeNotifier {
       reviews: "4321",
       isFavorite: false,
       sizes: [34, 35, 38],
+      colors: [
+        Colors.green,
+        Colors.white,
+        Colors.blue,
+      ],
+      selectedSize: 35,
+      selectedColor: Colors.green,
       quantity: 1,
     ),
   ];

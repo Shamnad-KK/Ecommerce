@@ -22,7 +22,6 @@ class CustomNotFoundWidget extends StatelessWidget {
         children: [
           SizedBox(
               width: size.width * 0.5,
-              height: size.height * 0.23,
               child: Image.asset(
                 "assets/common/no_data.png",
                 fit: BoxFit.fill,
