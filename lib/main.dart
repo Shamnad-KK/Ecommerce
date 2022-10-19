@@ -6,6 +6,7 @@ import 'package:ecommerce/controller/forgot_password_controller.dart';
 import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/controller/login_controller.dart';
 import 'package:ecommerce/controller/onboarding_controller.dart';
+import 'package:ecommerce/controller/orders_controller.dart';
 import 'package:ecommerce/controller/otp_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/controller/signup_controller.dart';
@@ -14,6 +15,7 @@ import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
+import 'package:ecommerce/view/orders/orders_screen.dart';
 import 'package:ecommerce/widgets/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +46,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => ProductDetailController()),
         ChangeNotifierProvider(create: (ctx) => CartController()),
         ChangeNotifierProvider(create: (ctx) => WishlistController()),
+        ChangeNotifierProvider(create: (ctx) => OrdersController()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

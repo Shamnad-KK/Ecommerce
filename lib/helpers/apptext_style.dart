@@ -69,4 +69,14 @@ class AppTextStyle {
     color: AppColors.hintTextColor,
     fontSize: 14,
   );
+
+  static const activeTabBarStyle = TextStyle(
+    color: AppColors.whiteColor,
+    fontSize: 15,
+  );
+
+  static const inAtiveTabBarStyle = TextStyle(
+    color: AppColors.dullWhite,
+    fontSize: 15,
+  );
 }
