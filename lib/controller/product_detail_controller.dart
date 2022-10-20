@@ -1,9 +1,7 @@
-import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/model/home_product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailController extends ChangeNotifier {
-  List<Product> productList = HomeController().productList;
   int selectedChipIndex = 0;
   int selectedColorIndex = 0;
   double realPrice = 0;
@@ -18,9 +16,8 @@ class ProductDetailController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setProductInitialValues(Product newProduct) {
-    newProduct.quantity = 1;
-    realPrice = newProduct.price;
+  void setProductInitialValues(Product product) {
+    realPrice = product.price;
     notifyListeners();
   }
 
@@ -29,17 +26,17 @@ class ProductDetailController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void increaseQuantity(Product product, double price) {
+  void increaseQuantity(Product product) {
     product.quantity++;
-    product.price = product.price + price;
+    product.price = product.price + realPrice;
     notifyListeners();
   }
 
-  void decreaseQuantity(Product product, double price) {
+  void decreaseQuantity(Product product) {
     if (product.quantity == 1) {
       return;
     }
-    product.price = product.price - price;
+    product.price = product.price - realPrice;
     product.quantity--;
     notifyListeners();
   }

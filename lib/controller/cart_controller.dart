@@ -5,9 +5,6 @@ import 'package:ecommerce/widgets/custom_delete_from_cart_widget.dart';
 import 'package:flutter/material.dart';
 
 class CartController extends ChangeNotifier {
-  CartController() {
-    calculateTotalPrice();
-  }
   double realPrice = 0;
   double totalPrice = 0.0;
   List<Product> cartList = [];
@@ -18,8 +15,8 @@ class CartController extends ChangeNotifier {
   }
 
   void addProductToCart(Product product) {
-    totalPrice = product.price;
     cartList.add(product);
+    totalPrice = product.price;
     notifyListeners();
   }
 

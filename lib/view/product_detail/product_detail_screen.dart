@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
@@ -16,8 +18,10 @@ class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({
     super.key,
     required this.index,
+    required this.product,
   });
   final int index;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +31,16 @@ class ProductDetailScreen extends StatelessWidget {
     final productDetailController =
         Provider.of<ProductDetailController>(context, listen: false);
 
-    Product newProduct = productDetailController.productList[index];
+    product.quantity = 1;
 
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         productDetailController.setChip(0);
         productDetailController.setColor(0);
-        productDetailController.setProductInitialValues(newProduct);
+        productDetailController.setProductInitialValues(product);
       },
     );
+    log("hy");
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -49,12 +54,12 @@ class ProductDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: size.height * 0.5,
+                height: size.height * 0.45,
                 width: size.width,
                 decoration: BoxDecoration(
                   color: AppColors.mainColor,
                   image: DecorationImage(
-                    image: AssetImage(newProduct.image),
+                    image: AssetImage(product.image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -68,15 +73,18 @@ class ProductDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          newProduct.name,
+                          product.name,
                           style: AppTextStyle.titleLarge,
                         ),
-                        AddorRemoveFavoriteWidget(index: index),
+                        AddorRemoveFavoriteWidget(
+                          index: index,
+                          product: product,
+                        ),
                       ],
                     ),
                     SizedBox(
                       width: size.width * 0.4,
-                      child: ProductStatusWidget(product: newProduct),
+                      child: ProductStatusWidget(product: product),
                     ),
                     AppSpacing.kHeight10,
                     const Divider(
@@ -89,7 +97,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                     AppSpacing.kHeight5,
                     Text(
-                      newProduct.description,
+                      product.description,
                       style: AppTextStyle.subtitle2,
                     ),
                     AppSpacing.kHeight20,
@@ -107,13 +115,13 @@ class ProductDetailScreen extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 children: [
                                   for (int i = 0;
-                                      i < newProduct.sizes!.length;
+                                      i < product.sizes!.length;
                                       i++)
                                     ChoiceChip(
                                       backgroundColor: AppColors.mainColor,
                                       labelStyle: AppTextStyle.body2,
                                       label: Text(
-                                        newProduct.sizes![i].toString(),
+                                        product.sizes![i].toString(),
                                         style: AppTextStyle.body2.copyWith(
                                             color: value.selectedChipIndex == i
                                                 ? AppColors.blackColor
@@ -127,7 +135,7 @@ class ProductDetailScreen extends StatelessWidget {
                                     ),
                                   AppSpacing.kWidth50,
                                   for (int i = 0;
-                                      i < newProduct.colors!.length;
+                                      i < product.colors!.length;
                                       i++)
                                     GestureDetector(
                                       onTap: () {
@@ -145,8 +153,7 @@ class ProductDetailScreen extends StatelessWidget {
                                               width: 3),
                                         ),
                                         child: CircleAvatar(
-                                          backgroundColor:
-                                              newProduct.colors![i],
+                                          backgroundColor: product.colors![i],
                                         ),
                                       ),
                                     )
@@ -155,7 +162,7 @@ class ProductDetailScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        AppSpacing.kHeight10,
+                        AppSpacing.kHeight20,
                         Row(
                           children: [
                             const Text(
@@ -163,11 +170,10 @@ class ProductDetailScreen extends StatelessWidget {
                               style: AppTextStyle.body1,
                             ),
                             AppSpacing.kWidth10,
-                            ProductQuantityCustomizerWidget(
-                                product: newProduct),
+                            ProductQuantityCustomizerWidget(product: product),
                           ],
                         ),
-                        AppSpacing.kHeight10,
+                        AppSpacing.kHeight30,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -177,8 +183,8 @@ class ProductDetailScreen extends StatelessWidget {
                                 builder: (BuildContext context, value,
                                     Widget? child) {
                                   return Text(
-                                    "\$ ${value.productList[index].price}",
-                                    style: AppTextStyle.titleMedium,
+                                    "\$ ${product.price}",
+                                    style: AppTextStyle.titleLarge,
                                   );
                                 },
                               ),
@@ -188,23 +194,23 @@ class ProductDetailScreen extends StatelessWidget {
                                 text: "Add to cart",
                                 onTap: () {
                                   Product cartProduct = Product(
-                                    name: newProduct.name,
-                                    price: newProduct.price,
-                                    image: newProduct.image,
-                                    description: newProduct.description,
-                                    rating: newProduct.rating,
-                                    reviews: newProduct.reviews,
-                                    isFavorite: newProduct.isFavorite,
-                                    selectedSize: newProduct.sizes![
+                                    name: product.name,
+                                    price: product.price,
+                                    image: product.image,
+                                    description: product.description,
+                                    rating: product.rating,
+                                    reviews: product.reviews,
+                                    isFavorite: product.isFavorite,
+                                    selectedSize: product.sizes![
                                         productDetailController
                                             .selectedChipIndex],
-                                    quantity: newProduct.quantity,
-                                    selectedColor: newProduct.colors![
+                                    quantity: product.quantity,
+                                    selectedColor: product.colors![
                                         productDetailController
                                             .selectedColorIndex],
                                   );
                                   cartController.addProductToCart(cartProduct);
-                                  newProduct.price =
+                                  product.price =
                                       productDetailController.realPrice;
                                   Navigator.of(context).pop();
                                 },

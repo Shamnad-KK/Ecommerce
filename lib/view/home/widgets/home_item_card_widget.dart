@@ -40,7 +40,7 @@ class HomeItemCardWidget extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   ProductDetailArguments args =
-                      ProductDetailArguments(index: index);
+                      ProductDetailArguments(index: index, product: product);
                   Navigator.of(context).pushNamed(
                     RouteNames.productDetail,
                     arguments: args,
@@ -67,7 +67,10 @@ class HomeItemCardWidget extends StatelessWidget {
                         padding: AppPadding.allside5,
                         child: Align(
                           alignment: Alignment.topRight,
-                          child: AddorRemoveFavoriteWidget(index: index),
+                          child: AddorRemoveFavoriteWidget(
+                            index: index,
+                            product: product,
+                          ),
                         ),
                       ),
                     ),
@@ -77,7 +80,7 @@ class HomeItemCardWidget extends StatelessWidget {
                       style: AppTextStyle.body2,
                     ),
                     SizedBox(
-                      width: size.width * 0.3,
+                      width: size.width * 0.36,
                       child: ProductStatusWidget(product: product),
                     ),
                     Text(

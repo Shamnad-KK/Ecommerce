@@ -70,7 +70,7 @@ class OnboardingScreen extends StatelessWidget {
                                 );
                               } else {
                                 Navigator.pushNamedAndRemoveUntil(context,
-                                    RouteNames.welcomeScreen, (route) => false);
+                                    RouteNames.loginScreen, (route) => false);
                               }
                             },
                           ),

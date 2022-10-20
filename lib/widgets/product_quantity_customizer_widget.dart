@@ -28,8 +28,7 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              productDetailController.decreaseQuantity(
-                  product, productDetailController.realPrice);
+              productDetailController.decreaseQuantity(product);
               cartController.calculateTotalPrice();
             },
             icon: const Icon(
@@ -42,8 +41,7 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
           }),
           IconButton(
             onPressed: () {
-              productDetailController.increaseQuantity(
-                  product, productDetailController.realPrice);
+              productDetailController.increaseQuantity(product);
               cartController.calculateTotalPrice();
             },
             icon: const Icon(

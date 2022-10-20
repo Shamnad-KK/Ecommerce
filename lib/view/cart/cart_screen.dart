@@ -17,6 +17,9 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final cartController = Provider.of<CartController>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      cartController.calculateTotalPrice();
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Cart"),

@@ -36,6 +36,18 @@ class SignUpScreen extends StatelessWidget {
                   AppSpacing.kHeight30,
                   CustomTextField(
                     controller: signUpController.emailController,
+                    hint: "Username",
+                    keyboardType: TextInputType.emailAddress,
+                    filled: true,
+                    prefixIcon: const Icon(
+                      CupertinoIcons.person,
+                      color: AppColors.prefixIconColor,
+                      size: 18,
+                    ),
+                  ),
+                  AppSpacing.kHeight10,
+                  CustomTextField(
+                    controller: signUpController.emailController,
                     hint: "Email",
                     keyboardType: TextInputType.emailAddress,
                     filled: true,
@@ -73,34 +85,12 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     );
                   }),
-                  AppSpacing.kHeight10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Consumer<SignUpController>(
-                        builder: (BuildContext context, signUpConsumer,
-                            Widget? child) {
-                          return Checkbox(
-                            value: signUpConsumer.isChecked,
-                            activeColor: AppColors.mainColor,
-                            onChanged: (value) {
-                              signUpConsumer.setCheckVisibility(value!);
-                            },
-                          );
-                        },
-                      ),
-                      const Text(
-                        "Remember me",
-                        style: AppTextStyle.bodySmall,
-                      )
-                    ],
-                  ),
-                  AppSpacing.kHeight10,
+                  AppSpacing.kHeight30,
                   CustomButtonWidget(
                     text: "Sign up",
                     onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(context,
-                          RouteNames.accountSetupScreen, (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, RouteNames.bottomNavBar, (route) => false);
                     },
                   ),
                   AppSpacing.kHeight30,
@@ -113,13 +103,13 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SocialMediaCardWidget(
-                        image:
-                            "assets/social_media_icons/facebook-logo-3-1.png",
+                        image: "assets/social_media_icons/google-logo.png",
                         onTap: () {},
                       ),
                       AppSpacing.kWidth10,
                       SocialMediaCardWidget(
-                        image: "assets/social_media_icons/google-logo.png",
+                        image:
+                            "assets/social_media_icons/facebook-logo-3-1.png",
                         onTap: () {},
                       ),
                     ],
@@ -129,8 +119,7 @@ class SignUpScreen extends StatelessWidget {
                     leadingText: "Already have an account?",
                     mainText: "Sign in",
                     onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(RouteNames.loginScreen);
+                      Navigator.of(context).pop();
                     },
                   )
                 ],

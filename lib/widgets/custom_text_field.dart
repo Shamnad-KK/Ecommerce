@@ -53,7 +53,7 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly,
       obscureText: obscureText,
       validator: validator,
-      maxLines: obscureText == true ? 1 : maxLines,
+      maxLines: 1,
       inputFormatters: inputFormatters,
       onChanged: onchanged,
       decoration: InputDecoration(

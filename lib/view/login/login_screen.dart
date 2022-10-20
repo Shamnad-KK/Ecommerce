@@ -75,45 +75,26 @@ class LoginScreen extends StatelessWidget {
                     );
                   }),
                   AppSpacing.kHeight10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Consumer<SignUpController>(
-                        builder: (BuildContext context, signUpConsumer,
-                            Widget? child) {
-                          return Checkbox(
-                            value: signUpConsumer.isChecked,
-                            activeColor: AppColors.mainColor,
-                            onChanged: (value) {
-                              signUpConsumer.setCheckVisibility(value!);
-                            },
-                          );
-                        },
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, RouteNames.forgotPasswordScreen);
+                    },
+                    child: const Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        "Forgot the password?",
+                        style: AppTextStyle.body2,
                       ),
-                      const Text(
-                        "Remember me",
-                        style: AppTextStyle.bodySmall,
-                      )
-                    ],
+                    ),
                   ),
-                  AppSpacing.kHeight10,
+                  AppSpacing.kHeight30,
                   CustomButtonWidget(
                     text: "Sign in",
                     onTap: () {
                       Navigator.pushNamedAndRemoveUntil(
                           context, RouteNames.bottomNavBar, (route) => false);
                     },
-                  ),
-                  AppSpacing.kHeight30,
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                          context, RouteNames.forgotPasswordScreen);
-                    },
-                    child: const Text(
-                      "Forgot the password?",
-                      style: AppTextStyle.body2,
-                    ),
                   ),
                   AppSpacing.kHeight30,
                   const Text(
@@ -125,13 +106,13 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SocialMediaCardWidget(
-                        image:
-                            "assets/social_media_icons/facebook-logo-3-1.png",
+                        image: "assets/social_media_icons/google-logo.png",
                         onTap: () {},
                       ),
                       AppSpacing.kWidth10,
                       SocialMediaCardWidget(
-                        image: "assets/social_media_icons/google-logo.png",
+                        image:
+                            "assets/social_media_icons/facebook-logo-3-1.png",
                         onTap: () {},
                       ),
                     ],
@@ -141,8 +122,7 @@ class LoginScreen extends StatelessWidget {
                     leadingText: "Don't have an account?",
                     mainText: "Sign up",
                     onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(RouteNames.signUpScreen);
+                      Navigator.of(context).pushNamed(RouteNames.signUpScreen);
                     },
                   )
                 ],

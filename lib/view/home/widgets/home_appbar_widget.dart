@@ -48,20 +48,21 @@ class HomeAppBarWidget extends StatelessWidget {
           ],
         ),
         bottom: PreferredSize(
-            preferredSize: Size(size.width, size.height * 0.0),
-            child: const CustomTextField(
-              hint: "Search",
-              isSearchField: true,
-              isDense: true,
-              prefixIcon: Icon(
-                CupertinoIcons.search,
-                color: AppColors.prefixIconColor,
-              ),
-              suffixIcon: Icon(
-                Icons.filter_list,
-                color: AppColors.suffixIconColor,
-              ),
-            )),
+          preferredSize: Size(size.width, size.height * 0.0),
+          child: const CustomTextField(
+            hint: "Search",
+            isSearchField: true,
+            isDense: true,
+            prefixIcon: Icon(
+              CupertinoIcons.search,
+              color: AppColors.prefixIconColor,
+            ),
+            suffixIcon: Icon(
+              Icons.filter_list,
+              color: AppColors.suffixIconColor,
+            ),
+          ),
+        ),
       ),
     );
   }

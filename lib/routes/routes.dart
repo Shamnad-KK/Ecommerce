@@ -1,5 +1,4 @@
 import 'package:ecommerce/routes/route_names.dart';
-import 'package:ecommerce/view/account_setup/account_setup_screen.dart';
 import 'package:ecommerce/view/confirm_password/confirm_password_screen.dart';
 import 'package:ecommerce/view/favorites/wishlist_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
@@ -10,7 +9,6 @@ import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
 import 'package:ecommerce/view/product_detail/product_detail_screen.dart';
 import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
-import 'package:ecommerce/view/welcome/welcome_screen.dart';
 import 'package:ecommerce/widgets/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -25,10 +23,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const OnboardingScreen(),
         );
-      case RouteNames.welcomeScreen:
-        return MaterialPageRoute(
-          builder: (context) => const WelcomeScreen(),
-        );
+
       case RouteNames.signUpScreen:
         return MaterialPageRoute(
           builder: (context) => const SignUpScreen(),
@@ -49,10 +44,10 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const OtpScreen(),
         );
-      case RouteNames.accountSetupScreen:
-        return MaterialPageRoute(
-          builder: (context) => const AccountSetupScreen(),
-        );
+      // case RouteNames.accountSetupScreen:
+      //   return MaterialPageRoute(
+      //     builder: (context) => const AccountSetupScreen(),
+      //   );
       case RouteNames.bottomNavBar:
         return MaterialPageRoute(
           builder: (context) => const BottomNavBar(),
@@ -63,6 +58,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => ProductDetailScreen(
             index: args.index,
+            product: args.product,
           ),
         );
       case RouteNames.wishlistScreen:

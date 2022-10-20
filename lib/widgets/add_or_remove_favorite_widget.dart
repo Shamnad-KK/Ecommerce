@@ -2,6 +2,7 @@ import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
+import 'package:ecommerce/model/home_product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,9 +11,11 @@ class AddorRemoveFavoriteWidget extends StatelessWidget {
   const AddorRemoveFavoriteWidget({
     Key? key,
     required this.index,
+    required this.product,
   }) : super(key: key);
 
   final int index;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +33,9 @@ class AddorRemoveFavoriteWidget extends StatelessWidget {
             onTap: () {
               value.setFavorite(index);
               if (value.productList[index].isFavorite == true) {
-                wishlistController.addItemToWishList(value.productList[index]);
+                wishlistController.addItemToWishList(product);
               } else {
-                wishlistController
-                    .removeItemFromWishList(value.productList[index]);
+                wishlistController.removeItemFromWishList(product);
               }
             },
             child: Icon(
