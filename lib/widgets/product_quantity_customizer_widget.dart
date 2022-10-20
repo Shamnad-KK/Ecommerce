@@ -19,7 +19,6 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
         Provider.of<ProductDetailController>(context, listen: false);
     final cartController = Provider.of<CartController>(context, listen: false);
 
-    double price = product.price;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.mainColor,
@@ -29,11 +28,9 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              // productDetailController.decreaseQuantity();
-              productDetailController.decreaseQuantity(product, price);
+              productDetailController.decreaseQuantity(
+                  product, productDetailController.realPrice);
               cartController.calculateTotalPrice();
-              // product.quantity--;
-              // product.price = product.price - price;
             },
             icon: const Icon(
               Icons.remove,
@@ -45,10 +42,9 @@ class ProductQuantityCustomizerWidget extends StatelessWidget {
           }),
           IconButton(
             onPressed: () {
-              productDetailController.increaseQuantity(product, price);
+              productDetailController.increaseQuantity(
+                  product, productDetailController.realPrice);
               cartController.calculateTotalPrice();
-              // product.quantity++;
-              // product.price = product.price + price;
             },
             icon: const Icon(
               Icons.add,

@@ -28,12 +28,14 @@ class ProductDetailScreen extends StatelessWidget {
         Provider.of<ProductDetailController>(context, listen: false);
 
     Product newProduct = productDetailController.productList[index];
-    newProduct.quantity = 1;
-    double price = newProduct.price;
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      productDetailController.setChip(0);
-      productDetailController.setColor(0);
-    });
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        productDetailController.setChip(0);
+        productDetailController.setColor(0);
+        productDetailController.setProductInitialValues(newProduct);
+      },
+    );
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -202,7 +204,8 @@ class ProductDetailScreen extends StatelessWidget {
                                             .selectedColorIndex],
                                   );
                                   cartController.addProductToCart(cartProduct);
-                                  newProduct.price = price;
+                                  newProduct.price =
+                                      productDetailController.realPrice;
                                   Navigator.of(context).pop();
                                 },
                               ),

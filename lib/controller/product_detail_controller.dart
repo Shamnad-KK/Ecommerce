@@ -6,6 +6,7 @@ class ProductDetailController extends ChangeNotifier {
   List<Product> productList = HomeController().productList;
   int selectedChipIndex = 0;
   int selectedColorIndex = 0;
+  double realPrice = 0;
 
   void setChip(int newValue) {
     selectedChipIndex = newValue;
@@ -17,8 +18,9 @@ class ProductDetailController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setProduct(int index) {
-    productList[index].quantity = 1;
+  void setProductInitialValues(Product newProduct) {
+    newProduct.quantity = 1;
+    realPrice = newProduct.price;
     notifyListeners();
   }
 

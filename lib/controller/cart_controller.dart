@@ -8,8 +8,14 @@ class CartController extends ChangeNotifier {
   CartController() {
     calculateTotalPrice();
   }
+  double realPrice = 0;
   double totalPrice = 0.0;
   List<Product> cartList = [];
+
+  void setProductInitialValues(Product product) {
+    realPrice = product.price;
+    notifyListeners();
+  }
 
   void addProductToCart(Product product) {
     totalPrice = product.price;
