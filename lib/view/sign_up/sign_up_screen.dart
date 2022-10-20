@@ -35,7 +35,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   AppSpacing.kHeight30,
                   CustomTextField(
-                    controller: signUpController.emailController,
+                    controller: signUpController.userNameController,
                     hint: "Username",
                     keyboardType: TextInputType.emailAddress,
                     filled: true,
@@ -53,6 +53,18 @@ class SignUpScreen extends StatelessWidget {
                     filled: true,
                     prefixIcon: const Icon(
                       CupertinoIcons.mail,
+                      color: AppColors.prefixIconColor,
+                      size: 18,
+                    ),
+                  ),
+                  AppSpacing.kHeight10,
+                  CustomTextField(
+                    controller: signUpController.phoneController,
+                    hint: "Phone",
+                    keyboardType: TextInputType.number,
+                    filled: true,
+                    prefixIcon: const Icon(
+                      CupertinoIcons.phone,
                       color: AppColors.prefixIconColor,
                       size: 18,
                     ),

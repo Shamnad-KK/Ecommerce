@@ -1,5 +1,6 @@
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/confirm_password/confirm_password_screen.dart';
+import 'package:ecommerce/view/edit_profile/edit_profile_screen.dart';
 import 'package:ecommerce/view/favorites/wishlist_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
@@ -44,10 +45,10 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const OtpScreen(),
         );
-      // case RouteNames.accountSetupScreen:
-      //   return MaterialPageRoute(
-      //     builder: (context) => const AccountSetupScreen(),
-      //   );
+      case RouteNames.editProfileScreen:
+        return MaterialPageRoute(
+          builder: (context) => const EditProfileScreen(),
+        );
       case RouteNames.bottomNavBar:
         return MaterialPageRoute(
           builder: (context) => const BottomNavBar(),

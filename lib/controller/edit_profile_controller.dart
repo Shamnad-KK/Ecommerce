@@ -2,7 +2,7 @@ import 'package:ecommerce/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class AccountSetupController extends ChangeNotifier {
+class EditProfileController extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController phoneController = TextEditingController();

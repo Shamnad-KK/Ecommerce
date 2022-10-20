@@ -2,6 +2,7 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/account/widgets/profile_row_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,10 @@ class AccountScreen extends StatelessWidget {
                 ProfileRowWidget(
                   icon: Icons.person_outline,
                   text: "Edit Profile",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(RouteNames.editProfileScreen);
+                  },
                 ),
                 ProfileRowWidget(
                   icon: Icons.location_on_outlined,
