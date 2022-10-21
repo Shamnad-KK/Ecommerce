@@ -1,3 +1,4 @@
+import 'package:ecommerce/controller/address_controller.dart';
 import 'package:ecommerce/controller/bottom_nav_controller.dart';
 import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/controller/confirm_password_controller.dart';
@@ -15,7 +16,7 @@ import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
-import 'package:ecommerce/view/splash/splash_screen.dart';
+import 'package:ecommerce/view/address/address_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => CartController()),
         ChangeNotifierProvider(create: (ctx) => WishlistController()),
         ChangeNotifierProvider(create: (ctx) => OrdersController()),
+        ChangeNotifierProvider(create: (ctx) => AddressController()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
-        home: const SplashScreen(),
+        home: const AddressScreen(),
       ),
     );
   }

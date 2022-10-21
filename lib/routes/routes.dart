@@ -1,7 +1,9 @@
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/view/add_address/add_address_screen.dart';
+import 'package:ecommerce/view/address/address_screen.dart';
 import 'package:ecommerce/view/confirm_password/confirm_password_screen.dart';
 import 'package:ecommerce/view/edit_profile/edit_profile_screen.dart';
-import 'package:ecommerce/view/favorites/wishlist_screen.dart';
+import 'package:ecommerce/view/wishlist/wishlist_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
@@ -45,10 +47,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const OtpScreen(),
         );
-      case RouteNames.editProfileScreen:
-        return MaterialPageRoute(
-          builder: (context) => const EditProfileScreen(),
-        );
+
       case RouteNames.bottomNavBar:
         return MaterialPageRoute(
           builder: (context) => const BottomNavBar(),
@@ -65,6 +64,18 @@ class AppRoutes {
       case RouteNames.wishlistScreen:
         return MaterialPageRoute(
           builder: (context) => const WishlistScreen(),
+        );
+      case RouteNames.editProfileScreen:
+        return MaterialPageRoute(
+          builder: (context) => const EditProfileScreen(),
+        );
+      case RouteNames.addressScreen:
+        return MaterialPageRoute(
+          builder: (context) => const AddressScreen(),
+        );
+      case RouteNames.addAddressScreen:
+        return MaterialPageRoute(
+          builder: (context) => const AddAddressScreen(),
         );
       default:
         return MaterialPageRoute(

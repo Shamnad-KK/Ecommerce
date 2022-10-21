@@ -3,12 +3,12 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/route_names.dart';
-import 'package:ecommerce/view/account/widgets/profile_row_widget.dart';
+import 'package:ecommerce/view/profile/widgets/profile_row_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,9 @@ class AccountScreen extends StatelessWidget {
                 ProfileRowWidget(
                   icon: Icons.location_on_outlined,
                   text: "Address",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(RouteNames.addressScreen);
+                  },
                 ),
                 ProfileRowWidget(
                   icon: Icons.notifications_outlined,

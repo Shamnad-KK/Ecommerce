@@ -33,21 +33,27 @@ class EditProfileScreen extends StatelessWidget {
                 ),
                 AppSpacing.kHeight10,
                 CustomTextField(
-                  controller: editProfileController.dateController,
-                  hint: "Date of birth",
+                  controller: editProfileController.emailController,
+                  hint: "Email",
                   isDense: true,
-                  readOnly: true,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      editProfileController.pickDate(context);
-                    },
-                    icon: const Icon(
-                      Icons.calendar_today,
-                      color: AppColors.suffixIconColor,
-                    ),
-                  ),
                 ),
                 AppSpacing.kHeight10,
+                // CustomTextField(
+                //   controller: editProfileController.dateController,
+                //   hint: "Date of birth",
+                //   isDense: true,
+                //   readOnly: true,
+                //   suffixIcon: IconButton(
+                //     onPressed: () {
+                //       editProfileController.pickDate(context);
+                //     },
+                //     icon: const Icon(
+                //       Icons.calendar_today,
+                //       color: AppColors.suffixIconColor,
+                //     ),
+                //   ),
+                // ),
+                // AppSpacing.kHeight10,
                 CustomTextField(
                   controller: editProfileController.phoneController,
                   hint: "Phone number",
@@ -59,6 +65,7 @@ class EditProfileScreen extends StatelessWidget {
                   child: DropdownButtonFormField<String>(
                     isDense: true,
                     decoration: const InputDecoration(
+                      contentPadding: AppPadding.sidePading12,
                       hintText: "Gender",
                       fillColor: AppColors.transparent,
                       filled: true,

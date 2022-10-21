@@ -12,7 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.obscureText = false,
     this.validator,
-    this.maxLines,
+    this.maxLines = 1,
     this.inputFormatters,
     this.hint,
     this.isDense,
@@ -53,7 +53,7 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly,
       obscureText: obscureText,
       validator: validator,
-      maxLines: 1,
+      maxLines: maxLines,
       inputFormatters: inputFormatters,
       onChanged: onchanged,
       decoration: InputDecoration(

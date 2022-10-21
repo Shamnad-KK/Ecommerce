@@ -43,24 +43,24 @@ class OnboardingScreen extends StatelessWidget {
                   child: Container(
                     width: size.width,
                     decoration: const BoxDecoration(color: AppColors.bgColor),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          onboardingList[index].bodyText,
-                          style: AppTextStyle.headline4,
-                          textAlign: TextAlign.center,
-                        ),
-                        CustomIndicatorWidget(
-                          count: 3,
-                          index: index,
-                          activeColor: AppColors.whiteColor,
-                          inactiveColor: AppColors.mainColor,
-                        ),
-                        Padding(
-                          padding: AppPadding.sidePading15,
-                          child: CustomButtonWidget(
+                    child: Padding(
+                      padding: AppPadding.sidePading15,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            onboardingList[index].bodyText,
+                            style: AppTextStyle.headline4,
+                            textAlign: TextAlign.center,
+                          ),
+                          CustomIndicatorWidget(
+                            count: 3,
+                            index: index,
+                            activeColor: AppColors.whiteColor,
+                            inactiveColor: AppColors.indicatorInactiveColor,
+                          ),
+                          CustomButtonWidget(
                             text: onboardingList[index].buttonText,
                             onTap: () {
                               if (index < 2) {
@@ -74,8 +74,18 @@ class OnboardingScreen extends StatelessWidget {
                               }
                             },
                           ),
-                        ),
-                      ],
+                          if (index == 0 || index == 1)
+                            CustomButtonWidget(
+                              color: AppColors.mainColor,
+                              textColor: AppColors.whiteColor,
+                              text: "Skip",
+                              onTap: () {
+                                onboardingController.pageController
+                                    .jumpToPage(2);
+                              },
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

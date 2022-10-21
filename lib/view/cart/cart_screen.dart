@@ -41,145 +41,145 @@ class CartScreen extends StatelessWidget {
               ),
             );
           } else {
-            return Stack(
+            return Column(
               children: [
-                ListView.separated(
-                  itemCount: value.cartList.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    final product = value.cartList[index];
-                    return Container(
-                      margin: AppPadding.sidePading15,
-                      padding: AppPadding.mainPading,
-                      height: size.height * 0.17,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                        color: AppColors.mediaButtonBg,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: size.height,
-                            width: size.width * 0.3,
-                            decoration: BoxDecoration(
-                              color: AppColors.mainColor,
-                              image: DecorationImage(
-                                  image: AssetImage(product.image),
-                                  fit: BoxFit.fill),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                          ),
-                          AppSpacing.kWidth10,
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(product.name, style: AppTextStyle.body1),
-                                  AppSpacing.kWidth30,
-                                  GestureDetector(
-                                    onTap: () {
-                                      cartController.removeProductFromCart(
-                                          product, context);
-                                    },
-                                    child: const Icon(Icons.delete_outline),
-                                  )
-                                ],
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: value.cartList.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) {
+                      final product = value.cartList[index];
+                      return Container(
+                        margin: AppPadding.sidePading15,
+                        padding: AppPadding.mainPading,
+                        height: size.height * 0.17,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                          color: AppColors.mediaButtonBg,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: size.height,
+                              width: size.width * 0.3,
+                              decoration: BoxDecoration(
+                                color: AppColors.mainColor,
+                                image: DecorationImage(
+                                    image: AssetImage(product.image),
+                                    fit: BoxFit.fill),
+                                borderRadius: BorderRadius.circular(15),
                               ),
-                              SizedBox(
-                                width: size.width * 0.2,
-                                child: Row(
+                            ),
+                            AppSpacing.kWidth10,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    CircleAvatar(
-                                      backgroundColor: product.selectedColor,
-                                      radius: 10,
-                                    ),
-                                    const Text("|"),
-                                    const Text(
-                                      "Size =",
-                                      style: AppTextStyle.labelSmall,
-                                    ),
-                                    Text(
-                                      "${product.selectedSize}",
-                                      style: AppTextStyle.labelSmall,
-                                    ),
+                                    Text(product.name,
+                                        style: AppTextStyle.body1),
+                                    AppSpacing.kWidth30,
+                                    GestureDetector(
+                                      onTap: () {
+                                        cartController.removeProductFromCart(
+                                            product, context);
+                                      },
+                                      child: const Icon(Icons.delete_outline),
+                                    )
                                   ],
                                 ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "\$ ${product.price}",
-                                    style: AppTextStyle.body1,
+                                SizedBox(
+                                  width: size.width * 0.2,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: product.selectedColor,
+                                        radius: 10,
+                                      ),
+                                      const Text("|"),
+                                      const Text(
+                                        "Size =",
+                                        style: AppTextStyle.labelSmall,
+                                      ),
+                                      Text(
+                                        "${product.selectedSize}",
+                                        style: AppTextStyle.labelSmall,
+                                      ),
+                                    ],
                                   ),
-                                  AppSpacing.kWidth10,
-                                  ProductQuantityCustomizerWidget(
-                                      product: product)
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return AppSpacing.kHeight20;
-                  },
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: size.height * 0.1,
-                    padding: AppPadding.mainPading,
-                    decoration: BoxDecoration(
-                      color: AppColors.mediaButtonBg,
-                      border: Border.all(
-                        color: AppColors.borderColor,
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Text(
-                              "Total Price",
-                              style: AppTextStyle.subtitle2,
-                            ),
-                            Consumer<CartController>(
-                              builder:
-                                  (BuildContext context, value, Widget? child) {
-                                return SizedBox(
-                                  width: size.width * 0.35,
-                                  child: Text(
-                                    "\$ ${value.totalPrice}",
-                                    style: AppTextStyle.body1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                );
-                              },
-                            ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "\$ ${product.price}",
+                                      style: AppTextStyle.body1,
+                                    ),
+                                    AppSpacing.kWidth10,
+                                    ProductQuantityCustomizerWidget(
+                                        product: product)
+                                  ],
+                                ),
+                              ],
+                            )
                           ],
                         ),
-                        AppSpacing.kWidth10,
-                        Expanded(
-                          child: CustomButtonWidget(
-                            text: "Checkout",
-                            onTap: () {},
-                          ),
-                        )
-                      ],
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return AppSpacing.kHeight20;
+                    },
+                  ),
+                ),
+                Container(
+                  height: size.height * 0.1,
+                  padding: AppPadding.mainPading,
+                  decoration: BoxDecoration(
+                    color: AppColors.mediaButtonBg,
+                    border: Border.all(
+                      color: AppColors.borderColor,
                     ),
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text(
+                            "Total Price",
+                            style: AppTextStyle.subtitle2,
+                          ),
+                          Consumer<CartController>(
+                            builder:
+                                (BuildContext context, value, Widget? child) {
+                              return SizedBox(
+                                width: size.width * 0.35,
+                                child: Text(
+                                  "\$ ${value.totalPrice}",
+                                  style: AppTextStyle.body1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      AppSpacing.kWidth10,
+                      Expanded(
+                        child: CustomButtonWidget(
+                          text: "Checkout",
+                          onTap: () {},
+                        ),
+                      )
+                    ],
                   ),
                 )
               ],

@@ -7,6 +7,7 @@ import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
 import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
+import 'package:ecommerce/widgets/custom_notfound_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,9 @@ class HomeItemCardWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return list.isEmpty
         ? const Center(
-            child: Text("Add Product"),
+            child: CustomNotFoundWidget(
+                title: "Your wishlist is empty",
+                subtitle: "You have'nt added any products"),
           )
         : GridView.builder(
             itemCount: list.length,

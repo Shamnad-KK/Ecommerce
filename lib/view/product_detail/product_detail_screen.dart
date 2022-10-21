@@ -182,38 +182,55 @@ class ProductDetailScreen extends StatelessWidget {
                               child: Consumer<ProductDetailController>(
                                 builder: (BuildContext context, value,
                                     Widget? child) {
-                                  return Text(
-                                    "\$ ${product.price}",
-                                    style: AppTextStyle.titleLarge,
+                                  return FittedBox(
+                                    child: Text(
+                                      "\$ ${product.price}",
+                                      style: AppTextStyle.titleLarge,
+                                    ),
                                   );
                                 },
                               ),
                             ),
+                            AppSpacing.kWidth5,
                             Expanded(
-                              child: CustomButtonWidget(
-                                text: "Add to cart",
-                                onTap: () {
-                                  Product cartProduct = Product(
-                                    name: product.name,
-                                    price: product.price,
-                                    image: product.image,
-                                    description: product.description,
-                                    rating: product.rating,
-                                    reviews: product.reviews,
-                                    isFavorite: product.isFavorite,
-                                    selectedSize: product.sizes![
-                                        productDetailController
-                                            .selectedChipIndex],
-                                    quantity: product.quantity,
-                                    selectedColor: product.colors![
-                                        productDetailController
-                                            .selectedColorIndex],
-                                  );
-                                  cartController.addProductToCart(cartProduct);
-                                  product.price =
-                                      productDetailController.realPrice;
-                                  Navigator.of(context).pop();
-                                },
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: CustomButtonWidget(
+                                      text: "Add to cart",
+                                      onTap: () {
+                                        Product cartProduct = Product(
+                                          name: product.name,
+                                          price: product.price,
+                                          image: product.image,
+                                          description: product.description,
+                                          rating: product.rating,
+                                          reviews: product.reviews,
+                                          isFavorite: product.isFavorite,
+                                          selectedSize: product.sizes![
+                                              productDetailController
+                                                  .selectedChipIndex],
+                                          quantity: product.quantity,
+                                          selectedColor: product.colors![
+                                              productDetailController
+                                                  .selectedColorIndex],
+                                        );
+                                        cartController
+                                            .addProductToCart(cartProduct);
+                                        product.price =
+                                            productDetailController.realPrice;
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ),
+                                  AppSpacing.kWidth5,
+                                  Expanded(
+                                    child: CustomButtonWidget(
+                                      text: "Buy Now",
+                                      onTap: () {},
+                                    ),
+                                  )
+                                ],
                               ),
                             )
                           ],

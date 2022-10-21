@@ -10,4 +10,6 @@ class RouteNames {
   static const productDetail = "productDetail";
   static const wishlistScreen = "wishlist";
   static const editProfileScreen = "editProfile";
+  static const addressScreen = "address";
+  static const addAddressScreen = "addAddress";
 }

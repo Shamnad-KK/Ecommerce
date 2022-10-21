@@ -7,9 +7,13 @@ class CustomButtonWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.onTap,
+    this.color = AppColors.whiteColor,
+    this.textColor = AppColors.blackColor,
   });
   final String text;
   final VoidCallback onTap;
+  final Color color;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +26,13 @@ class CustomButtonWidget extends StatelessWidget {
         height: 50,
         width: size.width,
         decoration: BoxDecoration(
-          color: AppColors.customButtonColor,
+          color: color,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Center(
           child: Text(
             text,
-            style: AppTextStyle.buttonBlackText,
+            style: AppTextStyle.buttonBlackText.copyWith(color: textColor),
           ),
         ),
       ),

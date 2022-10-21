@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 class EditProfileController extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 

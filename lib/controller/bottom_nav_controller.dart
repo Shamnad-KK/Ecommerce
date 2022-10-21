@@ -1,4 +1,4 @@
-import 'package:ecommerce/view/account/account_screen.dart';
+import 'package:ecommerce/view/profile/profile_screen.dart';
 import 'package:ecommerce/view/cart/cart_screen.dart';
 import 'package:ecommerce/view/home/home_screen.dart';
 import 'package:ecommerce/view/orders/orders_screen.dart';
@@ -9,7 +9,7 @@ class BottomNavController extends ChangeNotifier {
     const HomeScreen(),
     const CartScreen(),
     const OrdersScreen(),
-    const AccountScreen(),
+    const ProfileScreen(),
   ];
 
   List<Widget> get pageList => _pageList;
