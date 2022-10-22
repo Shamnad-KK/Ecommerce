@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/utils/app_popups.dart';
+import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:flutter/material.dart';
 
 class OtpController extends ChangeNotifier {
@@ -37,12 +38,14 @@ class OtpController extends ChangeNotifier {
     });
   }
 
-  void submitOtp(BuildContext context) async {
+  void submitOtp(BuildContext context, OtpAction otpAction) async {
     if (code.length != 4) {
       await AppPopUps.showToast("Incorrect OTP", AppColors.errorColor);
       return;
+    } else if (otpAction == OtpAction.FORGOT_PASSWORD) {
+      await Navigator.pushNamed(context, RouteNames.confirmPasswordScreen);
+    } else if (otpAction == OtpAction.SIGN_UP) {
+      await Navigator.pushNamed(context, RouteNames.bottomNavBar);
     }
-    // await AppPopUps.showToast("Otp verified", AppColors.successColor);
-    await Navigator.pushNamed(context, RouteNames.confirmPasswordScreen);
   }
 }

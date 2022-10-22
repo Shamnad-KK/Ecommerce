@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     this.fillColor = AppColors.textFieldFillColor,
     this.onchanged,
     this.isSearchField = false,
+    this.contentPadding,
   });
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -43,6 +44,7 @@ class CustomTextField extends StatelessWidget {
   final Color? fillColor;
   final Function(String)? onchanged;
   final bool isSearchField;
+  final EdgeInsets? contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,9 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       inputFormatters: inputFormatters,
       onChanged: onchanged,
+      cursorColor: AppColors.whiteColor,
       decoration: InputDecoration(
+        contentPadding: contentPadding,
         hintText: hint,
         hintStyle: AppTextStyle.hintTextStyle,
         isDense: isDense,

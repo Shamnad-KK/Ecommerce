@@ -46,7 +46,7 @@ class AddAddressScreen extends StatelessWidget {
                     CustomTextField(
                       controller: addressController.addressController,
                       hint: "Address",
-                      keyboardType: TextInputType.streetAddress,
+                      keyboardType: TextInputType.multiline,
                       maxLines: null,
                     ),
                     AppSpacing.kHeight10,

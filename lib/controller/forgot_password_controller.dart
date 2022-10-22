@@ -1,4 +1,6 @@
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/view/otp/otp_arguments.dart';
+import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordController extends ChangeNotifier {
@@ -11,9 +13,11 @@ class ForgotPasswordController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onContinue(BuildContext context) async {
+  void onContinue(BuildContext context, OtpAction otpAction) async {
     if (smsSelected == true) {
-      await Navigator.of(context).pushNamed(RouteNames.otpScreen);
+      final otpArguments = OtpArguments(otpAction: otpAction);
+      await Navigator.of(context)
+          .pushNamed(RouteNames.otpScreen, arguments: otpArguments);
     } else {}
   }
 

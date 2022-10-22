@@ -3,13 +3,15 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  const OtpScreen({super.key, required this.otpAction});
+  final OtpAction otpAction;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -82,7 +84,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   CustomButtonWidget(
                     text: "Verify",
                     onTap: () {
-                      otpController.submitOtp(context);
+                      otpController.submitOtp(context, widget.otpAction);
                     },
                   )
                 ],

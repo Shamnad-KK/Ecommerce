@@ -5,6 +5,8 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/view/otp/otp_arguments.dart';
+import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:ecommerce/widgets/login_or_signup_text_widget.dart';
@@ -77,8 +79,11 @@ class LoginScreen extends StatelessWidget {
                   AppSpacing.kHeight10,
                   GestureDetector(
                     onTap: () {
+                      final args =
+                          OtpArguments(otpAction: OtpAction.FORGOT_PASSWORD);
                       Navigator.pushNamed(
-                          context, RouteNames.forgotPasswordScreen);
+                          context, RouteNames.forgotPasswordScreen,
+                          arguments: args);
                     },
                     child: const Align(
                       alignment: Alignment.bottomRight,

@@ -4,6 +4,7 @@ class AppPadding {
   static const mainPading = EdgeInsets.all(15);
   static const allside2 = EdgeInsets.all(2);
   static const allside5 = EdgeInsets.all(5);
+  static const allside30 = EdgeInsets.all(30);
   static const sidePading15 = EdgeInsets.only(left: 15, right: 15);
   static const sidePading12 = EdgeInsets.only(left: 15, right: 12);
   static const sidePading5 = EdgeInsets.only(left: 5, right: 5);

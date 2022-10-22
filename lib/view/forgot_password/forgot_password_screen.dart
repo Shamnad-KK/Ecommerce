@@ -4,12 +4,14 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/view/forgot_password/widgets/forgot_password_custom_choicechip.dart';
+import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({super.key});
+  const ForgotPasswordScreen({super.key, required this.otpAction});
+  final OtpAction otpAction;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 CustomButtonWidget(
                   text: "Continue",
                   onTap: () {
-                    forgotPasswordController.onContinue(context);
+                    forgotPasswordController.onContinue(context, otpAction);
                   },
                 )
               ],

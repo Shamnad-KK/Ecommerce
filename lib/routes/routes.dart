@@ -3,6 +3,7 @@ import 'package:ecommerce/view/add_address/add_address_screen.dart';
 import 'package:ecommerce/view/address/address_screen.dart';
 import 'package:ecommerce/view/confirm_password/confirm_password_screen.dart';
 import 'package:ecommerce/view/edit_profile/edit_profile_screen.dart';
+import 'package:ecommerce/view/otp/otp_arguments.dart';
 import 'package:ecommerce/view/wishlist/wishlist_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
@@ -36,16 +37,20 @@ class AppRoutes {
           builder: (context) => const LoginScreen(),
         );
       case RouteNames.forgotPasswordScreen:
+        final OtpArguments args = settings.arguments as OtpArguments;
         return MaterialPageRoute(
-          builder: (context) => const ForgotPasswordScreen(),
+          builder: (context) => ForgotPasswordScreen(otpAction: args.otpAction),
         );
       case RouteNames.confirmPasswordScreen:
         return MaterialPageRoute(
           builder: (context) => const ConfirmPasswordScreen(),
         );
       case RouteNames.otpScreen:
+        final OtpArguments args = settings.arguments as OtpArguments;
         return MaterialPageRoute(
-          builder: (context) => const OtpScreen(),
+          builder: (context) => OtpScreen(
+            otpAction: args.otpAction,
+          ),
         );
 
       case RouteNames.bottomNavBar:

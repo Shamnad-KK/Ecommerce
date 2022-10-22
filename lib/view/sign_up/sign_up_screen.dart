@@ -4,6 +4,8 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/view/otp/otp_arguments.dart';
+import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:ecommerce/widgets/login_or_signup_text_widget.dart';
@@ -26,6 +28,7 @@ class SignUpScreen extends StatelessWidget {
           padding: AppPadding.mainPading,
           child: Center(
             child: SingleChildScrollView(
+              reverse: true,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -101,8 +104,9 @@ class SignUpScreen extends StatelessWidget {
                   CustomButtonWidget(
                     text: "Sign up",
                     onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, RouteNames.bottomNavBar, (route) => false);
+                      final args = OtpArguments(otpAction: OtpAction.SIGN_UP);
+                      Navigator.pushNamed(context, RouteNames.otpScreen,
+                          arguments: args);
                     },
                   ),
                   AppSpacing.kHeight30,
