@@ -53,7 +53,8 @@ class _OtpScreenState extends State<OtpScreen> {
               child: Column(
                 children: [
                   AppSpacing.kHeight50,
-                  const Text("Code has been sent to +91 9999999999"),
+                  Text(
+                      "Code has been sent to +91 ${signupController.phoneController.text}"),
                   AppSpacing.kHeight50,
                   OtpTextField(
                     numberOfFields: 4,

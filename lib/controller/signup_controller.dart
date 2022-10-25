@@ -53,7 +53,7 @@ class SignUpController extends ChangeNotifier {
   String? phoneValidation(String? value) {
     if (value!.isEmpty) {
       return "Please enter your mobile number";
-    } else if (value.length > 10) {
+    } else if (value.length < 10) {
       return "Please enter a valid mobile number";
     } else {
       return null;

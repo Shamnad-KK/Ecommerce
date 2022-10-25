@@ -1,18 +1,23 @@
+import 'package:ecommerce/model/login_model.dart';
+import 'package:ecommerce/services/login_services.dart';
 import 'package:flutter/material.dart';
 
 class LoginController extends ChangeNotifier {
+  LoginServices loginServices = LoginServices();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  bool _isChecked = false;
-  bool get isChecked => _isChecked;
-  void setCheckVisibility(bool value) {
-    _isChecked = value;
-    notifyListeners();
-  }
-
   bool _isObscure = true;
   bool get isObscure => _isObscure;
+
+  void login(BuildContext context) async {
+    final LoginModel loginModel = LoginModel(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    await loginServices.login(context, loginModel);
+  }
+
   void setObscureTextVisibility() {
     _isObscure = !_isObscure;
     notifyListeners();

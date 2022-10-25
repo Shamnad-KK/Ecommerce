@@ -105,8 +105,7 @@ class LoginScreen extends StatelessWidget {
                       text: "Sign in",
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          Navigator.pushNamedAndRemoveUntil(context,
-                              RouteNames.bottomNavBar, (route) => false);
+                          loginController.login(context);
                         }
                       },
                     ),
