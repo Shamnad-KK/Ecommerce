@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:ecommerce/controller/otp_controller.dart';
+import 'package:ecommerce/controller/signup_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/model/sign_up_model.dart';
 import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +38,9 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final signupController =
+        Provider.of<SignUpController>(context, listen: false);
+    log(signupController.userNameController.text);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Enter OTP"),
@@ -84,7 +91,17 @@ class _OtpScreenState extends State<OtpScreen> {
                   CustomButtonWidget(
                     text: "Verify",
                     onTap: () {
-                      otpController.submitOtp(context, widget.otpAction);
+                      final otpModel = UserModel(
+                        userName: signupController.userNameController.text,
+                        email: signupController.emailController.text,
+                        phone: signupController.phoneController.text,
+                        password: signupController.passwordController.text,
+                      );
+                      otpController.submitOtp(
+                        context,
+                        widget.otpAction,
+                        otpModel,
+                      );
                     },
                   )
                 ],

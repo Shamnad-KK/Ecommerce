@@ -1,3 +1,4 @@
+import 'package:ecommerce/controller/profile_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
@@ -6,12 +7,15 @@ import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/profile/widgets/profile_row_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final profileController =
+        Provider.of<ProfileController>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile"),
@@ -68,19 +72,24 @@ class ProfileScreen extends StatelessWidget {
                   text: "Invite Friends",
                   onTap: () {},
                 ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.logout,
-                      color: AppColors.redColor,
-                    ),
-                    AppSpacing.kWidth10,
-                    Text(
-                      "Log out",
-                      style: AppTextStyle.body1
-                          .copyWith(color: AppColors.redColor),
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    profileController.logOut(context);
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.logout,
+                        color: AppColors.redColor,
+                      ),
+                      AppSpacing.kWidth10,
+                      Text(
+                        "Log out",
+                        style: AppTextStyle.body1
+                            .copyWith(color: AppColors.redColor),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

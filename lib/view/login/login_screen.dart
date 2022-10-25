@@ -22,6 +22,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginController =
         Provider.of<LoginController>(context, listen: false);
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -29,108 +30,118 @@ class LoginScreen extends StatelessWidget {
           padding: AppPadding.mainPading,
           child: Center(
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Login to your\naccount",
-                    style: AppTextStyle.headline3,
-                  ),
-                  AppSpacing.kHeight30,
-                  CustomTextField(
-                    controller: loginController.emailController,
-                    hint: "Email",
-                    keyboardType: TextInputType.emailAddress,
-                    filled: true,
-                    prefixIcon: const Icon(
-                      CupertinoIcons.mail,
-                      color: AppColors.prefixIconColor,
-                      size: 18,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Login to your\naccount",
+                      style: AppTextStyle.headline3,
                     ),
-                  ),
-                  AppSpacing.kHeight10,
-                  Consumer<SignUpController>(
-                      builder: (BuildContext context, value, Widget? child) {
-                    return CustomTextField(
-                      controller: loginController.passwordController,
-                      hint: "Password",
-                      obscureText: value.isObscure,
-                      keyboardType: TextInputType.visiblePassword,
+                    AppSpacing.kHeight30,
+                    CustomTextField(
+                      controller: loginController.emailController,
+                      hint: "Email",
+                      validator: (value) =>
+                          loginController.emailValidation(value),
+                      keyboardType: TextInputType.emailAddress,
                       filled: true,
                       prefixIcon: const Icon(
-                        Icons.lock_outline_rounded,
+                        CupertinoIcons.mail,
                         color: AppColors.prefixIconColor,
                         size: 18,
                       ),
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          value.setObscureTextVisibility();
-                        },
-                        child: Icon(
-                          value.isObscure
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: AppColors.suffixIconColor,
+                    ),
+                    AppSpacing.kHeight10,
+                    Consumer<SignUpController>(
+                        builder: (BuildContext context, value, Widget? child) {
+                      return CustomTextField(
+                        controller: loginController.passwordController,
+                        hint: "Password",
+                        validator: (value) =>
+                            loginController.passwordValidation(value),
+                        obscureText: value.isObscure,
+                        keyboardType: TextInputType.visiblePassword,
+                        filled: true,
+                        prefixIcon: const Icon(
+                          Icons.lock_outline_rounded,
+                          color: AppColors.prefixIconColor,
                           size: 18,
                         ),
-                      ),
-                    );
-                  }),
-                  AppSpacing.kHeight10,
-                  GestureDetector(
-                    onTap: () {
-                      final args =
-                          OtpArguments(otpAction: OtpAction.FORGOT_PASSWORD);
-                      Navigator.pushNamed(
-                          context, RouteNames.forgotPasswordScreen,
-                          arguments: args);
-                    },
-                    child: const Align(
-                      alignment: Alignment.bottomRight,
-                      child: Text(
-                        "Forgot the password?",
-                        style: AppTextStyle.body2,
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            value.setObscureTextVisibility();
+                          },
+                          child: Icon(
+                            value.isObscure
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: AppColors.suffixIconColor,
+                            size: 18,
+                          ),
+                        ),
+                      );
+                    }),
+                    AppSpacing.kHeight10,
+                    GestureDetector(
+                      onTap: () {
+                        final args =
+                            OtpArguments(otpAction: OtpAction.FORGOT_PASSWORD);
+                        Navigator.pushNamed(
+                            context, RouteNames.forgotPasswordScreen,
+                            arguments: args);
+                      },
+                      child: const Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          "Forgot the password?",
+                          style: AppTextStyle.body2,
+                        ),
                       ),
                     ),
-                  ),
-                  AppSpacing.kHeight30,
-                  CustomButtonWidget(
-                    text: "Sign in",
-                    onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, RouteNames.bottomNavBar, (route) => false);
-                    },
-                  ),
-                  AppSpacing.kHeight30,
-                  const Text(
-                    "or continue with",
-                    style: AppTextStyle.body2,
-                  ),
-                  AppSpacing.kHeight30,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SocialMediaCardWidget(
-                        image: "assets/social_media_icons/google-logo.png",
-                        onTap: () {},
-                      ),
-                      AppSpacing.kWidth10,
-                      SocialMediaCardWidget(
-                        image:
-                            "assets/social_media_icons/facebook-logo-3-1.png",
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                  AppSpacing.kHeight30,
-                  LoginOrSignUpTextWidget(
-                    leadingText: "Don't have an account?",
-                    mainText: "Sign up",
-                    onTap: () {
-                      Navigator.of(context).pushNamed(RouteNames.signUpScreen);
-                    },
-                  )
-                ],
+                    AppSpacing.kHeight30,
+                    CustomButtonWidget(
+                      text: "Sign in",
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              RouteNames.bottomNavBar, (route) => false);
+                        }
+                      },
+                    ),
+                    AppSpacing.kHeight30,
+                    const Text(
+                      "or continue with",
+                      style: AppTextStyle.body2,
+                    ),
+                    AppSpacing.kHeight30,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SocialMediaCardWidget(
+                          image: "assets/social_media_icons/google-logo.png",
+                          onTap: () {},
+                        ),
+                        AppSpacing.kWidth10,
+                        SocialMediaCardWidget(
+                          image:
+                              "assets/social_media_icons/facebook-logo-3-1.png",
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                    AppSpacing.kHeight30,
+                    LoginOrSignUpTextWidget(
+                      leadingText: "Don't have an account?",
+                      mainText: "Sign up",
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(RouteNames.signUpScreen);
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ),

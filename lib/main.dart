@@ -10,13 +10,17 @@ import 'package:ecommerce/controller/onboarding_controller.dart';
 import 'package:ecommerce/controller/orders_controller.dart';
 import 'package:ecommerce/controller/otp_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
+import 'package:ecommerce/controller/profile_controller.dart';
 import 'package:ecommerce/controller/signup_controller.dart';
 import 'package:ecommerce/controller/splash_controller.dart';
 import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
+import 'package:ecommerce/view/address/address_screen.dart';
+import 'package:ecommerce/view/home/hyyy.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
+import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +51,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => WishlistController()),
         ChangeNotifierProvider(create: (ctx) => OrdersController()),
         ChangeNotifierProvider(create: (ctx) => AddressController()),
+        ChangeNotifierProvider(create: (ctx) => ProfileController()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

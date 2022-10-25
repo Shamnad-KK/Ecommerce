@@ -70,6 +70,7 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         filled: filled,
         fillColor: fillColor,
+        errorStyle: AppTextStyle.validatorStyle,
         border: OutlineInputBorder(
             borderSide: const BorderSide(
               color: AppColors.borderColor,

@@ -68,7 +68,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   return ForgotPasswordChoiceChipWidget(
                     icon: Icons.mail,
                     tile: "via Email",
-                    subtitle: "+91 9207****46",
+                    subtitle: "abc****@gmail.com",
                     isSelected: value.emailSelected,
                     borderColor: forgotPasswordController.emailSelected
                         ? AppColors.whiteColor

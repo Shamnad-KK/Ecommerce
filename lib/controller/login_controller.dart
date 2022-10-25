@@ -17,4 +17,26 @@ class LoginController extends ChangeNotifier {
     _isObscure = !_isObscure;
     notifyListeners();
   }
+
+  String? emailValidation(String? value) {
+    if (value!.isEmpty) {
+      return "Please enter your email";
+    } else if (!value.contains("@") ||
+        !value.contains(".") ||
+        value.startsWith("@")) {
+      return "Please enter a valid email";
+    } else {
+      return null;
+    }
+  }
+
+  String? passwordValidation(String? value) {
+    if (value!.isEmpty) {
+      return "Please enter your password";
+    } else if (value.length < 6) {
+      return "Password should have atleast 6 characters";
+    } else {
+      return null;
+    }
+  }
 }

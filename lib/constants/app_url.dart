@@ -1,0 +1,3 @@
+class AppUrls {
+  static String mainUrl = "​http://172.16.1.212:5000/api/v1";
+}

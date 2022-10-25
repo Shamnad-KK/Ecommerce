@@ -38,6 +38,11 @@ class AppTextStyle {
     color: AppColors.whiteColor,
   );
 
+  static const validatorStyle = TextStyle(
+    fontSize: 12,
+    color: AppColors.whiteColor,
+  );
+
   //Used for Appbar
   static const headLine6 = TextStyle(
     fontSize: 20,
