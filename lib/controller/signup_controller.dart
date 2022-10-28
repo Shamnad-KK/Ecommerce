@@ -1,5 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:ecommerce/model/sign_up_model.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/services/signup_services.dart';
+import 'package:ecommerce/view/otp/otp_arguments.dart';
+import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:flutter/material.dart';
 
 class SignUpController extends ChangeNotifier {
@@ -17,6 +22,8 @@ class SignUpController extends ChangeNotifier {
     notifyListeners();
   }
 
+  UserModel? userModel;
+
   Future<void> registerUser(BuildContext context) async {
     final user = UserModel(
       userName: userNameController.text,
@@ -25,7 +32,11 @@ class SignUpController extends ChangeNotifier {
       password: passwordController.text,
     );
 
-    await signUpServices.registerUser(user, context);
+    userModel = await signUpServices.registerUser(user, context);
+    if (userModel != null) {
+      final args = OtpArguments(otpAction: OtpAction.SIGN_UP);
+      Navigator.of(context).pushNamed(RouteNames.otpScreen, arguments: args);
+    }
   }
 
   String? usernameValidation(String? value) {

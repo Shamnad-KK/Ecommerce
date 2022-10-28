@@ -15,15 +15,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpServices {
   Dio dio = Dio();
-  Future<void> verifySignUpOtp(
+  Future<RegisterOtpVerificationModel?> verifySignUpOtp(
       RegisterOtpVerificationModel model, BuildContext context) async {
-    final url = "http://${AppUrls.host}:5000/api/v1/verifyOtp";
-    final response = await dio.post(
-      url,
-      data: jsonEncode(model.toJson()),
-      queryParameters: AppConfig.getApiHeader(token: null),
-    );
     try {
+      RegisterOtpVerificationModel? registerOtpVerificationModel;
+      final url = "http://${AppUrls.host}:5000/api/v1/verifyOtp";
+      final response = await dio.post(
+        url,
+        data: jsonEncode(model.toJson()),
+        queryParameters: AppConfig.getApiHeader(token: null),
+      );
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         final PreferenceManager sharedPreference =
             PreferenceManager(await SharedPreferences.getInstance());
@@ -33,10 +34,9 @@ class OtpServices {
           sharedPreference.token = response.data["token"];
 
           log(response.statusCode.toString());
-          await Navigator.of(context).pushNamedAndRemoveUntil(
-            RouteNames.bottomNavBar,
-            (route) => false,
-          );
+          registerOtpVerificationModel =
+              RegisterOtpVerificationModel.fromJson(response.data);
+          return registerOtpVerificationModel;
         }
       } else {
         log("Error with status code ${response.statusCode.toString()}");
@@ -44,5 +44,6 @@ class OtpServices {
     } catch (e) {
       AppExceptions.handleError(e);
     }
+    return null;
   }
 }

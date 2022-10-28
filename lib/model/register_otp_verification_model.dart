@@ -13,14 +13,14 @@ class RegisterOtpVerificationModel {
     required this.code,
   });
 
-  // factory UserModel.fromJson(Map<String, dynamic> json) {
-  //   return UserModel(
-  //     userName: json["username"] ?? "a",
-  //     email: json["email"] ?? "b",
-  //     phone: json["phone"] ?? "c",
-  //     password: json["password"] ?? "d",
-  //   );
-  // }
+  factory RegisterOtpVerificationModel.fromJson(Map<String, dynamic> json) {
+    return RegisterOtpVerificationModel(
+        userName: json["username"] ?? "a",
+        email: json["email"] ?? "b",
+        phone: json["phone"] ?? "c",
+        password: json["password"] ?? "d",
+        code: json["code"] ?? "1234");
+  }
 
   Map<String, dynamic> toJson() {
     return {

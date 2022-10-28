@@ -25,14 +25,14 @@ class UserModel {
     required this.password,
   });
 
-  // factory UserModel.fromJson(Map<String, dynamic> json) {
-  //   return UserModel(
-  //     userName: json["username"] ?? "a",
-  //     email: json["email"] ?? "b",
-  //     phone: json["phone"] ?? "c",
-  //     password: json["password"] ?? "d",
-  //   );
-  // }
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      userName: json["username"] ?? "a",
+      email: json["email"] ?? "b",
+      phone: json["phone"] ?? "c",
+      password: json["password"] ?? "d",
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

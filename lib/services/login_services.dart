@@ -14,9 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginServices {
-  Future<void> login(BuildContext context, LoginModel loginModel) async {
-    Dio dio = Dio();
+  Future<LoginModel?> login(BuildContext context, LoginModel loginModel) async {
     try {
+      LoginModel? model;
+      Dio dio = Dio();
       final url = "http://${AppUrls.host}:5000/api/v1/login";
       final Response<Map<String, dynamic>> response = await dio.post(url,
           data: jsonEncode(loginModel.toJson()),
@@ -28,8 +29,8 @@ class LoginServices {
           PreferenceManager manager =
               PreferenceManager(await SharedPreferences.getInstance());
           manager.token = token;
-          await Navigator.pushNamedAndRemoveUntil(
-              context, RouteNames.bottomNavBar, (route) => false);
+          model = LoginModel.fromJson(response.data!);
+          return model;
         }
       } else {
         log("Error with status code ${response.statusCode.toString()}");
@@ -37,5 +38,6 @@ class LoginServices {
     } catch (e) {
       AppExceptions.handleError(e);
     }
+    return null;
   }
 }

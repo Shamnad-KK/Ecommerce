@@ -16,6 +16,7 @@ class OtpController extends ChangeNotifier {
   int timeRemaining = 30;
   Timer? timer;
   bool enableResend = false;
+  RegisterOtpVerificationModel? registerOtpVerificationModel;
 
   String code = '';
 
@@ -58,7 +59,15 @@ class OtpController extends ChangeNotifier {
         password: model?.password,
         code: code,
       );
-      otpServices.verifySignUpOtp(otpModel, context);
+      registerOtpVerificationModel =
+          await otpServices.verifySignUpOtp(otpModel, context);
+      if (registerOtpVerificationModel != null) {
+        AppPopUps.showToast("Signed up successfully", Colors.green);
+        await Navigator.of(context).pushNamedAndRemoveUntil(
+          RouteNames.bottomNavBar,
+          (route) => false,
+        );
+      }
     } else if (otpAction == OtpAction.EDIT_PROFILE) {}
   }
 }

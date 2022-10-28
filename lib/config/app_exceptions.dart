@@ -25,6 +25,8 @@ class AppExceptions {
         AppPopUps.showToast("Send time out", Colors.red);
       } else if (exception.type == DioErrorType.other) {
         AppPopUps.showToast("Error occured", Colors.red);
+      } else if (exception.type == DioErrorType.response) {
+        AppPopUps.showToast("Error occured", Colors.red);
       }
     } else {
       AppPopUps.showToast(exception.toString(), Colors.red);

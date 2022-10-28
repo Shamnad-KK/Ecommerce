@@ -8,6 +8,7 @@ import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/otp/otp_arguments.dart';
 import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_loading_widget.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:ecommerce/widgets/login_or_signup_text_widget.dart';
 import 'package:ecommerce/widgets/social_media_card_widget.dart';
@@ -101,12 +102,18 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     AppSpacing.kHeight30,
-                    CustomButtonWidget(
-                      text: "Sign in",
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          loginController.login(context);
-                        }
+                    Consumer<LoginController>(
+                      builder: (BuildContext context, value, Widget? child) {
+                        return value.isLoading
+                            ? const CustomLoadingWidget()
+                            : CustomButtonWidget(
+                                text: "Sign in",
+                                onTap: () {
+                                  if (formKey.currentState!.validate()) {
+                                    value.login(context);
+                                  }
+                                },
+                              );
                       },
                     ),
                     AppSpacing.kHeight30,
