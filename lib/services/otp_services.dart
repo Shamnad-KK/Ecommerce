@@ -1,6 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -9,20 +6,21 @@ import 'package:ecommerce/config/app_exceptions.dart';
 import 'package:ecommerce/constants/app_url.dart';
 import 'package:ecommerce/helpers/preference_manager.dart';
 import 'package:ecommerce/model/register_otp_verification_model.dart';
-import 'package:ecommerce/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpServices {
   Dio dio = Dio();
   Future<RegisterOtpVerificationModel?> verifySignUpOtp(
-      RegisterOtpVerificationModel model, BuildContext context) async {
+      RegisterOtpVerificationModel model,
+      BuildContext context,
+      String code) async {
     try {
       RegisterOtpVerificationModel? registerOtpVerificationModel;
-      final url = "http://${AppUrls.host}:5000/api/v1/verifyOtp";
+      final url = "http://${AppUrls.host}:6000/api/v1/verify";
       final response = await dio.post(
         url,
-        data: jsonEncode(model.toJson()),
+        data: {"user": model.toJson(), "code": code},
         queryParameters: AppConfig.getApiHeader(token: null),
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {

@@ -16,8 +16,7 @@ class AppPopUps {
     );
   }
 
-  static Future<void> logoutPopUp(
-      BuildContext context, VoidCallback onTap) async {
+  static void logoutPopUp(BuildContext context, VoidCallback onTap) async {
     showDialog(
       context: context,
       builder: (context) {

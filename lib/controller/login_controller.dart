@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:ecommerce/model/login_model.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/services/login_services.dart';
@@ -9,8 +7,6 @@ class LoginController extends ChangeNotifier {
   LoginServices loginServices = LoginServices();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  LoginModel? model;
 
   bool _isObscure = true;
   bool get isObscure => _isObscure;
@@ -24,13 +20,16 @@ class LoginController extends ChangeNotifier {
       email: emailController.text,
       password: passwordController.text,
     );
-    model = await loginServices.login(context, loginModel);
-    isLoading = false;
-    if (model != null) {
-      await Navigator.pushNamedAndRemoveUntil(
-          context, RouteNames.bottomNavBar, (route) => false);
-    }
-    notifyListeners();
+    await loginServices.login(context, loginModel).then(
+      (value) {
+        isLoading = false;
+        notifyListeners();
+        if (value != null) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, RouteNames.bottomNavBar, (route) => false);
+        }
+      },
+    );
   }
 
   void setObscureTextVisibility() {

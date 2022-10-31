@@ -4,6 +4,7 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_loading_widget.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:ecommerce/widgets/login_or_signup_text_widget.dart';
 import 'package:ecommerce/widgets/social_media_card_widget.dart';
@@ -107,12 +108,19 @@ class SignUpScreen extends StatelessWidget {
                       );
                     }),
                     AppSpacing.kHeight30,
-                    CustomButtonWidget(
-                      text: "Sign up",
-                      onTap: () async {
-                        if (formKey.currentState!.validate()) {
-                          await signUpController.registerUser(context);
-                        }
+                    Consumer<SignUpController>(
+                      builder: (context, value, child) {
+                        return value.isLoading
+                            ? const CustomLoadingWidget()
+                            : CustomButtonWidget(
+                                text: "Sign up",
+                                onTap: () async {
+                                  if (formKey.currentState!.validate()) {
+                                    await signUpController
+                                        .registerUser(context);
+                                  }
+                                },
+                              );
                       },
                     ),
                     AppSpacing.kHeight30,
@@ -121,20 +129,9 @@ class SignUpScreen extends StatelessWidget {
                       style: AppTextStyle.body2,
                     ),
                     AppSpacing.kHeight30,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SocialMediaCardWidget(
-                          image: "assets/social_media_icons/google-logo.png",
-                          onTap: () {},
-                        ),
-                        AppSpacing.kWidth10,
-                        SocialMediaCardWidget(
-                          image:
-                              "assets/social_media_icons/facebook-logo-3-1.png",
-                          onTap: () {},
-                        ),
-                      ],
+                    SocialMediaCardWidget(
+                      image: "assets/social_media_icons/google-logo.png",
+                      onTap: () {},
                     ),
                     AppSpacing.kHeight30,
                     LoginOrSignUpTextWidget(

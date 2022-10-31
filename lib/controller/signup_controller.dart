@@ -15,16 +15,19 @@ class SignUpController extends ChangeNotifier {
 
   SignUpServices signUpServices = SignUpServices();
 
+  bool isLoading = false;
+
   bool _isObscure = true;
   bool get isObscure => _isObscure;
+
   void setObscureTextVisibility() {
     _isObscure = !_isObscure;
     notifyListeners();
   }
 
-  UserModel? userModel;
-
   Future<void> registerUser(BuildContext context) async {
+    isLoading = true;
+    notifyListeners();
     final user = UserModel(
       userName: userNameController.text,
       email: emailController.text,
@@ -32,11 +35,14 @@ class SignUpController extends ChangeNotifier {
       password: passwordController.text,
     );
 
-    userModel = await signUpServices.registerUser(user, context);
-    if (userModel != null) {
-      final args = OtpArguments(otpAction: OtpAction.SIGN_UP);
-      Navigator.of(context).pushNamed(RouteNames.otpScreen, arguments: args);
-    }
+    signUpServices.registerUser(user, context).then((value) {
+      isLoading = false;
+      notifyListeners();
+      if (value != null) {
+        final args = OtpArguments(otpAction: OtpAction.SIGN_UP);
+        Navigator.of(context).pushNamed(RouteNames.otpScreen, arguments: args);
+      }
+    });
   }
 
   String? usernameValidation(String? value) {

@@ -9,6 +9,7 @@ import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/model/sign_up_model.dart';
 import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,9 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     otpController = Provider.of<OtpController>(context, listen: false);
     otpController.changeTimer();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      otpController.setTimer();
+    });
     super.initState();
   }
 
@@ -80,6 +84,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           : TextButton(
                               onPressed: () {
                                 value.setResendVisibility(false);
+                                value.resendOtp(context);
                               },
                               child: const Text(
                                 "Resend OTP",
@@ -89,20 +94,28 @@ class _OtpScreenState extends State<OtpScreen> {
                     },
                   ),
                   AppSpacing.kHeight50,
-                  CustomButtonWidget(
-                    text: "Verify",
-                    onTap: () {
-                      final otpModel = UserModel(
-                        userName: signupController.userNameController.text,
-                        email: signupController.emailController.text,
-                        phone: signupController.phoneController.text,
-                        password: signupController.passwordController.text,
-                      );
-                      otpController.submitOtp(
-                        context,
-                        widget.otpAction,
-                        otpModel,
-                      );
+                  Consumer<OtpController>(
+                    builder: (BuildContext context, value, Widget? child) {
+                      return value.isLoading
+                          ? const CustomLoadingWidget()
+                          : CustomButtonWidget(
+                              text: "Verify",
+                              onTap: () {
+                                final otpModel = UserModel(
+                                  userName:
+                                      signupController.userNameController.text,
+                                  email: signupController.emailController.text,
+                                  phone: signupController.phoneController.text,
+                                  password:
+                                      signupController.passwordController.text,
+                                );
+                                otpController.submitOtp(
+                                  context,
+                                  widget.otpAction,
+                                  otpModel,
+                                );
+                              },
+                            );
                     },
                   )
                 ],

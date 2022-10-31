@@ -40,6 +40,7 @@ dependencies:
   provider: 6.0.4
   shared_preferences: ^2.0.15
   loading_animation_widget: 1.2.0+3
+  scrollable_list_tab_scroller: ^1.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

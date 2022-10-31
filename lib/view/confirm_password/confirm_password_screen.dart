@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:ecommerce/controller/confirm_password_controller.dart';
+import 'package:ecommerce/controller/forgot_password_controller.dart';
+import 'package:ecommerce/controller/otp_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/model/confirm_passwordmodel.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_loading_widget.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +20,13 @@ class ConfirmPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final confirmPasswordController =
+        Provider.of<ConfirmPasswordController>(context, listen: false);
+    final forgotPasswordController =
+        Provider.of<ForgotPasswordController>(context, listen: false);
+    final otpController = Provider.of<OtpController>(context, listen: false);
+    //confirmPasswordController.clearController();
+    log("hy");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Confirm Password"),
@@ -40,10 +52,13 @@ class ConfirmPasswordScreen extends StatelessWidget {
                 ),
                 AppSpacing.kHeight30,
                 CustomTextField(
+                  controller: confirmPasswordController.passwordController,
                   hint: "Password",
                   obscureText:
                       context.read<ConfirmPasswordController>().isObscure,
                   isDense: true,
+                  validator: (p0) =>
+                      confirmPasswordController.passwordValidation(p0),
                   prefixIcon: const Icon(
                     Icons.lock_outline_rounded,
                     color: AppColors.whiteColor,
@@ -64,11 +79,26 @@ class ConfirmPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 AppSpacing.kHeight30,
-                CustomButtonWidget(
-                  text: "Continue",
-                  onTap: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        RouteNames.bottomNavBar, (route) => false);
+                Consumer<ConfirmPasswordController>(
+                  builder: (BuildContext context, value, Widget? child) {
+                    return value.isLoading
+                        ? const CustomLoadingWidget()
+                        : CustomButtonWidget(
+                            text: "Continue",
+                            onTap: () {
+                              ConfirmPasswordModel model = ConfirmPasswordModel(
+                                email: forgotPasswordController
+                                    .emailController.text,
+                                password: confirmPasswordController
+                                    .passwordController.text,
+                                code: otpController.code,
+                              );
+                              confirmPasswordController.confirmNewPassword(
+                                model,
+                                context,
+                              );
+                            },
+                          );
                   },
                 )
               ],

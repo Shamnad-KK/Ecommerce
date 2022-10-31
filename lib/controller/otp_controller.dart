@@ -17,6 +17,7 @@ class OtpController extends ChangeNotifier {
   Timer? timer;
   bool enableResend = false;
   RegisterOtpVerificationModel? registerOtpVerificationModel;
+  bool isLoading = false;
 
   String code = '';
 
@@ -25,9 +26,20 @@ class OtpController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setTimer() {
+    timeRemaining = 30;
+    notifyListeners();
+  }
+
   void setResendVisibility(bool newValue) {
     enableResend = newValue;
     timeRemaining = 30;
+    notifyListeners();
+  }
+
+  void resendOtp(BuildContext context) {
+    Navigator.of(context).pop();
+    code = '';
     notifyListeners();
   }
 
@@ -45,6 +57,8 @@ class OtpController extends ChangeNotifier {
 
   void submitOtp(
       BuildContext context, OtpAction otpAction, UserModel? model) async {
+    isLoading = true;
+    notifyListeners();
     if (code.length != 4) {
       await AppPopUps.showToast("Incorrect OTP", AppColors.errorColor);
       return;
@@ -57,10 +71,9 @@ class OtpController extends ChangeNotifier {
         email: model?.email,
         phone: model?.phone,
         password: model?.password,
-        code: code,
       );
       registerOtpVerificationModel =
-          await otpServices.verifySignUpOtp(otpModel, context);
+          await otpServices.verifySignUpOtp(otpModel, context, code);
       if (registerOtpVerificationModel != null) {
         AppPopUps.showToast("Signed up successfully", Colors.green);
         await Navigator.of(context).pushNamedAndRemoveUntil(
@@ -69,5 +82,7 @@ class OtpController extends ChangeNotifier {
         );
       }
     } else if (otpAction == OtpAction.EDIT_PROFILE) {}
+    isLoading = false;
+    notifyListeners();
   }
 }
