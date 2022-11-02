@@ -1,4 +1,4 @@
-package com.example.ecommerce
+package in.shamnad.clothify
 
 import io.flutter.embedding.android.FlutterActivity
 
