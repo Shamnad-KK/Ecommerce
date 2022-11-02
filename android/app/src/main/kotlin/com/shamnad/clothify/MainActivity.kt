@@ -1,4 +1,4 @@
-package in.shamnad.clothify
+package com.shamnad.clothify
 
 import io.flutter.embedding.android.FlutterActivity
 
