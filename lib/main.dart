@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => OtpController()),
         ChangeNotifierProvider(create: (ctx) => BottomNavController()),
         ChangeNotifierProvider(create: (ctx) => HomeController()),
-        ChangeNotifierProvider(create: (ctx) => ConfirmPasswordController()),
+        ChangeNotifierProvider(create: (ctx) => CreateNewPasswordController()),
         ChangeNotifierProvider(create: (ctx) => ProductDetailController()),
         ChangeNotifierProvider(create: (ctx) => CartController()),
         ChangeNotifierProvider(create: (ctx) => WishlistController()),

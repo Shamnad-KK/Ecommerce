@@ -15,9 +15,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final forgotPasswordController =
         Provider.of<ForgotPasswordController>(context, listen: false);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      forgotPasswordController.setSmsSelection();
-    });
+
     final size = MediaQuery.of(context).size;
 
     return Scaffold(

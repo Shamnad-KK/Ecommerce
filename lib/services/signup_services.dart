@@ -19,10 +19,8 @@ class SignUpServices {
 
       Response response = await dio.post(
         url,
-        data: json.encode(
-          user.toJson(),
-        ),
-        queryParameters: AppConfig.getApiHeader(token: null),
+        data: json.encode(user.toJson()),
+        options: Options(headers: AppConfig.getApiHeader(token: null)),
       );
       log(response.data.toString());
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {

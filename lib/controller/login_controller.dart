@@ -20,16 +20,20 @@ class LoginController extends ChangeNotifier {
       email: emailController.text,
       password: passwordController.text,
     );
-    await loginServices.login(context, loginModel).then(
+    loginServices.login(context, loginModel).then(
       (value) {
-        isLoading = false;
-        notifyListeners();
         if (value != null) {
           Navigator.pushNamedAndRemoveUntil(
               context, RouteNames.bottomNavBar, (route) => false);
         }
       },
     );
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void signinWithGoogle() async {
+    loginServices.signinWithGoogle().then((value) {});
   }
 
   void setObscureTextVisibility() {

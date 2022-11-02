@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 
 class AppExceptions {
   static void handleError(Object exception) {
-    if (exception == SocketException) {
-      AppPopUps.showToast("Please check your internet", Colors.red);
-    } else if (exception is DioError) {
+    if (exception is DioError) {
       if (exception.response?.data['message'] != null) {
         AppPopUps.showToast(
           exception.response!.data["message"],
           Colors.red,
         );
+      } else if (exception.error is SocketException) {
+        AppPopUps.showToast("Please check your connection", Colors.red);
       } else if (exception.type == DioErrorType.cancel) {
         AppPopUps.showToast("Request cancelled", Colors.red);
       } else if (exception.type == DioErrorType.connectTimeout) {

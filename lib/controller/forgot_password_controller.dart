@@ -5,15 +5,7 @@ import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordController extends ChangeNotifier {
-  bool smsSelected = true;
-  bool emailSelected = false;
   TextEditingController emailController = TextEditingController();
-
-  void setSmsSelection() async {
-    emailSelected = false;
-    smsSelected = true;
-    notifyListeners();
-  }
 
   void onContinue(BuildContext context, OtpAction otpAction) async {
     final otpArguments = OtpArguments(otpAction: otpAction);
@@ -25,11 +17,5 @@ class ForgotPasswordController extends ChangeNotifier {
         }
       },
     );
-  }
-
-  void setEmailSelection() {
-    emailSelected = true;
-    smsSelected = false;
-    notifyListeners();
   }
 }

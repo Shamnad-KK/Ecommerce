@@ -8,6 +8,7 @@ import 'package:ecommerce/constants/app_url.dart';
 import 'package:ecommerce/helpers/preference_manager.dart';
 import 'package:ecommerce/model/login_model.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginServices {
@@ -18,9 +19,13 @@ class LoginServices {
 
       final url = "http://${AppUrls.host}:6000/api/v1/login";
 
-      final Response<Map<String, dynamic>> response = await dio.post(url,
-          data: jsonEncode(loginModel.toJson()),
-          queryParameters: AppConfig.getApiHeader(token: null));
+      final Response<Map<String, dynamic>> response = await dio.post(
+        url,
+        data: jsonEncode(
+          loginModel.toJson(),
+        ),
+        options: Options(headers: AppConfig.getApiHeader(token: null)),
+      );
 
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         log(response.data.toString());
@@ -42,6 +47,17 @@ class LoginServices {
       } else {
         log("Error with status code ${response.statusCode.toString()}");
       }
+    } catch (e) {
+      AppExceptions.handleError(e);
+    }
+    return null;
+  }
+
+  Future<GoogleSignInAccount?> signinWithGoogle() async {
+    try {
+      GoogleSignInAccount? account;
+      account = await GoogleSignIn().signIn();
+      return account;
     } catch (e) {
       AppExceptions.handleError(e);
     }

@@ -122,20 +122,11 @@ class LoginScreen extends StatelessWidget {
                       style: AppTextStyle.body2,
                     ),
                     AppSpacing.kHeight30,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SocialMediaCardWidget(
-                          image: "assets/social_media_icons/google-logo.png",
-                          onTap: () {},
-                        ),
-                        AppSpacing.kWidth10,
-                        SocialMediaCardWidget(
-                          image:
-                              "assets/social_media_icons/facebook-logo-3-1.png",
-                          onTap: () {},
-                        ),
-                      ],
+                    SocialMediaCardWidget(
+                      image: "assets/social_media_icons/google-logo.png",
+                      onTap: () {
+                        loginController.signinWithGoogle();
+                      },
                     ),
                     AppSpacing.kHeight30,
                     LoginOrSignUpTextWidget(

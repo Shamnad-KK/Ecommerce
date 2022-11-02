@@ -1,7 +1,7 @@
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/add_address/add_address_screen.dart';
 import 'package:ecommerce/view/address/address_screen.dart';
-import 'package:ecommerce/view/confirm_password/confirm_password_screen.dart';
+import 'package:ecommerce/view/confirm_password/create_new_password.dart';
 import 'package:ecommerce/view/edit_profile/edit_profile_screen.dart';
 import 'package:ecommerce/view/otp/otp_arguments.dart';
 import 'package:ecommerce/view/wishlist/wishlist_screen.dart';
@@ -43,7 +43,7 @@ class AppRoutes {
         );
       case RouteNames.confirmPasswordScreen:
         return MaterialPageRoute(
-          builder: (context) => const ConfirmPasswordScreen(),
+          builder: (context) => const CreateNewPasswordScreen(),
         );
       case RouteNames.otpScreen:
         final OtpArguments args = settings.arguments as OtpArguments;

@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/model/register_otp_verification_model.dart';
 import 'package:ecommerce/model/sign_up_model.dart';
+import 'package:ecommerce/model/verify_forgot_password_model.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/services/otp_services.dart';
 import 'package:ecommerce/utils/app_popups.dart';
@@ -55,15 +57,22 @@ class OtpController extends ChangeNotifier {
     });
   }
 
-  void submitOtp(
-      BuildContext context, OtpAction otpAction, UserModel? model) async {
+  void submitOtp(BuildContext context, OtpAction otpAction, UserModel? model,
+      VerifyForgotPasswordModel verifyForgotPasswordModel) async {
     isLoading = true;
     notifyListeners();
     if (code.length != 4) {
       await AppPopUps.showToast("Incorrect OTP", AppColors.errorColor);
       return;
-    } else if (otpAction == OtpAction.FORGOT_PASSWORD) {
-      await Navigator.pushNamed(context, RouteNames.confirmPasswordScreen);
+    }
+    if (otpAction == OtpAction.FORGOT_PASSWORD) {
+      OtpServices()
+          .verifyForgotPasswordOtp(verifyForgotPasswordModel)
+          .then((value) {
+        if (value == "OTP verification success") {
+          Navigator.pushNamed(context, RouteNames.confirmPasswordScreen);
+        }
+      });
     } else if (otpAction == OtpAction.SIGN_UP) {
       final RegisterOtpVerificationModel otpModel =
           RegisterOtpVerificationModel(

@@ -3,7 +3,7 @@ import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/services/confirm_password_services.dart';
 import 'package:flutter/material.dart';
 
-class ConfirmPasswordController extends ChangeNotifier {
+class CreateNewPasswordController extends ChangeNotifier {
   TextEditingController passwordController = TextEditingController();
 
   bool _isObscure = true;
@@ -21,7 +21,7 @@ class ConfirmPasswordController extends ChangeNotifier {
   }
 
   void confirmNewPassword(
-      ConfirmPasswordModel model, BuildContext context) async {
+      CreateNewPasswordModel model, BuildContext context) async {
     isLoading = true;
     notifyListeners();
     ConfirmPasswordServices().confirmNewPassword(model).then((value) {

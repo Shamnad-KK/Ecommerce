@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ecommerce/controller/forgot_password_controller.dart';
 import 'package:ecommerce/controller/otp_controller.dart';
 import 'package:ecommerce/controller/signup_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/model/sign_up_model.dart';
+import 'package:ecommerce/model/verify_forgot_password_model.dart';
 import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:ecommerce/widgets/custom_loading_widget.dart';
@@ -44,6 +46,8 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     final signupController =
         Provider.of<SignUpController>(context, listen: false);
+    final forgotPasswordController =
+        Provider.of<ForgotPasswordController>(context, listen: false);
     log(signupController.userNameController.text);
     return Scaffold(
       appBar: AppBar(
@@ -109,10 +113,17 @@ class _OtpScreenState extends State<OtpScreen> {
                                   password:
                                       signupController.passwordController.text,
                                 );
+                                final verifyForgotPasswordModel =
+                                    VerifyForgotPasswordModel(
+                                  email: forgotPasswordController
+                                      .emailController.text,
+                                  otp: otpController.code,
+                                );
                                 otpController.submitOtp(
                                   context,
                                   widget.otpAction,
                                   otpModel,
+                                  verifyForgotPasswordModel,
                                 );
                               },
                             );

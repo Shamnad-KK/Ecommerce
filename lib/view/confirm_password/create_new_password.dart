@@ -14,18 +14,16 @@ import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ConfirmPasswordScreen extends StatelessWidget {
-  const ConfirmPasswordScreen({super.key});
+class CreateNewPasswordScreen extends StatelessWidget {
+  const CreateNewPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final confirmPasswordController =
-        Provider.of<ConfirmPasswordController>(context, listen: false);
+    final createNewPasswordController =
+        Provider.of<CreateNewPasswordController>(context, listen: false);
     final forgotPasswordController =
         Provider.of<ForgotPasswordController>(context, listen: false);
-    final otpController = Provider.of<OtpController>(context, listen: false);
-    //confirmPasswordController.clearController();
     log("hy");
     return Scaffold(
       appBar: AppBar(
@@ -52,13 +50,13 @@ class ConfirmPasswordScreen extends StatelessWidget {
                 ),
                 AppSpacing.kHeight30,
                 CustomTextField(
-                  controller: confirmPasswordController.passwordController,
+                  controller: createNewPasswordController.passwordController,
                   hint: "Password",
                   obscureText:
-                      context.read<ConfirmPasswordController>().isObscure,
+                      context.read<CreateNewPasswordController>().isObscure,
                   isDense: true,
                   validator: (p0) =>
-                      confirmPasswordController.passwordValidation(p0),
+                      createNewPasswordController.passwordValidation(p0),
                   prefixIcon: const Icon(
                     Icons.lock_outline_rounded,
                     color: AppColors.whiteColor,
@@ -66,11 +64,11 @@ class ConfirmPasswordScreen extends StatelessWidget {
                   suffixIcon: InkWell(
                     onTap: () {
                       context
-                          .read<ConfirmPasswordController>()
+                          .read<CreateNewPasswordController>()
                           .setObscureTextVisibility();
                     },
                     child: Icon(
-                      context.watch<ConfirmPasswordController>().isObscure
+                      context.watch<CreateNewPasswordController>().isObscure
                           ? Icons.visibility_off
                           : Icons.visibility,
                       color: AppColors.suffixIconColor,
@@ -79,21 +77,21 @@ class ConfirmPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 AppSpacing.kHeight30,
-                Consumer<ConfirmPasswordController>(
+                Consumer<CreateNewPasswordController>(
                   builder: (BuildContext context, value, Widget? child) {
                     return value.isLoading
                         ? const CustomLoadingWidget()
                         : CustomButtonWidget(
                             text: "Continue",
                             onTap: () {
-                              ConfirmPasswordModel model = ConfirmPasswordModel(
+                              CreateNewPasswordModel model =
+                                  CreateNewPasswordModel(
                                 email: forgotPasswordController
                                     .emailController.text,
-                                password: confirmPasswordController
+                                password: createNewPasswordController
                                     .passwordController.text,
-                                code: otpController.code,
                               );
-                              confirmPasswordController.confirmNewPassword(
+                              createNewPasswordController.confirmNewPassword(
                                 model,
                                 context,
                               );
