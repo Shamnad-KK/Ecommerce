@@ -32,8 +32,13 @@ class LoginController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void signinWithGoogle() async {
-    loginServices.signinWithGoogle().then((value) {});
+  void signinWithGoogle(BuildContext context) async {
+    loginServices.signinWithGoogle().then((value) {
+      if (value != null) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, RouteNames.bottomNavBar, (route) => false);
+      }
+    });
   }
 
   void setObscureTextVisibility() {

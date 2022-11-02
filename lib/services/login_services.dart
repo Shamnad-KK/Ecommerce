@@ -57,6 +57,8 @@ class LoginServices {
     try {
       GoogleSignInAccount? account;
       account = await GoogleSignIn().signIn();
+
+      log(account!.email);
       return account;
     } catch (e) {
       AppExceptions.handleError(e);

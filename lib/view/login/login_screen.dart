@@ -125,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                     SocialMediaCardWidget(
                       image: "assets/social_media_icons/google-logo.png",
                       onTap: () {
-                        loginController.signinWithGoogle();
+                        loginController.signinWithGoogle(context);
                       },
                     ),
                     AppSpacing.kHeight30,
