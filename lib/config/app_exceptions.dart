@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:ecommerce/utils/app_popups.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppExceptions {
   static void handleError(Object exception) {
@@ -15,6 +16,8 @@ class AppExceptions {
         );
       } else if (exception.error is SocketException) {
         AppPopUps.showToast("Please check your connection", Colors.red);
+      } else if (exception.error is PlatformException) {
+        AppPopUps.showToast("Platform Exception", Colors.red);
       } else if (exception.type == DioErrorType.cancel) {
         AppPopUps.showToast("Request cancelled", Colors.red);
       } else if (exception.type == DioErrorType.connectTimeout) {
@@ -28,6 +31,8 @@ class AppExceptions {
       } else if (exception.type == DioErrorType.response) {
         AppPopUps.showToast("Error occured", Colors.red);
       }
+    } else if (exception is PlatformException) {
+      log(exception.message.toString());
     } else {
       AppPopUps.showToast(exception.toString(), Colors.red);
       log(exception.toString());

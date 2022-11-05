@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
@@ -40,7 +38,7 @@ class ProductDetailScreen extends StatelessWidget {
         productDetailController.setProductInitialValues(product);
       },
     );
-    log("hy");
+
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,

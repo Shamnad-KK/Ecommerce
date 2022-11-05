@@ -1,7 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/model/register_otp_verification_model.dart';
@@ -18,7 +15,6 @@ class OtpController extends ChangeNotifier {
   int timeRemaining = 30;
   Timer? timer;
   bool enableResend = false;
-  RegisterOtpVerificationModel? registerOtpVerificationModel;
   bool isLoading = false;
 
   String code = '';
@@ -66,13 +62,14 @@ class OtpController extends ChangeNotifier {
       return;
     }
     if (otpAction == OtpAction.FORGOT_PASSWORD) {
-      OtpServices()
-          .verifyForgotPasswordOtp(verifyForgotPasswordModel)
-          .then((value) {
-        if (value == "OTP verification success") {
-          Navigator.pushNamed(context, RouteNames.confirmPasswordScreen);
-        }
-      });
+      OtpServices().verifyForgotPasswordOtp(verifyForgotPasswordModel).then(
+        (value) {
+          if (value == "OTP verification success") {
+            Navigator.pushReplacementNamed(
+                context, RouteNames.confirmPasswordScreen);
+          }
+        },
+      );
     } else if (otpAction == OtpAction.SIGN_UP) {
       final RegisterOtpVerificationModel otpModel =
           RegisterOtpVerificationModel(
@@ -81,15 +78,16 @@ class OtpController extends ChangeNotifier {
         phone: model?.phone,
         password: model?.password,
       );
-      registerOtpVerificationModel =
-          await otpServices.verifySignUpOtp(otpModel, context, code);
-      if (registerOtpVerificationModel != null) {
-        AppPopUps.showToast("Signed up successfully", Colors.green);
-        await Navigator.of(context).pushNamedAndRemoveUntil(
-          RouteNames.bottomNavBar,
-          (route) => false,
-        );
-      }
+
+      await otpServices.verifySignUpOtp(otpModel, context, code).then((value) {
+        if (value != null) {
+          AppPopUps.showToast("Signed up successfully", Colors.green);
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            RouteNames.bottomNavBar,
+            (route) => false,
+          );
+        }
+      });
     } else if (otpAction == OtpAction.EDIT_PROFILE) {}
     isLoading = false;
     notifyListeners();

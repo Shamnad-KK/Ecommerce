@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:ecommerce/controller/confirm_password_controller.dart';
 import 'package:ecommerce/controller/forgot_password_controller.dart';
-import 'package:ecommerce/controller/otp_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
@@ -24,7 +21,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
         Provider.of<CreateNewPasswordController>(context, listen: false);
     final forgotPasswordController =
         Provider.of<ForgotPasswordController>(context, listen: false);
-    log("hy");
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Confirm Password"),

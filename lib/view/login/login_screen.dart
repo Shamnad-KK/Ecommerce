@@ -107,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                         return value.isLoading
                             ? const CustomLoadingWidget()
                             : CustomButtonWidget(
-                                text: "Sign in",
+                                text: "Log in",
                                 onTap: () {
                                   if (formKey.currentState!.validate()) {
                                     value.login(context);

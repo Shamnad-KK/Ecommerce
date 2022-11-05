@@ -33,11 +33,11 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Create your\naccount",
-                      style: AppTextStyle.headline3,
-                    ),
-                    AppSpacing.kHeight30,
+                    // const Text(
+                    //   "Create your\naccount",
+                    //   style: AppTextStyle.headline3,
+                    // ),
+                    // AppSpacing.kHeight30,
                     CustomTextField(
                       controller: signUpController.userNameController,
                       hint: "Username",
@@ -69,7 +69,7 @@ class SignUpScreen extends StatelessWidget {
                       controller: signUpController.phoneController,
                       hint: "Phone",
                       validator: (p0) => signUpController.phoneValidation(p0),
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.phone,
                       filled: true,
                       prefixIcon: const Icon(
                         CupertinoIcons.phone,
@@ -86,7 +86,7 @@ class SignUpScreen extends StatelessWidget {
                             signUpController.passwordValidation(p0),
                         hint: "Password",
                         obscureText: value.isObscure,
-                        keyboardType: TextInputType.visiblePassword,
+                        keyboardType: TextInputType.text,
                         filled: true,
                         prefixIcon: const Icon(
                           Icons.lock_outline_rounded,
@@ -107,6 +107,20 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       );
                     }),
+                    AppSpacing.kHeight10,
+                    CustomTextField(
+                      controller: signUpController.confirmPasswordController,
+                      hint: "Confirm Password",
+                      validator: (p0) =>
+                          signUpController.confirmPasswordValidation(p0),
+                      keyboardType: TextInputType.text,
+                      filled: true,
+                      prefixIcon: const Icon(
+                        CupertinoIcons.phone,
+                        color: AppColors.prefixIconColor,
+                        size: 18,
+                      ),
+                    ),
                     AppSpacing.kHeight30,
                     Consumer<SignUpController>(
                       builder: (context, value, child) {

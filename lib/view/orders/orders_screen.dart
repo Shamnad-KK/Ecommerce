@@ -3,6 +3,7 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/widgets/custom_notfound_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,10 @@ class _OrdersScreenState extends State<OrdersScreen>
       appBar: AppBar(
         title: const Text("My Orders"),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(CupertinoIcons.search),
+          ),
         ],
         bottom: TabBar(
           controller: ordersController.tabController,

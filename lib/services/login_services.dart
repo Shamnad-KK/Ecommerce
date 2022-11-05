@@ -58,8 +58,11 @@ class LoginServices {
       GoogleSignInAccount? account;
       account = await GoogleSignIn().signIn();
 
-      log(account!.email);
-      return account;
+      if (account != null) {
+        return account;
+      } else {
+        return null;
+      }
     } catch (e) {
       AppExceptions.handleError(e);
     }

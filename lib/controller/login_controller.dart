@@ -33,12 +33,18 @@ class LoginController extends ChangeNotifier {
   }
 
   void signinWithGoogle(BuildContext context) async {
+    isLoading = true;
+    notifyListeners();
     loginServices.signinWithGoogle().then((value) {
       if (value != null) {
+        isLoading = false;
+        notifyListeners();
         Navigator.pushNamedAndRemoveUntil(
             context, RouteNames.bottomNavBar, (route) => false);
       }
     });
+    isLoading = false;
+    notifyListeners();
   }
 
   void setObscureTextVisibility() {

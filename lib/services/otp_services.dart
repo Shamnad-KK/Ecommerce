@@ -58,8 +58,6 @@ class OtpServices {
         options: Options(headers: AppConfig.getApiHeader(token: null)),
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        log("hy");
-
         log(response.data.toString());
 
         if (response.data["message"] == "OTP verification success") {

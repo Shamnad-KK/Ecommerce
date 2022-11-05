@@ -12,6 +12,7 @@ class SignUpController extends ChangeNotifier {
   TextEditingController userNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   SignUpServices signUpServices = SignUpServices();
 
@@ -82,6 +83,16 @@ class SignUpController extends ChangeNotifier {
       return "Please enter your password";
     } else if (value.length < 6) {
       return "Password should have atleast 6 characters";
+    } else {
+      return null;
+    }
+  }
+
+  String? confirmPasswordValidation(String? value) {
+    if (value!.isEmpty) {
+      return "Please enter your password";
+    } else if (value != passwordController.text) {
+      return "Password does not match";
     } else {
       return null;
     }

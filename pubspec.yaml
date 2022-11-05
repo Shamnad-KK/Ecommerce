@@ -41,6 +41,9 @@ dependencies:
   shared_preferences: 2.0.15
   loading_animation_widget: 1.2.0+3
   google_sign_in: 5.4.2
+  animated_text_kit: 4.2.2
+  google_fonts: 3.0.1
+  razorpay_flutter: 1.3.4
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -61,6 +64,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logos/—Pngtree—letter e logo  e_4833002.png
+    - assets/logos/clothify_logo.png
     - assets/onboarding/RADDESTLOOKS_NET-removebg-preview.png
     - assets/onboarding/f.png
     - assets/onboarding/An_Unexpected_Fairytale_-_CHAPTER_FOUR-removebg-preview.png

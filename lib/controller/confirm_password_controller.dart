@@ -1,6 +1,8 @@
+import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/model/confirm_passwordmodel.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/services/confirm_password_services.dart';
+import 'package:ecommerce/utils/app_popups.dart';
 import 'package:flutter/material.dart';
 
 class CreateNewPasswordController extends ChangeNotifier {
@@ -26,6 +28,8 @@ class CreateNewPasswordController extends ChangeNotifier {
     notifyListeners();
     ConfirmPasswordServices().confirmNewPassword(model).then((value) {
       if (value != null) {
+        AppPopUps.showToast("Password changed successfully, Please login",
+            AppColors.successColor);
         Navigator.pushNamedAndRemoveUntil(
             context, RouteNames.loginScreen, (route) => false);
       }
