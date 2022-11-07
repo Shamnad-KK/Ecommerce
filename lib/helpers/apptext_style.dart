@@ -84,4 +84,9 @@ class AppTextStyle {
     color: AppColors.dullWhite,
     fontSize: 15,
   );
+
+  static const stepperTitle = TextStyle(
+    color: AppColors.dullWhite,
+    fontSize: 14,
+  );
 }

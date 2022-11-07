@@ -27,9 +27,9 @@ class AppExceptions {
       } else if (exception.type == DioErrorType.sendTimeout) {
         AppPopUps.showToast("Send time out", Colors.red);
       } else if (exception.type == DioErrorType.other) {
-        AppPopUps.showToast("Error occured", Colors.red);
+        AppPopUps.showToast("Error Occured", Colors.red);
       } else if (exception.type == DioErrorType.response) {
-        AppPopUps.showToast("Error occured", Colors.red);
+        AppPopUps.showToast("Response Error occured", Colors.red);
       }
     } else if (exception is PlatformException) {
       log(exception.message.toString());

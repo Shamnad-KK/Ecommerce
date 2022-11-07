@@ -1,3 +1,4 @@
+import 'package:ecommerce/config/scroll_config.dart';
 import 'package:ecommerce/controller/address_controller.dart';
 import 'package:ecommerce/controller/bottom_nav_controller.dart';
 import 'package:ecommerce/controller/cart_controller.dart';
@@ -9,16 +10,17 @@ import 'package:ecommerce/controller/login_controller.dart';
 import 'package:ecommerce/controller/onboarding_controller.dart';
 import 'package:ecommerce/controller/orders_controller.dart';
 import 'package:ecommerce/controller/otp_controller.dart';
-import 'package:ecommerce/controller/payment_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/controller/profile_controller.dart';
 import 'package:ecommerce/controller/signup_controller.dart';
 import 'package:ecommerce/controller/splash_controller.dart';
+import 'package:ecommerce/controller/stepper_controller.dart';
 import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
-import 'package:ecommerce/view/payment/payment_screen.dart';
+import 'package:ecommerce/view/splash/splash_screen.dart';
+import 'package:ecommerce/view/steppers/stepper_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,9 +52,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => OrdersController()),
         ChangeNotifierProvider(create: (ctx) => AddressController()),
         ChangeNotifierProvider(create: (ctx) => ProfileController()),
-        ChangeNotifierProvider(create: (ctx) => PaymentController()),
+        ChangeNotifierProvider(create: (ctx) => StepperController()),
       ],
       child: MaterialApp(
+        scrollBehavior: MyBehavior(),
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: AppColors.bgColor,
@@ -70,7 +73,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
-        home: const PaymentScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

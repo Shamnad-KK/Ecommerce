@@ -82,6 +82,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const AddAddressScreen(),
         );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),

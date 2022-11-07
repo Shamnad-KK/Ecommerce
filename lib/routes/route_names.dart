@@ -12,4 +12,6 @@ class RouteNames {
   static const editProfileScreen = "editProfile";
   static const addressScreen = "address";
   static const addAddressScreen = "addAddress";
+  static const orderSummaryScreen = "orderSummary";
+  static const paymentScreen = "payment";
 }

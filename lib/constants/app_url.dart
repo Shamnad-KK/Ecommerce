@@ -1,5 +1,5 @@
 class AppUrls {
-  static String mainUrl = "​http://192.168.0.68:5000/api/v1";
+  static const String mainUrl = "​http://$host:6000/api/v1";
 
-  static String host = "192.168.0.192";
+  static const String host = "192.168.0.194";
 }

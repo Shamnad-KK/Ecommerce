@@ -1,9 +1,18 @@
 import 'dart:developer';
 
+import 'package:ecommerce/model/home_category_model.dart';
 import 'package:ecommerce/model/home_product_model.dart';
+import 'package:ecommerce/services/home_services.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends ChangeNotifier {
+  HomeController() {
+    getAllCategories();
+  }
+  HomeServices homeServices = HomeServices();
+
+  bool isLoading = false;
+
   List<Product> productList = [
     Product(
       name: "Casual Shirt",
@@ -42,6 +51,20 @@ class HomeController extends ChangeNotifier {
       quantity: 1,
     ),
   ];
+
+  List<HomeCategoryModel> categoryList = [];
+
+  void getAllCategories() async {
+    isLoading = true;
+    notifyListeners();
+    await homeServices.getAllCategories().then((value) {
+      if (value.isNotEmpty) {
+        categoryList = value;
+      }
+    });
+    isLoading = false;
+    notifyListeners();
+  }
 
   void setFavorite(int index) {
     productList[index].isFavorite = !productList[index].isFavorite;

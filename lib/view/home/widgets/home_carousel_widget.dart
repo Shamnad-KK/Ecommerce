@@ -19,6 +19,7 @@ class HomeScreenCarouselWidget extends StatelessWidget {
         return Padding(
           padding: AppPadding.mainPading,
           child: Container(
+            padding: AppPadding.mainPading,
             width: size.width,
             height: size.height * 0.2,
             decoration: BoxDecoration(
@@ -74,7 +75,7 @@ class HomeScreenCarouselWidget extends StatelessWidget {
                   ],
                 ),
                 Positioned(
-                  bottom: 10,
+                  bottom: 0,
                   left: 0,
                   right: 0,
                   child: CustomIndicatorWidget(
