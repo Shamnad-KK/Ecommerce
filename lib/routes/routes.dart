@@ -1,9 +1,12 @@
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/add_address/add_address_screen.dart';
 import 'package:ecommerce/view/address/address_screen.dart';
+import 'package:ecommerce/view/all_products/all_products_screen.dart';
+import 'package:ecommerce/view/all_products/all_products_screen_arguments.dart';
 import 'package:ecommerce/view/confirm_password/create_new_password.dart';
 import 'package:ecommerce/view/edit_profile/edit_profile_screen.dart';
 import 'package:ecommerce/view/otp/otp_arguments.dart';
+import 'package:ecommerce/view/steppers/stepper_screens.dart';
 import 'package:ecommerce/view/wishlist/wishlist_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
@@ -66,6 +69,12 @@ class AppRoutes {
             product: args.product,
           ),
         );
+      case RouteNames.allProductsScreen:
+        AllProductsScreenArguments args =
+            settings.arguments as AllProductsScreenArguments;
+        return MaterialPageRoute(
+          builder: (context) => AllProductsScreen(title: args.title),
+        );
       case RouteNames.wishlistScreen:
         return MaterialPageRoute(
           builder: (context) => const WishlistScreen(),
@@ -82,7 +91,10 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const AddAddressScreen(),
         );
-
+      case RouteNames.stepperScreen:
+        return MaterialPageRoute(
+          builder: (context) => const StepperScreens(),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),

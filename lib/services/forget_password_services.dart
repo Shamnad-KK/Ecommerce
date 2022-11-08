@@ -8,7 +8,7 @@ class ForgetPasswordServices {
     try {
       Dio dio = Dio();
 
-      final url = "http://${AppUrls.host}:6000/api/v1/accounts/password";
+      const url = "http://${AppUrls.host}:6000/api/v1/accounts/password";
       Response response = await dio.post(
         url,
         data: {"email": email},

@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:ecommerce/config/app_exceptions.dart';
-import 'package:ecommerce/constants/api_endpoints.dart';
 import 'package:ecommerce/constants/app_url.dart';
 import 'package:ecommerce/model/home_category_model.dart';
 

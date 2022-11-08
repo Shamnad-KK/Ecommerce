@@ -1,6 +1,8 @@
 import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
+import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/view/all_products/all_products_screen_arguments.dart';
 import 'package:ecommerce/view/home/widgets/home_appbar_widget.dart';
 import 'package:ecommerce/view/home/widgets/home_carousel_widget.dart';
 import 'package:ecommerce/view/home/widgets/home_category_widget.dart';
@@ -17,10 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // final homeController = Provider.of<HomeController>(context, listen: false);
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   homeController.getAllCategories();
-    // });
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(
@@ -46,16 +45,15 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {},
                   ),
                 ),
-                AppSpacing.kHeight20,
                 const HomeScreenCarouselWidget(),
+                AppSpacing.kHeight20,
                 Padding(
                   padding: AppPadding.mainPading,
                   child: Column(
                     children: [
                       SizedBox(
                         child: Consumer<HomeController>(
-                          builder:
-                              (BuildContext context, value, Widget? child) {
+                          builder: (BuildContext _, value, Widget? child) {
                             return value.isLoading
                                 ? const CustomLoadingWidget()
                                 : value.categoryList.isEmpty
@@ -65,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                                             "There are no categories in the API")
                                     : Center(
                                         child: SizedBox(
-                                          height: 100,
+                                          height: 80,
                                           width: size.width,
                                           child: Center(
                                             child: ListView.builder(
@@ -73,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                                               scrollDirection: Axis.horizontal,
                                               itemCount:
                                                   value.categoryList.length,
-                                              itemBuilder: (context, index) {
+                                              itemBuilder: (ctx, index) {
                                                 final category =
                                                     value.categoryList[index];
                                                 return Row(
@@ -81,8 +79,28 @@ class HomeScreen extends StatelessWidget {
                                                     HomeScreenCategoryWidget(
                                                       title: category.name,
                                                       image: category.image,
-                                                      onTap: () {},
+                                                      onTap: () {
+                                                        final args =
+                                                            AllProductsScreenArguments(
+                                                                title: category
+                                                                    .name);
+                                                        Navigator.of(context)
+                                                            .pushNamed(
+                                                                RouteNames
+                                                                    .allProductsScreen,
+                                                                arguments:
+                                                                    args);
+                                                      },
                                                     ),
+                                                    index <
+                                                            value.categoryList
+                                                                    .length -
+                                                                1
+                                                        ? SizedBox(
+                                                            width: size.width *
+                                                                0.1,
+                                                          )
+                                                        : const SizedBox()
                                                   ],
                                                 );
                                               },
@@ -97,9 +115,15 @@ class HomeScreen extends StatelessWidget {
                       HomeRowWidget(
                         leading: "Most Popular",
                         trailing: "See all",
-                        onTap: () {},
+                        onTap: () {
+                          final args =
+                              AllProductsScreenArguments(title: "All Products");
+                          Navigator.of(context).pushNamed(
+                              RouteNames.allProductsScreen,
+                              arguments: args);
+                        },
                       ),
-                      AppSpacing.kHeight10,
+                      AppSpacing.kHeight20,
                       Consumer<HomeController>(builder:
                           (BuildContext context, value, Widget? child) {
                         return HomeItemCardWidget(

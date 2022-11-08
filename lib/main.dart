@@ -20,7 +20,6 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/routes.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
-import 'package:ecommerce/view/steppers/stepper_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

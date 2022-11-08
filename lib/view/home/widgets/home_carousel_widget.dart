@@ -17,7 +17,7 @@ class HomeScreenCarouselWidget extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (context, index, realIndex) {
         return Padding(
-          padding: AppPadding.mainPading,
+          padding: AppPadding.sidePading15,
           child: Container(
             padding: AppPadding.mainPading,
             width: size.width,
@@ -66,7 +66,7 @@ class HomeScreenCarouselWidget extends StatelessWidget {
                             image: AssetImage(
                               "assets/onboarding/f.png",
                             ),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                             opacity: 0.7,
                           ),
                         ),

@@ -34,7 +34,7 @@ class HomeItemCardWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 1 / 1.45,
+              childAspectRatio: 1 / 1.55,
               crossAxisSpacing: 20,
               mainAxisSpacing: 30,
             ),
@@ -54,7 +54,7 @@ class HomeItemCardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: size.height * 0.2,
+                      height: size.height * 0.25,
                       width: size.width * 0.4,
                       decoration: BoxDecoration(
                         color: AppColors.mainColor,
@@ -62,7 +62,7 @@ class HomeItemCardWidget extends StatelessWidget {
                           image: AssetImage(
                             product.image,
                           ),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                         borderRadius: BorderRadius.circular(20),
                       ),

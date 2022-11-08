@@ -19,7 +19,7 @@ class OtpServices {
       String code) async {
     try {
       RegisterOtpVerificationModel? registerOtpVerificationModel;
-      final url = "http://${AppUrls.host}:6000/api/v1/verify";
+      const url = "http://${AppUrls.host}:6000/api/v1/verify";
       log(model.toJson().toString());
       final response = await dio.post(
         url,
@@ -51,7 +51,7 @@ class OtpServices {
   Future<String?> verifyForgotPasswordOtp(
       VerifyForgotPasswordModel model) async {
     try {
-      final url = "http://${AppUrls.host}:6000/api/v1/verifyOtp";
+      const url = "http://${AppUrls.host}:6000/api/v1/verifyOtp";
       final response = await dio.post(
         url,
         data: json.encode(model.toJson()),

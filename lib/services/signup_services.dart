@@ -13,7 +13,7 @@ class SignUpServices {
   Future<UserModel?> registerUser(UserModel user, BuildContext context) async {
     try {
       //final url = AppUrls.mainUrl + ApiEndPoints.register;
-      final url = "http://${AppUrls.host}:6000/api/v1/register";
+      const url = "http://${AppUrls.host}:6000/api/v1/register";
 
       log(url.toString());
 

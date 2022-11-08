@@ -5,6 +5,7 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/model/home_product_model.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
@@ -52,13 +53,13 @@ class ProductDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: size.height * 0.45,
+                height: size.height * 0.51,
                 width: size.width,
                 decoration: BoxDecoration(
                   color: AppColors.mainColor,
                   image: DecorationImage(
                     image: AssetImage(product.image),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
@@ -171,7 +172,7 @@ class ProductDetailScreen extends StatelessWidget {
                             ProductQuantityCustomizerWidget(product: product),
                           ],
                         ),
-                        AppSpacing.kHeight30,
+                        AppSpacing.kHeight20,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -189,50 +190,38 @@ class ProductDetailScreen extends StatelessWidget {
                                 },
                               ),
                             ),
+                          ],
+                        ),
+                        AppSpacing.kHeight10,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomButtonWidget(
+                                text: "Add to cart",
+                                onTap: () {
+                                  cartController.addProductToCart(
+                                      product,
+                                      productDetailController.selectedChipIndex,
+                                      productDetailController
+                                          .selectedColorIndex);
+                                  product.price =
+                                      productDetailController.realPrice;
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ),
                             AppSpacing.kWidth5,
                             Expanded(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: CustomButtonWidget(
-                                      text: "Add to cart",
-                                      onTap: () {
-                                        Product cartProduct = Product(
-                                          name: product.name,
-                                          price: product.price,
-                                          image: product.image,
-                                          description: product.description,
-                                          rating: product.rating,
-                                          reviews: product.reviews,
-                                          isFavorite: product.isFavorite,
-                                          selectedSize: product.sizes![
-                                              productDetailController
-                                                  .selectedChipIndex],
-                                          quantity: product.quantity,
-                                          selectedColor: product.colors![
-                                              productDetailController
-                                                  .selectedColorIndex],
-                                        );
-                                        cartController
-                                            .addProductToCart(cartProduct);
-                                        product.price =
-                                            productDetailController.realPrice;
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ),
-                                  AppSpacing.kWidth5,
-                                  Expanded(
-                                    child: CustomButtonWidget(
-                                      text: "Buy Now",
-                                      onTap: () {},
-                                    ),
-                                  )
-                                ],
+                              child: CustomButtonWidget(
+                                text: "Buy Now",
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(RouteNames.stepperScreen);
+                                },
                               ),
                             )
                           ],
-                        ),
+                        )
                       ],
                     )
                   ],

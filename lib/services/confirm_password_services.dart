@@ -9,7 +9,7 @@ class ConfirmPasswordServices {
     try {
       Dio dio = Dio();
 
-      final url = "http://${AppUrls.host}:6000/api/v1/accounts/password";
+      const url = "http://${AppUrls.host}:6000/api/v1/accounts/password";
       Response response = await dio.put(
         url,
         data: model.toJson(),

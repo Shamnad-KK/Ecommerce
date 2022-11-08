@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/widgets/custom_loading_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenCategoryWidget extends StatelessWidget {

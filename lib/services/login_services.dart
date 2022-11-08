@@ -17,7 +17,7 @@ class LoginServices {
       //LoginModel? model;
       Dio dio = Dio();
 
-      final url = "http://${AppUrls.host}:6000/api/v1/login";
+      const url = "http://${AppUrls.host}:6000/api/v1/login";
 
       final Response<Map<String, dynamic>> response = await dio.post(
         url,

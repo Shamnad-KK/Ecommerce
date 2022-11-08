@@ -14,8 +14,22 @@ class CartController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addProductToCart(Product product) {
-    cartList.add(product);
+  void addProductToCart(
+      Product product, int selectedChipIndex, int selectedColorIndex) {
+    Product cartProduct = Product(
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      description: product.description,
+      rating: product.rating,
+      reviews: product.reviews,
+      isFavorite: product.isFavorite,
+      selectedSize: product.sizes![selectedChipIndex],
+      quantity: product.quantity,
+      selectedColor: product.colors![selectedColorIndex],
+    );
+    // cartController.addProductToCart(cartProduct);
+    cartList.add(cartProduct);
     totalPrice = product.price;
     notifyListeners();
   }
