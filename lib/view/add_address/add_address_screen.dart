@@ -5,6 +5,8 @@ import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/model/address_model.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_loading_widget.dart';
+import 'package:ecommerce/widgets/custom_outlined_button.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,61 +25,94 @@ class AddAddressScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: size.height * 0.4,
-                width: size.width,
-                decoration: const BoxDecoration(color: AppColors.mainColor),
-              ),
-              Padding(
-                padding: AppPadding.mainPading,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Center(
-                      child: Text(
-                        "Address Details",
-                        style: AppTextStyle.titleLarge,
-                      ),
-                    ),
-                    AppSpacing.kHeight10,
-                    CustomTextField(
-                      controller: addressController.addressController,
-                      hint: "Address",
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                    ),
-                    AppSpacing.kHeight10,
-                    CustomTextField(
-                      controller: addressController.pinCodeController,
-                      hint: "Pincode",
-                      keyboardType: TextInputType.number,
-                    ),
-                    AppSpacing.kHeight10,
-                    CustomTextField(
-                      controller: addressController.landMarkController,
-                      hint: "Landmark",
-                      keyboardType: TextInputType.streetAddress,
-                    ),
-                    AppSpacing.kHeight50,
-                    CustomButtonWidget(
-                      text: "Add",
-                      onTap: () {
-                        final address = Address(
-                          address: addressController.addressController.text,
-                          pincode: addressController.pinCodeController.text,
-                          landMark: addressController.landMarkController.text,
-                        );
-                        addressController.addAddress(address);
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: size.height * 0.4,
+                  width: size.width,
+                  decoration: const BoxDecoration(color: AppColors.mainColor),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: AppPadding.mainPading,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Center(
+                            child: Text(
+                              "Address Details",
+                              style: AppTextStyle.titleLarge,
+                            ),
+                          ),
+                          CustomOutlinedButton(
+                            text: "Pick current address",
+                            onTap: () {
+                              addressController.pickCurrentAddress();
+                            },
+                          )
+                        ],
+                      ),
+                      AppSpacing.kHeight10,
+                      Consumer<AddressController>(
+                        builder: (BuildContext context, value, Widget? child) {
+                          return value.isLoading
+                              ? const CustomLoadingWidget()
+                              : Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AppSpacing.kHeight10,
+                                    CustomTextField(
+                                      controller:
+                                          addressController.addressController,
+                                      hint: "Address",
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: null,
+                                    ),
+                                    AppSpacing.kHeight10,
+                                    CustomTextField(
+                                      controller:
+                                          addressController.pinCodeController,
+                                      hint: "Pincode",
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    AppSpacing.kHeight10,
+                                    CustomTextField(
+                                      controller:
+                                          addressController.cityController,
+                                      hint: "City",
+                                      keyboardType: TextInputType.streetAddress,
+                                    ),
+                                    AppSpacing.kHeight50,
+                                    CustomButtonWidget(
+                                      text: "Add",
+                                      onTap: () {
+                                        final address = AddressModel(
+                                          address: addressController
+                                              .addressController.text,
+                                          pincode: addressController
+                                              .pinCodeController.text,
+                                          landMark: addressController
+                                              .cityController.text,
+                                        );
+                                        addressController.addAddress(address);
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

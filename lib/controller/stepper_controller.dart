@@ -27,8 +27,8 @@ class StepperController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void stepCancel() {
-    currentStep > 0 ? currentStep-- : null;
+  void stepCancel(BuildContext context) {
+    currentStep > 0 ? currentStep-- : Navigator.pop(context);
     notifyListeners();
   }
 

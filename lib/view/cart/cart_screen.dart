@@ -3,6 +3,7 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:ecommerce/widgets/custom_notfound_widget.dart';
 import 'package:ecommerce/widgets/product_quantity_customizer_widget.dart';
@@ -176,7 +177,10 @@ class CartScreen extends StatelessWidget {
                       Expanded(
                         child: CustomButtonWidget(
                           text: "Checkout",
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(RouteNames.stepperScreen);
+                          },
                         ),
                       )
                     ],

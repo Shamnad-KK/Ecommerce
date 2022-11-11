@@ -1,9 +1,9 @@
-class Address {
+class AddressModel {
   String address;
   String pincode;
   String landMark;
 
-  Address({
+  AddressModel({
     required this.address,
     required this.pincode,
     required this.landMark,

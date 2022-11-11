@@ -23,8 +23,9 @@ class AddressStepperWidget extends StatelessWidget {
           );
         } else {
           return ListView.builder(
+            shrinkWrap: true,
             itemBuilder: (context, index) {
-              final Address address = value.addressList[index];
+              final AddressModel address = value.addressList[index];
               return Column(
                 children: [
                   Container(

@@ -10,4 +10,7 @@ class AppPadding {
   static const sidePading5 = EdgeInsets.only(left: 5, right: 5);
   static const sidePading25 = EdgeInsets.only(left: 25, right: 25);
   static const verticalPading15 = EdgeInsets.symmetric(vertical: 15);
+  static const verticalPading10 = EdgeInsets.symmetric(vertical: 10);
+  static const buttonPadding =
+      EdgeInsets.symmetric(vertical: 4, horizontal: 15);
 }

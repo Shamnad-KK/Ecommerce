@@ -34,7 +34,7 @@ class HomeItemCardWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 1 / 1.55,
+              childAspectRatio: 1 / 1.60,
               crossAxisSpacing: 20,
               mainAxisSpacing: 30,
             ),

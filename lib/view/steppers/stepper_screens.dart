@@ -1,6 +1,8 @@
+import 'package:ecommerce/controller/address_controller.dart';
 import 'package:ecommerce/controller/stepper_controller.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/steppers/widgets/address_stepper.dart';
 import 'package:ecommerce/view/steppers/widgets/order_summary_stepper.dart';
 import 'package:ecommerce/view/steppers/widgets/payment_stepper.dart';
@@ -38,7 +40,15 @@ class _StepperScreensState extends State<StepperScreens> {
     final stepperController =
         Provider.of<StepperController>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Provider.of<StepperController>(context, listen: false)
+                .stepCancel(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -58,7 +68,7 @@ class _StepperScreensState extends State<StepperScreens> {
                     value.stepContinued();
                   },
                   onStepCancel: () {
-                    value.stepCancel();
+                    value.stepCancel(context);
                   },
                   steps: <Step>[
                     Step(
@@ -99,14 +109,25 @@ class _StepperScreensState extends State<StepperScreens> {
               },
             ),
           ),
-          Padding(
-            padding: AppPadding.mainPading,
-            child: CustomButtonWidget(
-              text: "CONTINUE",
-              onTap: () {
-                stepperController.stepContinued();
-              },
-            ),
+          Consumer<AddressController>(
+            builder: (BuildContext context, addressConsumer, Widget? child) {
+              return Padding(
+                padding: AppPadding.mainPading,
+                child: CustomButtonWidget(
+                  text: addressConsumer.addressList.isEmpty
+                      ? "ADD ADDRESS"
+                      : "CONTINUE",
+                  onTap: () {
+                    if (addressConsumer.addressList.isNotEmpty) {
+                      stepperController.stepContinued();
+                    } else {
+                      Navigator.of(context)
+                          .pushNamed(RouteNames.addAddressScreen);
+                    }
+                  },
+                ),
+              );
+            },
           )
         ],
       ),
