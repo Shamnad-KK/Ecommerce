@@ -45,3 +45,4 @@ app.*.map.json
 
 //Filip
 lib/view/home/hy.dart
+lib/constants/strings.dart

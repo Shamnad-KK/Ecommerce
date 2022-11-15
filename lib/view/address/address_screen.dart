@@ -61,7 +61,7 @@ class AddressScreen extends StatelessWidget {
                                         ),
                                       ),
                                       title: Text(
-                                        address.address,
+                                        "${address.address}, ${address.pincode}",
                                         style: AppTextStyle.body1,
                                       ),
                                       subtitle: Text(

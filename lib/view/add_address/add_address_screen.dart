@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce/controller/address_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
@@ -9,6 +11,7 @@ import 'package:ecommerce/widgets/custom_loading_widget.dart';
 import 'package:ecommerce/widgets/custom_outlined_button.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class AddAddressScreen extends StatelessWidget {
@@ -29,10 +32,38 @@ class AddAddressScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: size.height * 0.4,
-                  width: size.width,
-                  decoration: const BoxDecoration(color: AppColors.mainColor),
+                Consumer<AddressController>(
+                  builder: (BuildContext context, value, Widget? child) {
+                    return Container(
+                      height: size.height * 0.4,
+                      width: size.width,
+                      decoration:
+                          const BoxDecoration(color: AppColors.mainColor),
+                      child: GoogleMap(
+                        mapType: MapType.hybrid,
+                        initialCameraPosition:
+                            addressController.initialLocation,
+                        onMapCreated: (controller) {
+                          log("map created successfully");
+                          if (addressController.controller.isCompleted) {
+                            return;
+                          }
+                          addressController.controller.complete(controller);
+                        },
+                        buildingsEnabled: true,
+                        compassEnabled: true,
+                        indoorViewEnabled: true,
+                        mapToolbarEnabled: true,
+                        myLocationEnabled: true,
+                        myLocationButtonEnabled: true,
+                        markers: addressController.markers,
+                        onTap: (argument) {
+                          addressController.addMarker(
+                              argument.latitude, argument.longitude);
+                        },
+                      ),
+                    );
+                  },
                 ),
                 Padding(
                   padding: AppPadding.mainPading,

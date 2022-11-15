@@ -14,8 +14,7 @@ class AddressServices {
         }
         return null;
       } else {
-        return await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high);
+        return await Geolocator.getCurrentPosition();
       }
     } catch (e) {
       AppExceptions.handleError(e);

@@ -43,6 +43,9 @@ class AppExceptions {
       AppPopUps.showToast(exception.message.toString(), AppColors.errorColor);
     } else if (exception.toString() == "Failed host lookup: 'geocode.xyz'") {
       // log('geocode-dont worry');
+    } else if (exception.toString() ==
+        "[Error]: (006) Request Throttled. Over Rate limit: up to 2 per sec. See geocode.xyz/pricing") {
+      AppPopUps.showToast("Failed, Please try again", AppColors.errorColor);
     } else {
       log('message');
       AppPopUps.showToast(exception.toString(), AppColors.errorColor);
