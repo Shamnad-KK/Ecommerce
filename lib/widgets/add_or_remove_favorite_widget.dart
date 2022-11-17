@@ -3,6 +3,7 @@ import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/model/home_product_model.dart';
+import 'package:ecommerce/model/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ class AddorRemoveFavoriteWidget extends StatelessWidget {
   }) : super(key: key);
 
   final int index;
-  final Product product;
+  final ProductElement product;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +34,14 @@ class AddorRemoveFavoriteWidget extends StatelessWidget {
             onTap: () {
               value.setFavorite(index);
               if (value.productList[index].isFavorite == true) {
-                wishlistController.addItemToWishList(product);
+                //wishlistController.addItemToWishList(product);
               } else {
-                wishlistController.removeItemFromWishList(product);
+                //wishlistController.removeItemFromWishList(product);
               }
             },
             child: Icon(
               CupertinoIcons.heart_fill,
-              color: value.productList[index].isFavorite
-                  ? AppColors.redColor
-                  : AppColors.whiteColor,
+              color: AppColors.whiteColor,
             ),
           );
         },

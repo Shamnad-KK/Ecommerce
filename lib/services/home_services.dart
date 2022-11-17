@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce/config/app_exceptions.dart';
 import 'package:ecommerce/constants/app_url.dart';
 import 'package:ecommerce/model/home_category_model.dart';
+import 'package:ecommerce/model/product_model.dart';
 
 class HomeServices {
   Future<List<HomeCategoryModel>> getAllCategories() async {
@@ -16,7 +17,7 @@ class HomeServices {
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         List data = response.data;
         categoryList = data.map((e) {
-          log(e.toString());
+          //log(e.toString());
           return HomeCategoryModel.fromJson(e);
         }).toList();
         return categoryList;
@@ -28,5 +29,23 @@ class HomeServices {
       AppExceptions.handleError(e);
     }
     return <HomeCategoryModel>[];
+  }
+
+  Future<Products?> getAllProducts() async {
+    try {
+      Dio dio = Dio();
+      const url = "http://${AppUrls.host}:6000/api/v1/products";
+      Response response = await dio.get(url);
+      if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+        log('response success');
+        log(response.data.toString());
+        return Products.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      AppExceptions.handleError(e);
+    }
+    return null;
   }
 }

@@ -12,12 +12,13 @@ import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
 import 'package:ecommerce/view/otp/otp_screen.dart';
-import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
-import 'package:ecommerce/view/product_detail/product_detail_screen.dart';
 import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
 import 'package:ecommerce/widgets/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../view/product_detail/product_detail_arguments.dart';
+import '../view/product_detail/product_detail_screen.dart';
 
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {

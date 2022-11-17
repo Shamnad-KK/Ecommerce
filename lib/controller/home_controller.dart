@@ -2,16 +2,20 @@ import 'dart:developer';
 
 import 'package:ecommerce/model/home_category_model.dart';
 import 'package:ecommerce/model/home_product_model.dart';
+import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/services/home_services.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends ChangeNotifier {
   HomeController() {
     getAllCategories();
+    getAllProducts();
   }
   HomeServices homeServices = HomeServices();
 
   bool isLoading = false;
+
+  Products? products;
 
   List<Product> productList = [
     Product(
@@ -64,6 +68,19 @@ class HomeController extends ChangeNotifier {
     });
     isLoading = false;
     notifyListeners();
+  }
+
+  void getAllProducts() async {
+    isLoading = true;
+    notifyListeners();
+    await homeServices.getAllProducts().then((value) {
+      if (value != null) {
+        products = value;
+      }
+    });
+    isLoading = false;
+    notifyListeners();
+    //log(products?.count.toString() ?? "null");
   }
 
   void setFavorite(int index) {

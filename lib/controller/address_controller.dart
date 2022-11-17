@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddressController extends ChangeNotifier {
-  AddressController() {
-    pickCurrentAddress();
-  }
   TextEditingController addressController = TextEditingController();
   TextEditingController pinCodeController = TextEditingController();
   TextEditingController cityController = TextEditingController();
+
+  final Completer<GoogleMapController> controller = Completer();
 
   double latitude = 0.0;
   double longitude = 0.0;
@@ -28,6 +27,30 @@ class AddressController extends ChangeNotifier {
     notifyListeners();
   }
 
+  CameraPosition cameraPosition = const CameraPosition(
+    target: LatLng(61.1518356, 75.8930459),
+    zoom: 14.4746,
+  );
+
+  void setCurrentLocation() async {
+    await AddressServices().getCurrentLocation().then((value) async {
+      if (value != null) {
+        log(value.latitude.toString());
+        cameraPosition = CameraPosition(
+          target: LatLng(value.latitude, value.longitude),
+          zoom: 15.4746,
+        );
+        notifyListeners();
+
+        GoogleMapController newController = await controller.future;
+        newController
+            .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+
+        log(cameraPosition.toString());
+      }
+    });
+  }
+
   void pickCurrentAddress() async {
     isLoading = true;
     notifyListeners();
@@ -35,7 +58,7 @@ class AddressController extends ChangeNotifier {
       if (value != null) {
         latitude = value.latitude;
         longitude = value.longitude;
-        notifyListeners();
+
         await AddressServices().getCordinates(latitude, longitude).then(
           (address) {
             if (address != null) {
@@ -53,15 +76,9 @@ class AddressController extends ChangeNotifier {
     notifyListeners();
   }
 
-  final Completer<GoogleMapController> controller = Completer();
-
-  CameraPosition initialLocation = const CameraPosition(
-    target: LatLng(11.1518356, 75.8930459),
-    zoom: 14.4746,
-  );
-
   void addMarker(double lat, double lon) async {
     markers.clear();
+    notifyListeners();
     markers.add(
       Marker(
           markerId: const MarkerId('defaultLocation'),

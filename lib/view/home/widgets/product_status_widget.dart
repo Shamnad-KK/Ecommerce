@@ -3,6 +3,7 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/model/home_product_model.dart';
+import 'package:ecommerce/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductStatusWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class ProductStatusWidget extends StatelessWidget {
     required this.product,
   }) : super(key: key);
 
-  final Product product;
+  final ProductElement product;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class ProductStatusWidget extends StatelessWidget {
             ),
             AppSpacing.kWidth5,
             Text(
-              product.rating,
+              //rating
+              "100",
               style: AppTextStyle.bodySmall,
             ),
           ],
@@ -46,7 +48,8 @@ class ProductStatusWidget extends StatelessWidget {
                 ),
               ),
               child: Text(
-                product.reviews,
+                //'reviews',
+                '10',
                 style: AppTextStyle.labelSmall,
               ),
             ),

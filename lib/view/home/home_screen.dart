@@ -126,9 +126,11 @@ class HomeScreen extends StatelessWidget {
                       AppSpacing.kHeight20,
                       Consumer<HomeController>(builder:
                           (BuildContext context, value, Widget? child) {
-                        return HomeItemCardWidget(
-                          list: value.productList,
-                        );
+                        return value.isLoading
+                            ? const CustomLoadingWidget()
+                            : HomeItemCardWidget(
+                                list: value.products?.products ?? [],
+                              );
                       })
                     ],
                   ),

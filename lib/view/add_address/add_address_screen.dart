@@ -14,14 +14,31 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-class AddAddressScreen extends StatelessWidget {
+class AddAddressScreen extends StatefulWidget {
   const AddAddressScreen({super.key});
 
   @override
+  State<AddAddressScreen> createState() => _AddAddressScreenState();
+}
+
+class _AddAddressScreenState extends State<AddAddressScreen> {
+  late final AddressController addressController;
+  @override
+  void initState() {
+    addressController = Provider.of<AddressController>(
+      context,
+      listen: false,
+    );
+
+    addressController.setCurrentLocation();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    log('bi');
     final size = MediaQuery.of(context).size;
-    final addressController =
-        Provider.of<AddressController>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add New Address"),
@@ -41,8 +58,7 @@ class AddAddressScreen extends StatelessWidget {
                           const BoxDecoration(color: AppColors.mainColor),
                       child: GoogleMap(
                         mapType: MapType.hybrid,
-                        initialCameraPosition:
-                            addressController.initialLocation,
+                        initialCameraPosition: addressController.cameraPosition,
                         onMapCreated: (controller) {
                           log("map created successfully");
                           if (addressController.controller.isCompleted) {

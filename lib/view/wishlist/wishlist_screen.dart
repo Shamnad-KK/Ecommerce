@@ -20,17 +20,18 @@ class WishlistScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: AppPadding.mainPading,
-          child: Consumer<WishlistController>(
-              builder: (BuildContext context, value, Widget? child) {
-            return HomeItemCardWidget(
-              list: value.wishList,
-            );
-          }),
-        ),
-      ),
+      // body:
+      // SafeArea(
+      //   child: Padding(
+      //     padding: AppPadding.mainPading,
+      //     child: Consumer<WishlistController>(
+      //         builder: (BuildContext context, value, Widget? child) {
+      //       return HomeItemCardWidget(
+      //         list: value.wishList,
+      //       );
+      //     }),
+      //   ),
+      // ),
     );
   }
 }

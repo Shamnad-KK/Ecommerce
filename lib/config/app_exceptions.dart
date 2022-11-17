@@ -45,7 +45,9 @@ class AppExceptions {
       // log('geocode-dont worry');
     } else if (exception.toString() ==
         "[Error]: (006) Request Throttled. Over Rate limit: up to 2 per sec. See geocode.xyz/pricing") {
-      AppPopUps.showToast("Failed, Please try again", AppColors.errorColor);
+      AppPopUps.showToast(
+          "Failed to fetch location automatically, Please try again",
+          AppColors.errorColor);
     } else {
       log('message');
       AppPopUps.showToast(exception.toString(), AppColors.errorColor);

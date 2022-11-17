@@ -95,6 +95,7 @@ class AddressScreen extends StatelessWidget {
                   Navigator.of(context).pushNamed(RouteNames.addAddressScreen);
                 },
               ),
+              AppSpacing.kHeight10,
             ],
           ),
         ),

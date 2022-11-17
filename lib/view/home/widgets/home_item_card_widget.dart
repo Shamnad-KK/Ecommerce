@@ -3,7 +3,9 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/model/home_product_model.dart';
+import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/utils/app_utils.dart';
 import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
 import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
@@ -16,7 +18,7 @@ class HomeItemCardWidget extends StatelessWidget {
     Key? key,
     required this.list,
   }) : super(key: key);
-  final List<Product> list;
+  final List<ProductElement> list;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class HomeItemCardWidget extends StatelessWidget {
     return list.isEmpty
         ? const Center(
             child: CustomNotFoundWidget(
-                title: "Your wishlist is empty",
+                title: "Your Product list is empty",
                 subtitle: "You have'nt added any products"),
           )
         : GridView.builder(
@@ -39,7 +41,7 @@ class HomeItemCardWidget extends StatelessWidget {
               mainAxisSpacing: 30,
             ),
             itemBuilder: (context, index) {
-              final Product product = list[index];
+              final ProductElement product = list[index];
               return GestureDetector(
                 onTap: () {
                   ProductDetailArguments args =
@@ -59,8 +61,8 @@ class HomeItemCardWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.mainColor,
                         image: DecorationImage(
-                          image: AssetImage(
-                            product.image,
+                          image: NetworkImage(
+                            product.colors?[0].images[0] ?? AppUtils.dummyImage,
                           ),
                           fit: BoxFit.fill,
                         ),
@@ -79,7 +81,7 @@ class HomeItemCardWidget extends StatelessWidget {
                     ),
                     AppSpacing.kHeight5,
                     Text(
-                      product.name,
+                      product.name ?? "",
                       style: AppTextStyle.body2,
                     ),
                     SizedBox(
