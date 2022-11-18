@@ -1,34 +1,28 @@
-import 'package:ecommerce/controller/cart_controller.dart';
+import 'dart:developer';
+
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
-import 'package:ecommerce/helpers/app_spacing.dart';
-import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/model/home_product_model.dart';
-import 'package:ecommerce/model/product_model.dart';
-import 'package:ecommerce/routes/route_names.dart';
-import 'package:ecommerce/utils/app_utils.dart';
-import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
-import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
-import 'package:ecommerce/widgets/custom_button.dart';
-import 'package:ecommerce/widgets/product_quantity_customizer_widget.dart';
+import 'package:ecommerce/view/product_detail/widgets/product_quantity_widget.dart';
+import 'package:ecommerce/view/product_detail/widgets/product_variant_widget.dart';
+import 'package:ecommerce/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'widgets/add_or_buy_buttons_widget.dart';
+import 'widgets/product_description_widget.dart';
+import 'widgets/product_detail_carousel.dart';
+import 'widgets/product_name_row.dart';
+import 'widgets/product_price_widget.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({
     super.key,
-    required this.index,
-    required this.product,
   });
-  final int index;
-  final ProductElement product;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    final cartController = Provider.of<CartController>(context, listen: false);
+    //final cartController = Provider.of<CartController>(context, listen: false);
     final productDetailController =
         Provider.of<ProductDetailController>(context, listen: false);
 
@@ -41,6 +35,10 @@ class ProductDetailScreen extends StatelessWidget {
         //productDetailController.setProductInitialValues(product);
       },
     );
+    // log(product.id!);
+    //productDetailController.getOneProduct(product.id!);
+
+    log('product detail build called');
 
     return SafeArea(
       child: Scaffold(
@@ -54,187 +52,19 @@ class ProductDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: size.height * 0.51,
-                width: size.width,
-                decoration: BoxDecoration(
-                  color: AppColors.mainColor,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        product.colors?[0].images[0] ?? AppUtils.dummyImage),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
+              const ProductDetailCarouselWidget(),
               Padding(
                 padding: AppPadding.mainPading,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          product.name ?? "Try later",
-                          style: AppTextStyle.titleLarge,
-                        ),
-                        AddorRemoveFavoriteWidget(
-                          index: index,
-                          product: product,
-                        ),
-                      ],
-                    ),
-                    // SizedBox(
-                    //   width: size.width * 0.4,
-                    //   child: ProductStatusWidget(product: product),
-                    // ),
-                    AppSpacing.kHeight10,
-                    const Divider(
-                      color: AppColors.divider,
-                    ),
-                    AppSpacing.kHeight10,
-                    const Text(
-                      "Descriptioin",
-                      style: AppTextStyle.body1,
-                    ),
-                    AppSpacing.kHeight5,
-                    Text(
-                      product.description ?? "No description",
-                      style: AppTextStyle.subtitle2,
-                    ),
-                    AppSpacing.kHeight20,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("Size", style: AppTextStyle.body1),
-                        AppSpacing.kHeight5,
-                        Consumer<ProductDetailController>(
-                          builder:
-                              (BuildContext context, value, Widget? child) {
-                            return SizedBox(
-                              height: size.height * 0.05,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  for (int i = 0; i < product.size!.length; i++)
-                                    ChoiceChip(
-                                      backgroundColor: AppColors.mainColor,
-                                      labelStyle: AppTextStyle.body2,
-                                      label: Text(
-                                        product.size![i].toString(),
-                                        style: AppTextStyle.body2.copyWith(
-                                            color: value.selectedChipIndex == i
-                                                ? AppColors.blackColor
-                                                : AppColors.whiteColor),
-                                      ),
-                                      selected: value.selectedChipIndex == i,
-                                      selectedColor: AppColors.whiteColor,
-                                      onSelected: (bool _) {
-                                        value.setChip(i);
-                                      },
-                                    ),
-                                  AppSpacing.kWidth50,
-                                  for (int i = 0;
-                                      i < product.colors!.length;
-                                      i++)
-                                    GestureDetector(
-                                      onTap: () {
-                                        value.setColor(i);
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.zero,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: AppColors.whiteColor,
-                                              width: 1),
-                                        ),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color:
-                                                    value.selectedColorIndex ==
-                                                            i
-                                                        ? AppColors.whiteColor
-                                                        : AppColors.transparent,
-                                                width: 3),
-                                          ),
-                                          child: CircleAvatar(
-                                            backgroundColor: Color(int.parse(
-                                                product.colors![i].color)),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                        AppSpacing.kHeight20,
-                        Row(
-                          children: [
-                            const Text(
-                              "Quantity",
-                              style: AppTextStyle.body1,
-                            ),
-                            AppSpacing.kWidth10,
-                            //ProductQuantityCustomizerWidget(product: product),
-                          ],
-                        ),
-                        AppSpacing.kHeight20,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: size.width * 0.3,
-                              child: Consumer<ProductDetailController>(
-                                builder: (BuildContext context, value,
-                                    Widget? child) {
-                                  return FittedBox(
-                                    child: Text(
-                                      "\$ ${product.price}",
-                                      style: AppTextStyle.titleLarge,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        AppSpacing.kHeight10,
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomButtonWidget(
-                                text: "Add to cart",
-                                onTap: () {
-                                  // cartController.addProductToCart(
-                                  //     product,
-                                  //     productDetailController.selectedChipIndex,
-                                  //     productDetailController
-                                  //         .selectedColorIndex);
-                                  // product.price =
-                                  //     productDetailController.realPrice;
-                                  // Navigator.of(context).pop();
-                                },
-                              ),
-                            ),
-                            AppSpacing.kWidth5,
-                            Expanded(
-                              child: CustomButtonWidget(
-                                text: "Buy Now",
-                                onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(RouteNames.stepperScreen);
-                                },
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    )
+                  children: const [
+                    ProductNameRowWidget(),
+                    CustomDivider(color: AppColors.divider),
+                    ProductionDescriptionWidget(),
+                    ProductVariantWidget(),
+                    ProductQuantityWidget(),
+                    ProductPriceWidget(),
+                    AddorBuyButtonsWidget()
                   ],
                 ),
               )

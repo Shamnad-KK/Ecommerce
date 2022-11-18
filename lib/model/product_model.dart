@@ -27,26 +27,18 @@ class ProductElement {
     required this.description,
     required this.offer,
     required this.ratings,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
-    this.colorIndex,
   });
 
   Category? category;
   String? id;
   String? name;
-  int? price;
+  num? price;
   List<dynamic>? size;
   List<ProductColor>? colors;
   int? inventory;
   String? description;
   int? offer;
   List<dynamic>? ratings;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
-  int? colorIndex;
 
   factory ProductElement.fromJson(Map<String, dynamic> json) => ProductElement(
         category: Category.fromJson(json["category"]),
@@ -60,9 +52,6 @@ class ProductElement {
         description: json["description"],
         offer: json["offer"],
         ratings: List<dynamic>.from(json["ratings"].map((x) => x)),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
       );
 }
 

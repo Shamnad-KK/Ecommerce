@@ -1,6 +1,4 @@
-import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
-import 'package:ecommerce/view/home/widgets/home_item_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class AllProductsScreen extends StatelessWidget {
@@ -16,7 +14,7 @@ class AllProductsScreen extends StatelessWidget {
       body: Padding(
         padding: AppPadding.mainPading,
         child: Column(
-          children: [
+          children: const [
             // Consumer<HomeController>(
             //   builder: (BuildContext context, value, Widget? child) {
             //     return HomeItemCardWidget(

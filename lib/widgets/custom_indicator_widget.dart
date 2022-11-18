@@ -8,11 +8,13 @@ class CustomIndicatorWidget extends StatelessWidget {
     required this.activeColor,
     required this.count,
     required this.inactiveColor,
+    this.height = 6,
   }) : super(key: key);
   final int index;
   final int count;
   final Color activeColor;
   final Color inactiveColor;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,9 @@ class CustomIndicatorWidget extends StatelessWidget {
       children: List.generate(
         count,
         (sliderIndex) => Container(
-          height: 5,
+          height: height,
           margin: AppPadding.sidePading5,
-          width: index == sliderIndex ? 25 : 5,
+          width: index == sliderIndex ? 30 : 7,
           decoration: BoxDecoration(
             color: index == sliderIndex ? activeColor : inactiveColor,
             borderRadius: BorderRadius.circular(15),

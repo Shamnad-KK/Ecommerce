@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
@@ -19,7 +21,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    log('home build called');
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(
@@ -128,9 +130,7 @@ class HomeScreen extends StatelessWidget {
                           (BuildContext context, value, Widget? child) {
                         return value.isLoading
                             ? const CustomLoadingWidget()
-                            : HomeItemCardWidget(
-                                list: value.products?.products ?? [],
-                              );
+                            : const HomeItemCardWidget();
                       })
                     ],
                   ),

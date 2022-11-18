@@ -37,8 +37,8 @@ class HomeServices {
       const url = "http://${AppUrls.host}:6000/api/v1/products";
       Response response = await dio.get(url);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        log('response success');
-        log(response.data.toString());
+        log('get all product response success');
+
         return Products.fromJson(response.data);
       } else {
         return null;

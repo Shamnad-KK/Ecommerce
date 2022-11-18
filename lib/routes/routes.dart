@@ -5,19 +5,18 @@ import 'package:ecommerce/view/all_products/all_products_screen.dart';
 import 'package:ecommerce/view/all_products/all_products_screen_arguments.dart';
 import 'package:ecommerce/view/confirm_password/create_new_password.dart';
 import 'package:ecommerce/view/edit_profile/edit_profile_screen.dart';
-import 'package:ecommerce/view/otp/otp_arguments.dart';
-import 'package:ecommerce/view/steppers/stepper_screens.dart';
-import 'package:ecommerce/view/wishlist/wishlist_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
 import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
+import 'package:ecommerce/view/otp/otp_arguments.dart';
 import 'package:ecommerce/view/otp/otp_screen.dart';
 import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
+import 'package:ecommerce/view/steppers/stepper_screens.dart';
+import 'package:ecommerce/view/wishlist/wishlist_screen.dart';
 import 'package:ecommerce/widgets/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../view/product_detail/product_detail_arguments.dart';
 import '../view/product_detail/product_detail_screen.dart';
 
 class AppRoutes {
@@ -62,13 +61,8 @@ class AppRoutes {
           builder: (context) => const BottomNavBar(),
         );
       case RouteNames.productDetail:
-        ProductDetailArguments args =
-            settings.arguments as ProductDetailArguments;
         return MaterialPageRoute(
-          builder: (context) => ProductDetailScreen(
-            index: args.index,
-            product: args.product,
-          ),
+          builder: (context) => const ProductDetailScreen(),
         );
       case RouteNames.allProductsScreen:
         AllProductsScreenArguments args =

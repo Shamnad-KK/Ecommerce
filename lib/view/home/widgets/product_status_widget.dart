@@ -2,7 +2,6 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/model/home_product_model.dart';
 import 'package:ecommerce/model/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +19,8 @@ class ProductStatusWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          children: [
-            const Icon(
+          children: const [
+            Icon(
               Icons.star,
               color: AppColors.whiteColor,
             ),
@@ -47,7 +46,7 @@ class ProductStatusWidget extends StatelessWidget {
                   10,
                 ),
               ),
-              child: Text(
+              child: const Text(
                 //'reviews',
                 '10',
                 style: AppTextStyle.labelSmall,

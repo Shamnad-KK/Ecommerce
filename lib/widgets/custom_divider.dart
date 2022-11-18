@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 class CustomDivider extends StatelessWidget {
   const CustomDivider({
     Key? key,
+    this.color = AppColors.whiteColor,
   }) : super(key: key);
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         AppSpacing.kHeight10,
         Divider(
-          color: AppColors.whiteColor,
+          color: color,
         ),
         AppSpacing.kHeight10,
       ],
