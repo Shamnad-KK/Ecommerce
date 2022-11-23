@@ -14,44 +14,8 @@ class HomeController extends ChangeNotifier {
 
   Products? products;
 
-  // List<Product> productList = [
-  //   Product(
-  //     name: "Casual Shirt",
-  //     price: 400,
-  //     image: "assets/home/download (1).jpg",
-  //     description: "This is a good product",
-  //     rating: "4.3",
-  //     reviews: "1234",
-  //     isFavorite: false,
-  //     sizes: [30, 34, 36],
-  //     colors: [
-  //       Colors.green,
-  //       Colors.white,
-  //       Colors.blue,
-  //     ],
-  //     selectedColor: Colors.green,
-  //     selectedSize: 30,
-  //     quantity: 1,
-  //   ),
-  //   Product(
-  //     name: "Formal Shirt",
-  //     price: 500,
-  //     image: "assets/onboarding/f.png",
-  //     description: "This is a good product",
-  //     rating: "4.5",
-  //     reviews: "4321",
-  //     isFavorite: false,
-  //     sizes: [34, 35, 38],
-  //     colors: [
-  //       Colors.green,
-  //       Colors.white,
-  //       Colors.blue,
-  //     ],
-  //     selectedSize: 35,
-  //     selectedColor: Colors.green,
-  //     quantity: 1,
-  //   ),
-  // ];
+  num offerPrice = 0;
+  num actualPrice = 0;
 
   List<HomeCategoryModel> categoryList = [];
 
@@ -78,6 +42,13 @@ class HomeController extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
     //log(products?.count.toString() ?? "null");
+  }
+
+  void calculatePrice(ProductElement product) {
+    if (products != null) {
+      offerPrice = product.price! * product.offer! / 100;
+      actualPrice = product.price! - offerPrice;
+    }
   }
 
   void setFavorite(int index) {

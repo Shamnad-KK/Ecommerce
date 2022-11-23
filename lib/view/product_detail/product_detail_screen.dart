@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
-import 'package:ecommerce/view/product_detail/widgets/product_quantity_widget.dart';
+import 'package:ecommerce/view/product_detail/widgets/product_ratings_widget.dart';
 import 'package:ecommerce/view/product_detail/widgets/product_variant_widget.dart';
 import 'package:ecommerce/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
@@ -22,22 +22,19 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final cartController = Provider.of<CartController>(context, listen: false);
     final productDetailController =
         Provider.of<ProductDetailController>(context, listen: false);
 
-    //product.quantity = 1;
-
+    productDetailController.calculatePrice();
+    productDetailController
+        .initializeProductPrices(productDetailController.productElement!);
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
-        productDetailController.setChip(0);
-        productDetailController.setColor(0);
-        //productDetailController.setProductInitialValues(product);
+        productDetailController.setSizeIndex(0);
+        productDetailController.setColorIndex(0);
+        productDetailController.setInitialQuantity(1);
       },
     );
-    // log(product.id!);
-    //productDetailController.getOneProduct(product.id!);
-
     log('product detail build called');
 
     return SafeArea(
@@ -61,10 +58,11 @@ class ProductDetailScreen extends StatelessWidget {
                     ProductNameRowWidget(),
                     CustomDivider(color: AppColors.divider),
                     ProductionDescriptionWidget(),
-                    ProductVariantWidget(),
-                    ProductQuantityWidget(),
+                    ProductRatingWidget(),
                     ProductPriceWidget(),
-                    AddorBuyButtonsWidget()
+                    ProductVariantWidget(),
+                    //ProductQuantityWidget(),
+                    AddToCartorBuyButtonsWidget()
                   ],
                 ),
               )

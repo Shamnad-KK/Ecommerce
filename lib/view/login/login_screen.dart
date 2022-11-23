@@ -31,6 +31,7 @@ class LoginScreen extends StatelessWidget {
           padding: AppPadding.mainPading,
           child: Center(
             child: SingleChildScrollView(
+              reverse: true,
               child: Form(
                 key: formKey,
                 child: Column(

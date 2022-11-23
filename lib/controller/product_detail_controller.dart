@@ -8,14 +8,18 @@ import '../routes/route_names.dart';
 
 class ProductDetailController extends ChangeNotifier {
   ProductDetailServices productDetailServices = ProductDetailServices();
-  int selectedChipIndex = 0;
+  int selectedSizeIndex = 0;
   int selectedColorIndex = 0;
 
   int selectedImageListIndex = 0;
 
-  double realPrice = 0;
-
   ProductElement? productElement;
+
+  num totalPrice = 0;
+  int totalQuantity = 1;
+
+  num offerPrice = 0;
+  num actualPrice = 0;
 
   bool isLoading = false;
 
@@ -29,24 +33,33 @@ class ProductDetailController extends ChangeNotifier {
         notifyListeners();
         log('product not null');
         productElement = value;
-        //ProductDetailArguments args = ProductDetailArguments(index: index);
-        Navigator.of(context).pushNamed(
-          RouteNames.productDetail,
-          //arguments: args,
-        );
+        Navigator.of(context).pushNamed(RouteNames.productDetail);
       }
     });
     isLoading = false;
     notifyListeners();
   }
 
-  void setChip(int newValue) {
-    selectedChipIndex = newValue;
+  void calculatePrice() {
+    if (productElement != null) {
+      offerPrice = productElement!.price! * productElement!.offer! / 100;
+      actualPrice = productElement!.price! - offerPrice;
+      log('Actuallll : $actualPrice');
+    }
+  }
+
+  void setSizeIndex(int newValue) {
+    selectedSizeIndex = newValue;
     notifyListeners();
   }
 
-  void setColor(int newValue) {
+  void setColorIndex(int newValue) {
     selectedColorIndex = newValue;
+    notifyListeners();
+  }
+
+  void setInitialQuantity(int newValue) {
+    totalQuantity = newValue;
     notifyListeners();
   }
 
@@ -56,28 +69,31 @@ class ProductDetailController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void setProductInitialValues(Product product) {
-  //   realPrice = product.price;
-  //   notifyListeners();
-  // }
+  num initialActualPrice = 0;
+  num initialTotalPrice = 0;
 
-  // void setQuantity(Product product) {
-  //   product.quantity = 1;
-  //   notifyListeners();
-  // }
+  void initializeProductPrices(ProductElement product) {
+    initialActualPrice = actualPrice;
+    initialTotalPrice = product.price!;
+    totalPrice = product.price!;
+    log("initial actual price: $initialActualPrice");
+  }
 
-  // void increaseQuantity(Product product) {
-  //   product.quantity++;
-  //   product.price = product.price + realPrice;
-  //   notifyListeners();
-  // }
+  void incrementQuantity(ProductElement product) {
+    totalQuantity++;
+    actualPrice += initialActualPrice;
+    totalPrice += initialTotalPrice;
+    log(actualPrice.toString());
+    notifyListeners();
+  }
 
-  // void decreaseQuantity(Product product) {
-  //   if (product.quantity == 1) {
-  //     return;
-  //   }
-  //   product.price = product.price - realPrice;
-  //   product.quantity--;
-  //   notifyListeners();
-  // }
+  void decrementQuantity(ProductElement product) {
+    if (totalQuantity > 1) {
+      totalQuantity--;
+      actualPrice -= initialActualPrice;
+      totalPrice -= initialTotalPrice;
+      log(actualPrice.toString());
+      notifyListeners();
+    }
+  }
 }

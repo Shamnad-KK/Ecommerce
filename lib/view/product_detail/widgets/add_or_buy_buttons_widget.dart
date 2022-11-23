@@ -1,30 +1,38 @@
+import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../controller/cart_controller.dart';
 import '../../../helpers/app_spacing.dart';
 import '../../../routes/route_names.dart';
 import '../../../widgets/custom_button.dart';
 
-class AddorBuyButtonsWidget extends StatelessWidget {
-  const AddorBuyButtonsWidget({
+class AddToCartorBuyButtonsWidget extends StatelessWidget {
+  const AddToCartorBuyButtonsWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cartController = Provider.of<CartController>(context, listen: false);
     return Row(
       children: [
         Expanded(
-          child: CustomButtonWidget(
-            text: "Add to cart",
-            onTap: () {
-              // cartController.addProductToCart(
-              //     product,
-              //     productDetailController.selectedChipIndex,
-              //     productDetailController
-              //         .selectedColorIndex);
-              // product.price =
-              //     productDetailController.realPrice;
-              // Navigator.of(context).pop();
+          child: Consumer<ProductDetailController>(
+            builder: (BuildContext context, value, Widget? child) {
+              return CustomButtonWidget(
+                text: "Add to cart",
+                onTap: () {
+                  cartController.addProductToCart(
+                    context: context,
+                    productId: value.productElement!.id!,
+                    selectedColor: value.productElement!
+                        .colors![value.selectedColorIndex].color,
+                    selectedSize:
+                        value.productElement!.size![value.selectedSizeIndex],
+                  );
+                },
+              );
             },
           ),
         ),

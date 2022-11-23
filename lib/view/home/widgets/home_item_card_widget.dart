@@ -8,7 +8,6 @@ import 'package:ecommerce/utils/app_utils.dart';
 import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
 import 'package:ecommerce/widgets/custom_notfound_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +45,9 @@ class HomeItemCardWidget extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final ProductElement product = list[index];
+
+                  value.calculatePrice(product);
+
                   return GestureDetector(
                     onTap: () {
                       productDetailController.getOneProduct(
@@ -88,9 +90,26 @@ class HomeItemCardWidget extends StatelessWidget {
                           width: size.width * 0.36,
                           child: ProductStatusWidget(product: product),
                         ),
-                        Text(
-                          " \$ ${product.price}",
-                          style: AppTextStyle.body2,
+                        Row(
+                          children: [
+                            Text(
+                              "₹ ${product.price?.round()}",
+                              style: AppTextStyle.body2.copyWith(
+                                  color: AppColors.indicatorInactiveColor,
+                                  decoration: TextDecoration.lineThrough),
+                            ),
+                            AppSpacing.kWidth30,
+                            Text(
+                              "${product.offer?.round()}% OFF",
+                              style: AppTextStyle.bodySmall
+                                  .copyWith(color: Colors.green),
+                            ),
+                            AppSpacing.kWidth5,
+                            Text(
+                              "₹${value.actualPrice.round()}",
+                              style: AppTextStyle.body2,
+                            ),
+                          ],
                         ),
                       ],
                     ),

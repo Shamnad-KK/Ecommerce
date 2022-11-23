@@ -1,54 +1,44 @@
-import 'package:ecommerce/controller/product_detail_controller.dart';
+import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
-import 'package:ecommerce/model/product_model.dart';
+import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductQuantityCustomizerWidget extends StatelessWidget {
   const ProductQuantityCustomizerWidget({
     Key? key,
-    required this.product,
   }) : super(key: key);
-
-  final ProductElement product;
 
   @override
   Widget build(BuildContext context) {
-    // final productDetailController =
-    //     Provider.of<ProductDetailController>(context, listen: false);
-    // final cartController = Provider.of<CartController>(context, listen: false);
-
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.mainColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () {
-              // productDetailController.decreaseQuantity(product);
-              // cartController.calculateTotalPrice();
-            },
-            icon: const Icon(
-              Icons.remove,
-            ),
+    return Consumer<CartController>(
+      builder: (BuildContext context, value, Widget? child) {
+        return Container(
+          padding: AppPadding.allside5,
+          decoration: BoxDecoration(
+            color: AppColors.mainColor,
+            borderRadius: BorderRadius.circular(20),
           ),
-          Consumer<ProductDetailController>(
-              builder: (BuildContext context, value, Widget? child) {
-            return const Text("1");
-          }),
-          IconButton(
-            onPressed: () {
-              // productDetailController.increaseQuantity(product);
-              // cartController.calculateTotalPrice();
-            },
-            icon: const Icon(
-              Icons.add,
-            ),
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  // value.decrementQuantity();
+                },
+                child: const Icon(
+                  Icons.remove,
+                ),
+              ),
+              Text(value.totalQuantity.toString()),
+              GestureDetector(
+                  onTap: () {
+                    //  value.incrementQuantity();
+                  },
+                  child: const Icon(Icons.add)),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -32,18 +32,18 @@ class ProductVariantWidget extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            value.setChip(index);
+                            value.setSizeIndex(index);
                           },
                           child: CircleAvatar(
                             radius: 25,
-                            backgroundColor: value.selectedChipIndex == index
+                            backgroundColor: value.selectedSizeIndex == index
                                 ? AppColors.whiteColor
                                 : AppColors.mainColor,
                             child: Center(
                               child: Text(
                                 product.size![index].toString(),
                                 style: AppTextStyle.body2.copyWith(
-                                    color: value.selectedChipIndex == index
+                                    color: value.selectedSizeIndex == index
                                         ? AppColors.blackColor
                                         : AppColors.whiteColor),
                               ),
@@ -63,7 +63,7 @@ class ProductVariantWidget extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              value.setColor(index);
+                              value.setColorIndex(index);
                               value.setCarouselImage(index);
                             },
                             child: Container(

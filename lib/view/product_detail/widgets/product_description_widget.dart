@@ -17,7 +17,7 @@ class ProductionDescriptionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          "Descriptioin",
+          "Description",
           style: AppTextStyle.body1,
         ),
         AppSpacing.kHeight5,
