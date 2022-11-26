@@ -46,7 +46,7 @@ class CartController extends ChangeNotifier {
   void getAllCartProducts() async {
     isLoading = true;
     notifyListeners();
-    await CartService().getAllProducts().then((value) {
+    await CartService().getAllCartProducts().then((value) {
       if (value != null) {
         cartProducts = value;
         cartProduct = value.products;

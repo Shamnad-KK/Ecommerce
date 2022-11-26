@@ -25,4 +25,6 @@ class AppColors {
   static const Color bottomNavInactiveColor =
       Color.fromARGB(107, 245, 245, 245);
   static const Color divider = Color.fromARGB(255, 87, 92, 101);
+  static Color shimmerBaseColor = Colors.grey[300]!;
+  static Color shimmerHighlightColor = Colors.grey[100]!;
 }

@@ -2,16 +2,12 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductStatusWidget extends StatelessWidget {
   const ProductStatusWidget({
     Key? key,
-    required this.product,
   }) : super(key: key);
-
-  final ProductElement product;
 
   @override
   Widget build(BuildContext context) {

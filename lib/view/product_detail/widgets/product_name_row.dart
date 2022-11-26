@@ -21,7 +21,7 @@ class ProductNameRowWidget extends StatelessWidget {
           style: AppTextStyle.titleLarge,
         ),
         AddorRemoveFavoriteWidget(
-          product: product!,
+          productId: product!.id!,
         ),
       ],
     );

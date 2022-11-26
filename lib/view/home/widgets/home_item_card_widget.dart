@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/utils/app_utils.dart';
+import 'package:ecommerce/view/home/utils/shimmers.dart';
 import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
 import 'package:ecommerce/widgets/custom_notfound_widget.dart';
@@ -23,15 +24,12 @@ class HomeItemCardWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final productDetailController =
         Provider.of<ProductDetailController>(context, listen: false);
+
     return Consumer<HomeController>(
       builder: (context, value, child) {
         final list = value.products?.products ?? [];
         return list.isEmpty
-            ? const Center(
-                child: CustomNotFoundWidget(
-                    title: "Your Product list is empty",
-                    subtitle: "You have'nt added any products"),
-              )
+            ? HomeShimmers.homeProductCartdShimmer(context)
             : GridView.builder(
                 itemCount: list.length,
                 shrinkWrap: true,
@@ -44,7 +42,7 @@ class HomeItemCardWidget extends StatelessWidget {
                   mainAxisSpacing: 30,
                 ),
                 itemBuilder: (context, index) {
-                  final ProductElement product = list[index];
+                  final product = list[index];
 
                   value.calculatePrice(product);
 
@@ -63,7 +61,7 @@ class HomeItemCardWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AppColors.mainColor,
                             image: DecorationImage(
-                              image: NetworkImage(
+                              image: CachedNetworkImageProvider(
                                 product.colors?[0].images[0] ??
                                     AppUtils.dummyImage,
                               ),
@@ -76,7 +74,7 @@ class HomeItemCardWidget extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.topRight,
                               child: AddorRemoveFavoriteWidget(
-                                product: product,
+                                productId: product.id!,
                               ),
                             ),
                           ),
@@ -88,7 +86,7 @@ class HomeItemCardWidget extends StatelessWidget {
                         ),
                         SizedBox(
                           width: size.width * 0.36,
-                          child: ProductStatusWidget(product: product),
+                          child: const ProductStatusWidget(),
                         ),
                         Row(
                           children: [

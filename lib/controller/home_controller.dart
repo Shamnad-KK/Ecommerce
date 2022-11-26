@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce/model/home_category_model.dart';
 import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/services/home_services.dart';
@@ -7,6 +9,7 @@ class HomeController extends ChangeNotifier {
   HomeController() {
     getAllCategories();
     getAllProducts();
+    log('homecontroller constructor called');
   }
   HomeServices homeServices = HomeServices();
 
@@ -41,7 +44,7 @@ class HomeController extends ChangeNotifier {
     });
     isLoading = false;
     notifyListeners();
-    //log(products?.count.toString() ?? "null");
+    log(products?.count.toString() ?? "null");
   }
 
   void calculatePrice(ProductElement product) {

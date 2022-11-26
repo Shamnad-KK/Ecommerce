@@ -63,7 +63,7 @@ class AppExceptions {
           AppColors.errorColor);
       return;
     } else {
-      log('message');
+      log('other exception');
       AppPopUps.showToast(exception.toString(), AppColors.errorColor);
       log(exception.toString());
       return;
