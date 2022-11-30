@@ -11,7 +11,6 @@ import '../../helpers/app_colors.dart';
 import '../../helpers/app_padding.dart';
 import '../../helpers/app_spacing.dart';
 import '../../helpers/apptext_style.dart';
-import '../../widgets/custom_notfound_widget.dart';
 import '../home/widgets/product_status_widget.dart';
 
 class WishlistScreen extends StatelessWidget {

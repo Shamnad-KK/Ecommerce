@@ -63,18 +63,28 @@ class CartController extends ChangeNotifier {
     if (product != null) {
       initialActualPrice = actualPrice;
       initialTotalPrice = product.product.price;
-      totalPrice = product.product.price;
+      //totalPrice = product.product.price;
       log("initial actual price: $initialActualPrice");
     }
   }
 
   void calculatePrice(int index) {
+    log(totalPrice.toString());
     final product = cartProduct?[index];
     if (product != null) {
+      totalPrice = 0;
       offerPrice = product.product.price * product.product.offer / 100;
       actualPrice = product.product.price - offerPrice;
-      totalPrice = totalPrice + actualPrice;
-      log('Actuallll : $actualPrice');
+
+      for (var i = 0; i < cartProduct!.length; i++) {
+        log(actualPrice.toString());
+        totalPrice = totalPrice +
+            (cartProduct![i].product.price -
+                cartProduct![i].product.price *
+                    cartProduct![i].product.offer /
+                    100);
+      }
+      log('total : ${totalPrice.floor()}');
     }
   }
 

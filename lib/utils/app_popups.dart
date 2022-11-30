@@ -54,4 +54,43 @@ class AppPopUps {
       },
     );
   }
+
+  static void deletePopUp(
+      BuildContext context, String text, VoidCallback onTap) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            "Are you sure?",
+            style: AppTextStyle.headLine6,
+          ),
+          content: Text(
+            "Do you want to remove the $text?",
+            style: AppTextStyle.body1,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                "No",
+                style: AppTextStyle.body2,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                onTap();
+              },
+              child: const Text(
+                "Yes",
+                style: AppTextStyle.body2,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

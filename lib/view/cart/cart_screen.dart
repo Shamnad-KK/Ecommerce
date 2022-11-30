@@ -198,7 +198,7 @@ class CartScreen extends StatelessWidget {
                               return SizedBox(
                                 width: size.width * 0.35,
                                 child: Text(
-                                  "₹${value.totalPrice}",
+                                  "₹${value.totalPrice.floor()}",
                                   style: AppTextStyle.body1,
                                   overflow: TextOverflow.ellipsis,
                                 ),

@@ -114,11 +114,11 @@ class _StepperScreensState extends State<StepperScreens> {
               return Padding(
                 padding: AppPadding.mainPading,
                 child: CustomButtonWidget(
-                  text: addressConsumer.addressList.isEmpty
+                  text: addressConsumer.addressList!.isEmpty
                       ? "ADD ADDRESS"
                       : "CONTINUE",
                   onTap: () {
-                    if (addressConsumer.addressList.isNotEmpty) {
+                    if (addressConsumer.addressList!.isNotEmpty) {
                       stepperController.stepContinued();
                     } else {
                       Navigator.of(context)
