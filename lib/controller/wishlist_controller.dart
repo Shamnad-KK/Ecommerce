@@ -4,11 +4,12 @@ import 'package:ecommerce/services/wishlist_service.dart';
 import 'package:flutter/material.dart';
 
 import '../model/wishlist_model.dart';
+import '../routes/route_names.dart';
 
 class WishlistController extends ChangeNotifier {
-  // WishlistController() {
-  //   getAllWishlist();
-  // }
+  WishlistController() {
+    getAllWishlist();
+  }
 
   num offerPrice = 0;
   num actualPrice = 0;
@@ -55,5 +56,12 @@ class WishlistController extends ChangeNotifier {
       }
     });
     getAllWishlist();
+  }
+
+  void gotoProductDetails(BuildContext context, String productId) {
+    Navigator.of(context).pushNamed(
+      RouteNames.productDetail,
+      arguments: {'productId': productId},
+    );
   }
 }

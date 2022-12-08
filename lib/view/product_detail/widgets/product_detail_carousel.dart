@@ -21,7 +21,7 @@ class ProductDetailCarouselWidget extends StatelessWidget {
       return CarouselSlider.builder(
         itemCount: product!
             .colors?[productDetailConsumer.selectedImageListIndex]
-            .images
+            .images!
             .length,
         itemBuilder: (context, index, realIndex) {
           return Container(
@@ -32,7 +32,7 @@ class ProductDetailCarouselWidget extends StatelessWidget {
               image: DecorationImage(
                 image: NetworkImage(product
                         .colors?[productDetailConsumer.selectedImageListIndex]
-                        .images[index] ??
+                        .images?[index] ??
                     AppUtils.dummyImage),
                 fit: BoxFit.fill,
               ),
@@ -46,7 +46,7 @@ class ProductDetailCarouselWidget extends StatelessWidget {
                     activeColor: AppColors.mainColor,
                     count: product
                         .colors![productDetailConsumer.selectedImageListIndex]
-                        .images
+                        .images!
                         .length,
                     inactiveColor: AppColors.indicatorInactiveColor),
               ),

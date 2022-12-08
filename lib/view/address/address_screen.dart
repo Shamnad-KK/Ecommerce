@@ -25,7 +25,7 @@ class AddressScreen extends StatelessWidget {
           padding: AppPadding.mainPading,
           child: Column(
             children: [
-              Expanded(
+              const Expanded(
                 child: AddressWidget(),
               ),
               CustomButtonWidget(

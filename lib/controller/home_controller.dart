@@ -1,26 +1,30 @@
-import 'dart:developer';
-
+import 'package:ecommerce/model/carousal_model.dart';
 import 'package:ecommerce/model/home_category_model.dart';
 import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/services/home_services.dart';
+import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
 import 'package:flutter/material.dart';
+
+import '../routes/route_names.dart';
 
 class HomeController extends ChangeNotifier {
   HomeController() {
     getAllCategories();
     getAllProducts();
-    log('homecontroller constructor called');
+    getCarousals();
   }
   HomeServices homeServices = HomeServices();
 
   bool isLoading = false;
 
-  Products? products;
+  List<ProductElement>? products;
 
   num offerPrice = 0;
   num actualPrice = 0;
 
   List<HomeCategoryModel> categoryList = [];
+
+  List<Carrousals>? carousalList;
 
   void getAllCategories() async {
     isLoading = true;
@@ -44,7 +48,18 @@ class HomeController extends ChangeNotifier {
     });
     isLoading = false;
     notifyListeners();
-    log(products?.count.toString() ?? "null");
+  }
+
+  void getCarousals() async {
+    isLoading = true;
+    notifyListeners();
+    await homeServices.getCarousal().then((value) {
+      if (value != null) {
+        carousalList = value;
+        isLoading = false;
+        notifyListeners();
+      }
+    });
   }
 
   void calculatePrice(ProductElement product) {
@@ -54,9 +69,11 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-  void setFavorite(int index) {
-    // productList[index].isFavorite = !productList[index].isFavorite;
-    // notifyListeners();
-    // log(productList[index].isFavorite.toString());
+  void gotoProductDetails(BuildContext context, String productId) {
+    ProductDetailArguments args = ProductDetailArguments(productId: productId);
+    Navigator.of(context).pushNamed(
+      RouteNames.productDetail,
+      arguments: args,
+    );
   }
 }

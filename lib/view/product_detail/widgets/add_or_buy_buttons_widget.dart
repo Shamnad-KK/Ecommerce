@@ -27,7 +27,7 @@ class AddToCartorBuyButtonsWidget extends StatelessWidget {
                     context: context,
                     productId: value.productElement!.id!,
                     selectedColor: value.productElement!
-                        .colors![value.selectedColorIndex].color,
+                        .colors![value.selectedColorIndex].color!,
                     selectedSize:
                         value.productElement!.size![value.selectedSizeIndex],
                   );

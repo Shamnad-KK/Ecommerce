@@ -4,9 +4,10 @@ import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/services/product_detail_services.dart';
 import 'package:flutter/material.dart';
 
-import '../routes/route_names.dart';
-
 class ProductDetailController extends ChangeNotifier {
+  ProductDetailController() {
+    setLoading(true);
+  }
   ProductDetailServices productDetailServices = ProductDetailServices();
   int selectedSizeIndex = 0;
   int selectedColorIndex = 0;
@@ -23,17 +24,20 @@ class ProductDetailController extends ChangeNotifier {
 
   bool isLoading = false;
 
-  void getOneProduct(
-      {required BuildContext context, required String productId}) async {
+  void setLoading(bool value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
+  Future<void> getOneProduct(BuildContext context, String productId) async {
     isLoading = true;
     notifyListeners();
-    productDetailServices.getOneProduct(productId).then((value) {
+    await productDetailServices.getOneProduct(productId).then((value) {
       if (value != null) {
-        isLoading = false;
-        notifyListeners();
         log('product not null');
         productElement = value;
-        Navigator.of(context).pushNamed(RouteNames.productDetail);
+        isLoading = false;
+        notifyListeners();
       }
     });
     isLoading = false;
@@ -73,10 +77,14 @@ class ProductDetailController extends ChangeNotifier {
   num initialTotalPrice = 0;
 
   void initializeProductPrices(ProductElement product) {
+    isLoading = true;
+    notifyListeners();
     initialActualPrice = actualPrice;
     initialTotalPrice = product.price!;
     totalPrice = product.price!;
     log("initial actual price: $initialActualPrice");
+    isLoading = false;
+    notifyListeners();
   }
 
   void incrementQuantity(ProductElement product) {

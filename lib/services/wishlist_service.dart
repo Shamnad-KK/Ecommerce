@@ -46,12 +46,15 @@ class WishListService {
         url,
         options: Options(headers: AppConfig.getApiHeader(token: token)),
       );
-      if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+      if (response.statusCode! == 200) {
         log(response.data.toString());
-        final wishList = (response.data as List)
+        final List<WishlistProductElement> wishList = (response.data as List)
             .map((e) => WishlistProductElement.fromJson(e))
             .toList();
         return wishList;
+      }
+      if (response.statusCode! == 204) {
+        return <WishlistProductElement>[];
       }
     } catch (e) {
       AppExceptions.handleError(e);

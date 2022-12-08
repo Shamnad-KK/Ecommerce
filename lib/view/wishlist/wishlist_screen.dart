@@ -1,11 +1,10 @@
 import 'package:ecommerce/model/wishlist_model.dart';
-import 'package:ecommerce/view/home/utils/shimmers.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
+import 'package:ecommerce/widgets/custom_notfound_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controller/product_detail_controller.dart';
 import '../../controller/wishlist_controller.dart';
 import '../../helpers/app_colors.dart';
 import '../../helpers/app_padding.dart';
@@ -19,8 +18,6 @@ class WishlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final productDetailController =
-        Provider.of<ProductDetailController>(context, listen: false);
     final wishlistController =
         Provider.of<WishlistController>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -42,29 +39,31 @@ class WishlistScreen extends StatelessWidget {
           child: Consumer<WishlistController>(
               builder: (BuildContext context, value, Widget? child) {
             final list = value.wishlist;
-            return SingleChildScrollView(
-              child: GridView.builder(
-                  itemCount: list.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1 / 1.60,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 30,
-                  ),
-                  itemBuilder: (context, index) {
-                    final WishlistProductElement product = list[index];
+            return list.isEmpty
+                ? const CustomNotFoundWidget(
+                    title: 'Wishlist is empty',
+                    subtitle: 'You haven\'t added any products to wishlist')
+                : SingleChildScrollView(
+                    child: GridView.builder(
+                        itemCount: list.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1 / 1.60,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 30,
+                        ),
+                        itemBuilder: (context, index) {
+                          final WishlistProductElement product = list[index];
 
-                    value.calculatePrice(product);
+                          value.calculatePrice(product);
 
-                    return list.isEmpty
-                        ? HomeShimmers.homeProductCartdShimmer(context)
-                        : GestureDetector(
+                          return GestureDetector(
                             onTap: () {
-                              productDetailController.getOneProduct(
-                                  context: context, productId: product.id);
+                              value.gotoProductDetails(context, product.id);
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,8 +127,8 @@ class WishlistScreen extends StatelessWidget {
                               ],
                             ),
                           );
-                  }),
-            );
+                        }),
+                  );
           }),
         ),
       ),

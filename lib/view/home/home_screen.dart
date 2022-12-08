@@ -11,8 +11,6 @@ import 'package:ecommerce/view/home/widgets/home_carousel_widget.dart';
 import 'package:ecommerce/view/home/widgets/home_category_widget.dart';
 import 'package:ecommerce/view/home/widgets/home_item_card_widget.dart';
 import 'package:ecommerce/view/home/widgets/home_row_widget.dart';
-import 'package:ecommerce/widgets/custom_loading_widget.dart';
-import 'package:ecommerce/widgets/custom_notfound_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,9 +48,7 @@ class HomeScreen extends StatelessWidget {
                         onTap: () {},
                       ),
                     ),
-                    value.isLoading
-                        ? HomeShimmers.carouserShimmer(context)
-                        : const HomeScreenCarouselWidget(),
+                    const HomeScreenCarouselWidget(),
                     AppSpacing.kHeight20,
                     Padding(
                       padding: AppPadding.mainPading,

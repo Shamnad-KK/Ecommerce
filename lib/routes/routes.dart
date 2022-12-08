@@ -10,6 +10,7 @@ import 'package:ecommerce/view/login/login_screen.dart';
 import 'package:ecommerce/view/onboarding/onboarding_screen.dart';
 import 'package:ecommerce/view/otp/otp_arguments.dart';
 import 'package:ecommerce/view/otp/otp_screen.dart';
+import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
 import 'package:ecommerce/view/sign_up/sign_up_screen.dart';
 import 'package:ecommerce/view/splash/splash_screen.dart';
 import 'package:ecommerce/view/steppers/stepper_screens.dart';
@@ -61,8 +62,12 @@ class AppRoutes {
           builder: (context) => const BottomNavBar(),
         );
       case RouteNames.productDetail:
+        ProductDetailArguments args =
+            settings.arguments as ProductDetailArguments;
         return MaterialPageRoute(
-          builder: (context) => const ProductDetailScreen(),
+          builder: (context) => ProductDetailScreen(
+            productId: args.productId,
+          ),
         );
       case RouteNames.allProductsScreen:
         AllProductsScreenArguments args =

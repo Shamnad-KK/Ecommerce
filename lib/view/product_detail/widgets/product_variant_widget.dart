@@ -83,8 +83,9 @@ class ProductVariantWidget extends StatelessWidget {
                                       width: 3),
                                 ),
                                 child: CircleAvatar(
-                                  backgroundColor: Color(
-                                      int.parse(product.colors![index].color)),
+                                  backgroundColor: Color(int.parse(
+                                      product.colors![index].color ??
+                                          "0xFFB5D5FF")),
                                 ),
                               ),
                             ),

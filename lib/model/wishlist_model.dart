@@ -14,7 +14,7 @@ class WishlistProductElement {
 
   String id;
   String name;
-  Category category;
+  String category;
   int price;
   List<dynamic> size;
   List<Color> colors;
@@ -27,7 +27,7 @@ class WishlistProductElement {
       WishlistProductElement(
         id: json["_id"],
         name: json["name"],
-        category: Category.fromJson(json["category"]),
+        category: json["category"],
         price: json["price"],
         size: (json["size"] as List).map((e) => e).toList(),
         colors: List<Color>.from(json["colors"].map((x) => Color.fromJson(x))),
@@ -35,18 +35,6 @@ class WishlistProductElement {
         description: json["description"],
         offer: json["offer"],
         ratings: List<dynamic>.from(json["ratings"].map((x) => x)),
-      );
-}
-
-class Category {
-  Category({
-    required this.id,
-  });
-
-  String id;
-
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json["id"],
       );
 }
 

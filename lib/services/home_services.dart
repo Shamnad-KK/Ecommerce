@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce/config/app_config.dart';
 import 'package:ecommerce/config/app_exceptions.dart';
 import 'package:ecommerce/constants/app_url.dart';
+import 'package:ecommerce/model/carousal_model.dart';
 import 'package:ecommerce/model/home_category_model.dart';
 import 'package:ecommerce/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,7 +41,7 @@ class HomeServices {
     return <HomeCategoryModel>[];
   }
 
-  Future<Products?> getAllProducts() async {
+  Future<List<ProductElement>?> getAllProducts() async {
     try {
       Dio dio = Dio();
       PreferenceManager manager =
@@ -53,10 +54,33 @@ class HomeServices {
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         log('get all product response success');
 
-        return Products.fromJson(response.data);
+        List<ProductElement> result = (response.data as List)
+            .map((e) => ProductElement.fromJson(e))
+            .toList();
+
+        return result;
       } else {
         return null;
       }
+    } catch (e) {
+      AppExceptions.handleError(e);
+    }
+    return null;
+  }
+
+  Future<List<Carrousals>?> getCarousal() async {
+    try {
+      Dio dio = Dio();
+      const url = "http://${AppUrls.host}:6000/api/v1/admin/carousal";
+      Response response = await dio.get(url);
+      if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+        log(response.data.toString());
+        List<Carrousals> carousalList = (response.data['carousals'] as List)
+            .map((e) => Carrousals.fromJson(e))
+            .toList();
+        return carousalList;
+      }
+      return null;
     } catch (e) {
       AppExceptions.handleError(e);
     }

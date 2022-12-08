@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/controller/home_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
@@ -8,11 +10,8 @@ import 'package:ecommerce/utils/app_utils.dart';
 import 'package:ecommerce/view/home/utils/shimmers.dart';
 import 'package:ecommerce/view/home/widgets/product_status_widget.dart';
 import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
-import 'package:ecommerce/widgets/custom_notfound_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../controller/product_detail_controller.dart';
 
 class HomeItemCardWidget extends StatelessWidget {
   const HomeItemCardWidget({
@@ -22,12 +21,10 @@ class HomeItemCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final productDetailController =
-        Provider.of<ProductDetailController>(context, listen: false);
 
     return Consumer<HomeController>(
       builder: (context, value, child) {
-        final list = value.products?.products ?? [];
+        final list = value.products ?? [];
         return list.isEmpty
             ? HomeShimmers.homeProductCartdShimmer(context)
             : GridView.builder(
@@ -48,8 +45,10 @@ class HomeItemCardWidget extends StatelessWidget {
 
                   return GestureDetector(
                     onTap: () {
-                      productDetailController.getOneProduct(
-                          context: context, productId: product.id!);
+                      log(product.id!);
+                      value.gotoProductDetails(context, product.id!);
+                      // productDetailController.getOneProduct(
+                      //     context: context, productId: product.id!);
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +61,7 @@ class HomeItemCardWidget extends StatelessWidget {
                             color: AppColors.mainColor,
                             image: DecorationImage(
                               image: CachedNetworkImageProvider(
-                                product.colors?[0].images[0] ??
+                                product.colors?[0].images?[0] ??
                                     AppUtils.dummyImage,
                               ),
                               fit: BoxFit.fill,
