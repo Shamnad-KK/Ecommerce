@@ -111,22 +111,24 @@ class _StepperScreensState extends State<StepperScreens> {
           ),
           Consumer<AddressController>(
             builder: (BuildContext context, addressConsumer, Widget? child) {
-              return Padding(
-                padding: AppPadding.mainPading,
-                child: CustomButtonWidget(
-                  text: addressConsumer.addressList!.isEmpty
-                      ? "ADD ADDRESS"
-                      : "CONTINUE",
-                  onTap: () {
-                    if (addressConsumer.addressList!.isNotEmpty) {
-                      stepperController.stepContinued();
-                    } else {
-                      Navigator.of(context)
-                          .pushNamed(RouteNames.addAddressScreen);
-                    }
-                  },
-                ),
-              );
+              return addressConsumer.isLoading
+                  ? const SizedBox()
+                  : Padding(
+                      padding: AppPadding.mainPading,
+                      child: CustomButtonWidget(
+                        text: addressConsumer.addressList!.isEmpty
+                            ? "ADD ADDRESS"
+                            : "CONTINUE",
+                        onTap: () {
+                          if (addressConsumer.addressList!.isNotEmpty) {
+                            stepperController.stepContinued();
+                          } else {
+                            Navigator.of(context)
+                                .pushNamed(RouteNames.addAddressScreen);
+                          }
+                        },
+                      ),
+                    );
             },
           )
         ],

@@ -63,6 +63,7 @@ class AddressWidget extends StatelessWidget {
           );
         } else {
           return ListView.builder(
+            shrinkWrap: true,
             itemBuilder: (context, index) {
               final AddressModel address = value.addressList![index];
               return Column(

@@ -11,6 +11,7 @@ import 'package:ecommerce/controller/onboarding_controller.dart';
 import 'package:ecommerce/controller/orders_controller.dart';
 import 'package:ecommerce/controller/otp_controller.dart';
 import 'package:ecommerce/controller/product_detail_controller.dart';
+import 'package:ecommerce/controller/products_filter_controller.dart';
 import 'package:ecommerce/controller/profile_controller.dart';
 import 'package:ecommerce/controller/signup_controller.dart';
 import 'package:ecommerce/controller/splash_controller.dart';
@@ -20,6 +21,7 @@ import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/routes/routes.dart';
+import 'package:ecommerce/services/home_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => EditProfileController()),
         ChangeNotifierProvider(create: (ctx) => OtpController()),
         ChangeNotifierProvider(create: (ctx) => BottomNavController()),
-        ChangeNotifierProvider(create: (ctx) => HomeController()),
+        ChangeNotifierProvider(create: (ctx) => HomeController(HomeServices())),
         ChangeNotifierProvider(create: (ctx) => CreateNewPasswordController()),
         ChangeNotifierProvider(create: (ctx) => ProductDetailController()),
         ChangeNotifierProvider(create: (ctx) => CartController()),
@@ -52,6 +54,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => AddressController()),
         ChangeNotifierProvider(create: (ctx) => ProfileController()),
         ChangeNotifierProvider(create: (ctx) => StepperController()),
+        ChangeNotifierProvider(create: (ctx) => ProductFilterController()),
       ],
       child: MaterialApp(
         scrollBehavior: MyBehavior(),

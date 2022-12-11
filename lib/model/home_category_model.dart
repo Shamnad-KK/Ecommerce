@@ -1,5 +1,5 @@
 class HomeCategoryModel {
-  final int id;
+  final String id;
   final String name;
   final String image;
   HomeCategoryModel({
@@ -10,7 +10,7 @@ class HomeCategoryModel {
 
   factory HomeCategoryModel.fromJson(Map<String, dynamic> json) {
     return HomeCategoryModel(
-      id: json['id'] ?? 0,
+      id: json['_id'] ?? "0",
       name: json['category'] ?? "No category",
       image: json['icon'] ?? "No image",
     );

@@ -49,11 +49,11 @@ class ProductDetailScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: AppColors.transparent,
         ),
-        body: SingleChildScrollView(
-          child: Consumer<ProductDetailController>(
-            builder: (context, value, child) => value.isLoading
-                ? const CustomLoadingWidget()
-                : Column(
+        body: Consumer<ProductDetailController>(
+          builder: (context, value, child) => value.isLoading
+              ? const CustomLoadingWidget()
+              : SingleChildScrollView(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const ProductDetailCarouselWidget(),
@@ -67,7 +67,8 @@ class ProductDetailScreen extends StatelessWidget {
                             ProductionDescriptionWidget(),
                             ProductRatingWidget(),
                             ProductPriceWidget(),
-                            ProductVariantWidget(),
+                            ProductSizeVariant(),
+                            ProductColorVariant(),
                             //ProductQuantityWidget(),
                             AddToCartorBuyButtonsWidget()
                           ],
@@ -75,7 +76,7 @@ class ProductDetailScreen extends StatelessWidget {
                       )
                     ],
                   ),
-          ),
+                ),
         ),
       ),
     );

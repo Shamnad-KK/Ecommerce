@@ -52,8 +52,6 @@ class HomeServices {
       Response response = await dio.get(url,
           options: Options(headers: AppConfig.getApiHeader(token: token)));
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        log('get all product response success');
-
         List<ProductElement> result = (response.data as List)
             .map((e) => ProductElement.fromJson(e))
             .toList();
@@ -72,9 +70,12 @@ class HomeServices {
     try {
       Dio dio = Dio();
       const url = "http://${AppUrls.host}:6000/api/v1/admin/carousal";
-      Response response = await dio.get(url);
+      PreferenceManager manager =
+          PreferenceManager(await SharedPreferences.getInstance());
+      final token = await manager.getToken();
+      Response response = await dio.get(url,
+          options: Options(headers: AppConfig.getApiHeader(token: token)));
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        log(response.data.toString());
         List<Carrousals> carousalList = (response.data['carousals'] as List)
             .map((e) => Carrousals.fromJson(e))
             .toList();

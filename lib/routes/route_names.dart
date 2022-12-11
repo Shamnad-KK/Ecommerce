@@ -8,7 +8,7 @@ class RouteNames {
   static const otpScreen = "otp";
   static const bottomNavBar = "bottomNavBar";
   static const productDetail = "productDetail";
-  static const allProductsScreen = "allProducts";
+  static const productsFilter = "productsFilter";
   static const wishlistScreen = "wishlist";
   static const editProfileScreen = "editProfile";
   static const addressScreen = "address";

@@ -76,7 +76,7 @@ class AddressController extends ChangeNotifier {
       await AddressServices().removeAddress(addressId).then((value) {
         if (value == true) {
           getAllAddresses();
-          Navigator.of(context).pop();
+
           AppPopUps.showToast('Address removed', AppColors.successColor);
         }
       });

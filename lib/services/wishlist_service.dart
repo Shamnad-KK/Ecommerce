@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:ecommerce/config/app_config.dart';
 import 'package:ecommerce/config/app_exceptions.dart';
@@ -47,7 +45,6 @@ class WishListService {
         options: Options(headers: AppConfig.getApiHeader(token: token)),
       );
       if (response.statusCode! == 200) {
-        log(response.data.toString());
         final List<WishlistProductElement> wishList = (response.data as List)
             .map((e) => WishlistProductElement.fromJson(e))
             .toList();

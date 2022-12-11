@@ -59,7 +59,7 @@ class AppPopUps {
       BuildContext context, String text, VoidCallback onTap) async {
     showDialog(
       context: context,
-      builder: (context) {
+      builder: (ctx) {
         return AlertDialog(
           title: const Text(
             "Are you sure?",
@@ -82,6 +82,7 @@ class AppPopUps {
             TextButton(
               onPressed: () {
                 onTap();
+                Navigator.of(context).pop();
               },
               child: const Text(
                 "Yes",

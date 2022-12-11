@@ -1,8 +1,8 @@
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/add_address/add_address_screen.dart';
 import 'package:ecommerce/view/address/address_screen.dart';
-import 'package:ecommerce/view/all_products/all_products_screen.dart';
-import 'package:ecommerce/view/all_products/all_products_screen_arguments.dart';
+import 'package:ecommerce/view/all_products/products_filter_screen.dart';
+import 'package:ecommerce/view/all_products/products_filter_screen_arguments.dart';
 import 'package:ecommerce/view/confirm_password/create_new_password.dart';
 import 'package:ecommerce/view/edit_profile/edit_profile_screen.dart';
 import 'package:ecommerce/view/forgot_password/forgot_password_screen.dart';
@@ -69,11 +69,14 @@ class AppRoutes {
             productId: args.productId,
           ),
         );
-      case RouteNames.allProductsScreen:
-        AllProductsScreenArguments args =
-            settings.arguments as AllProductsScreenArguments;
+      case RouteNames.productsFilter:
+        ProductsFilerScreenArguments args =
+            settings.arguments as ProductsFilerScreenArguments;
         return MaterialPageRoute(
-          builder: (context) => AllProductsScreen(title: args.title),
+          builder: (context) => ProductsFilterScreen(
+            title: args.title,
+            categoryId: args.categoryId,
+          ),
         );
       case RouteNames.wishlistScreen:
         return MaterialPageRoute(
