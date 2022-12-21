@@ -4,13 +4,24 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
+import 'package:ecommerce/helpers/nav_key_helper.dart';
+import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/utils/app_popups.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class AppExceptions {
   static void handleError(Object exception) {
     if (exception is DioError) {
-      if (exception.response?.data['message'] != null) {
+      if (exception.response?.statusCode == 403 &&
+          exception.response?.data["message"] == "forbidden") {
+        Navigator.of(NavKeyHelper.navigatorKey.currentContext!)
+            .pushNamedAndRemoveUntil(
+          RouteNames.loginScreen,
+          (route) => false,
+        );
+      }
+      if (exception.response?.data?['message'] != null) {
         AppPopUps.showToast(
           exception.response!.data["message"],
           AppColors.errorColor,

@@ -1,5 +1,6 @@
 class ApiEndPoints {
-  static const String register = "/register";
-  static const String verifyOtp = "/verifyOtp";
+  static const String signUp = "/signup";
+  static const String userCheck = "/users/";
+  static const String sendOtp = "/auth/otp";
   static const String allCategories = "/admin/categories";
 }

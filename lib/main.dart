@@ -19,6 +19,7 @@ import 'package:ecommerce/controller/stepper_controller.dart';
 import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
+import 'package:ecommerce/helpers/nav_key_helper.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/routes/routes.dart';
 import 'package:ecommerce/services/home_services.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         scrollBehavior: MyBehavior(),
         title: 'Flutter Demo',
+        navigatorKey: NavKeyHelper.navigatorKey,
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: AppColors.bgColor,
           appBarTheme: const AppBarTheme(

@@ -1,22 +1,26 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
-import 'package:ecommerce/config/app_config.dart';
 import 'package:ecommerce/config/app_exceptions.dart';
 import 'package:ecommerce/constants/app_url.dart';
+import 'package:ecommerce/model/sign_up_model.dart';
 
 class ForgetPasswordServices {
-  Future<String?> getOtp(String email) async {
+  Future<UserModel?> userCheck(String email) async {
     try {
       Dio dio = Dio();
 
-      const url = "http://${AppUrls.host}:6000/api/v1/accounts/password";
-      Response response = await dio.post(
-        url,
-        data: {"email": email},
-        options: Options(headers: AppConfig.getApiHeader(token: null)),
+      Response response = await dio.get(
+        "http://${AppUrls.host}:6000/api/v1/users/",
+        queryParameters: {'email': email},
       );
-      if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        return response.data["message"];
+      log('usercheck');
+
+      if (response.statusCode == 200) {
+        UserModel userModel = UserModel.fromJson(response.data);
+        return userModel;
       }
+      return null;
     } catch (e) {
       AppExceptions.handleError(e);
     }

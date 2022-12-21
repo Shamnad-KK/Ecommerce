@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/model/confirm_passwordmodel.dart';
 import 'package:ecommerce/routes/route_names.dart';
@@ -24,6 +26,7 @@ class CreateNewPasswordController extends ChangeNotifier {
 
   void confirmNewPassword(
       CreateNewPasswordModel model, BuildContext context) async {
+    log("qqqq ${model.email}");
     isLoading = true;
     notifyListeners();
     ConfirmPasswordServices().confirmNewPassword(model).then((value) {

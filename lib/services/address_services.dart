@@ -1,30 +1,20 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:ecommerce/config/app_config.dart';
 import 'package:ecommerce/config/app_exceptions.dart';
 import 'package:ecommerce/constants/app_url.dart';
-import 'package:ecommerce/helpers/preference_manager.dart';
 import 'package:ecommerce/model/address_model.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AddressServices {
   Future<bool> addAddress(AddressModel address) async {
     try {
-      PreferenceManager manager =
-          PreferenceManager(await SharedPreferences.getInstance());
-
-      String token = await manager.getToken();
       Dio dio = Dio();
       const url = 'http://${AppUrls.host}:6000/api/v1/profile/address';
       Response response = await dio.post(
         url,
         data: address.toJson(),
-        options: Options(
-          headers: AppConfig.getApiHeader(token: token),
-        ),
       );
 
       log(response.statusCode.toString());
@@ -42,17 +32,10 @@ class AddressServices {
 
   Future<List<AddressModel>?> getAllAddresses() async {
     try {
-      PreferenceManager manager =
-          PreferenceManager(await SharedPreferences.getInstance());
-
-      String token = await manager.getToken();
       Dio dio = Dio();
       const url = 'http://${AppUrls.host}:6000/api/v1/profile/address';
       Response response = await dio.get(
         url,
-        options: Options(
-          headers: AppConfig.getApiHeader(token: token),
-        ),
       );
 
       if (response.statusCode! == 200) {
@@ -75,18 +58,11 @@ class AddressServices {
 
   Future<bool> removeAddress(String addressId) async {
     try {
-      PreferenceManager manager =
-          PreferenceManager(await SharedPreferences.getInstance());
-
-      String token = await manager.getToken();
       Dio dio = Dio();
       final url =
           'http://${AppUrls.host}:6000/api/v1/profile/address/$addressId';
       Response response = await dio.delete(
         url,
-        options: Options(
-          headers: AppConfig.getApiHeader(token: token),
-        ),
       );
 
       if (response.statusCode! == 202) {

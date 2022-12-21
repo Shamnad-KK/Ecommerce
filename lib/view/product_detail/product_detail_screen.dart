@@ -52,30 +52,37 @@ class ProductDetailScreen extends StatelessWidget {
         body: Consumer<ProductDetailController>(
           builder: (context, value, child) => value.isLoading
               ? const CustomLoadingWidget()
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const ProductDetailCarouselWidget(),
-                      Padding(
-                        padding: AppPadding.mainPading,
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            ProductNameRowWidget(),
-                            CustomDivider(color: AppColors.divider),
-                            ProductionDescriptionWidget(),
-                            ProductRatingWidget(),
-                            ProductPriceWidget(),
-                            ProductSizeVariant(),
-                            ProductColorVariant(),
-                            //ProductQuantityWidget(),
-                            AddToCartorBuyButtonsWidget()
+                          children: [
+                            const ProductDetailCarouselWidget(),
+                            Padding(
+                              padding: AppPadding.mainPading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  ProductNameRowWidget(),
+                                  CustomDivider(color: AppColors.divider),
+                                  ProductionDescriptionWidget(),
+                                  ProductRatingWidget(),
+                                  ProductPriceWidget(),
+                                  ProductSizeVariant(),
+                                  ProductColorVariant(),
+                                  //ProductQuantityWidget(),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    const AddToCartorBuyButtonsWidget()
+                  ],
                 ),
         ),
       ),

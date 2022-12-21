@@ -17,8 +17,10 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:provider/provider.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.otpAction});
+  const OtpScreen(
+      {super.key, required this.otpAction, required this.userModel});
   final OtpAction otpAction;
+  final UserModel userModel;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -49,6 +51,7 @@ class _OtpScreenState extends State<OtpScreen> {
     final forgotPasswordController =
         Provider.of<ForgotPasswordController>(context, listen: false);
     log(signupController.userNameController.text);
+    log(widget.userModel.email.toString());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Enter OTP"),
@@ -62,7 +65,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 children: [
                   AppSpacing.kHeight50,
                   Text(
-                      "Code has been sent to +91 ${signupController.phoneController.text}"),
+                    "Code has been sent to ${signupController.emailController.text}",
+                    textAlign: TextAlign.center,
+                  ),
                   AppSpacing.kHeight50,
                   OtpTextField(
                     numberOfFields: 4,
@@ -85,15 +90,21 @@ class _OtpScreenState extends State<OtpScreen> {
                     builder: (BuildContext context, value, Widget? child) {
                       return value.timeRemaining != 0
                           ? Text("Resend code in ${value.timeRemaining} s")
-                          : TextButton(
-                              onPressed: () {
-                                value.setResendVisibility(false);
-                                value.resendOtp(context);
-                              },
-                              child: const Text(
-                                "Resend OTP",
-                                style: AppTextStyle.body2,
-                              ),
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text('Don\'t recieve the code?'),
+                                TextButton(
+                                  onPressed: () {
+                                    value.setResendVisibility(false);
+                                    value.resendOtp(context);
+                                  },
+                                  child: const Text(
+                                    "Resend OTP",
+                                    style: AppTextStyle.body2,
+                                  ),
+                                ),
+                              ],
                             );
                     },
                   ),
@@ -105,14 +116,6 @@ class _OtpScreenState extends State<OtpScreen> {
                           : CustomButtonWidget(
                               text: "Verify",
                               onTap: () {
-                                final otpModel = UserModel(
-                                  userName:
-                                      signupController.userNameController.text,
-                                  email: signupController.emailController.text,
-                                  phone: signupController.phoneController.text,
-                                  password:
-                                      signupController.passwordController.text,
-                                );
                                 final verifyForgotPasswordModel =
                                     VerifyForgotPasswordModel(
                                   email: forgotPasswordController
@@ -122,7 +125,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 otpController.submitOtp(
                                   context,
                                   widget.otpAction,
-                                  otpModel,
+                                  widget.userModel,
                                   verifyForgotPasswordModel,
                                 );
                               },

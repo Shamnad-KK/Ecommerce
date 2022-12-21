@@ -70,7 +70,7 @@ class AddressWidget extends StatelessWidget {
                 children: [
                   Container(
                     width: size.width,
-                    height: size.height * 0.16,
+                    height: size.height * 0.165,
                     decoration: BoxDecoration(
                       color: AppColors.mainColor,
                       borderRadius: BorderRadius.circular(15),

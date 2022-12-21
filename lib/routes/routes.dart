@@ -54,6 +54,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => OtpScreen(
             otpAction: args.otpAction,
+            userModel: args.user,
           ),
         );
 

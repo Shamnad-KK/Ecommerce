@@ -86,21 +86,21 @@ class HomeItemCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
+                        "₹${value.actualPrice.round()}",
+                        style: AppTextStyle.body2,
+                      ),
+                      AppSpacing.kWidth20,
+                      Text(
                         "₹ ${product.price?.round()}",
                         style: AppTextStyle.body2.copyWith(
                             color: AppColors.indicatorInactiveColor,
                             decoration: TextDecoration.lineThrough),
                       ),
-                      AppSpacing.kWidth30,
+                      AppSpacing.kWidth5,
                       Text(
                         "${product.offer?.round()}% OFF",
                         style: AppTextStyle.bodySmall
                             .copyWith(color: Colors.green),
-                      ),
-                      AppSpacing.kWidth5,
-                      Text(
-                        "₹${value.actualPrice.round()}",
-                        style: AppTextStyle.body2,
                       ),
                     ],
                   ),

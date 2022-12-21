@@ -55,7 +55,7 @@ class AddressController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getAllAddresses() async {
+  Future<void> getAllAddresses() async {
     isLoading = true;
     notifyListeners();
     await AddressServices().getAllAddresses().then((value) {
@@ -75,11 +75,10 @@ class AddressController extends ChangeNotifier {
       notifyListeners();
       await AddressServices().removeAddress(addressId).then((value) {
         if (value == true) {
-          getAllAddresses();
-
           AppPopUps.showToast('Address removed', AppColors.successColor);
         }
       });
+      await getAllAddresses();
       isLoading = false;
       notifyListeners();
     });

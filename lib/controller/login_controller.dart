@@ -1,10 +1,14 @@
+import 'package:ecommerce/helpers/token_manager.dart';
 import 'package:ecommerce/model/login_model.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/services/login_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginController extends ChangeNotifier {
   LoginServices loginServices = LoginServices();
+  TokenManager tokenManager = TokenManager();
+  static const FlutterSecureStorage storage = FlutterSecureStorage();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -20,9 +24,13 @@ class LoginController extends ChangeNotifier {
       email: emailController.text,
       password: passwordController.text,
     );
-    loginServices.login(context, loginModel).then(
+    await loginServices.login(context, loginModel).then(
       (value) {
         if (value != null) {
+          tokenManager.setTokens(
+            refreshToken: value.refreshToken,
+            accessToken: value.accessToken,
+          );
           Navigator.pushNamedAndRemoveUntil(
               context, RouteNames.bottomNavBar, (route) => false);
         }

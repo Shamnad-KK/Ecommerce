@@ -3,6 +3,7 @@ import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
+import 'package:ecommerce/widgets/custom_loading_widget.dart';
 import 'package:ecommerce/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,11 +46,17 @@ class ForgotPasswordScreen extends StatelessWidget {
                   hint: "Email",
                 ),
                 AppSpacing.kHeight30,
-                CustomButtonWidget(
-                  text: "Continue",
-                  onTap: () {
-                    forgotPasswordController.onContinue(context, otpAction);
-                  },
+                Consumer<ForgotPasswordController>(
+                  builder: (context, value, child) => value.isLoading
+                      ? const CustomLoadingWidget()
+                      : CustomButtonWidget(
+                          text: "Continue",
+                          onTap: () {
+                            forgotPasswordController.onContinue(
+                              context,
+                            );
+                          },
+                        ),
                 )
               ],
             ),

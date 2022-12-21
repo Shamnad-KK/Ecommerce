@@ -2,7 +2,6 @@ import 'package:ecommerce/controller/onboarding_controller.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/app_padding.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
-import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/view/onboarding/utils/onboard_components_list.dart';
 import 'package:ecommerce/widgets/custom_button.dart';
 import 'package:ecommerce/widgets/custom_indicator_widget.dart';
@@ -69,8 +68,7 @@ class OnboardingScreen extends StatelessWidget {
                                   curve: Curves.slowMiddle,
                                 );
                               } else {
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    RouteNames.loginScreen, (route) => false);
+                                onboardingController.toSignInScreen(context);
                               }
                             },
                           ),

@@ -16,6 +16,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../model/sign_up_model.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -88,8 +90,15 @@ class LoginScreen extends StatelessWidget {
                     AppSpacing.kHeight10,
                     GestureDetector(
                       onTap: () {
-                        final args =
-                            OtpArguments(otpAction: OtpAction.FORGOT_PASSWORD);
+                        final args = OtpArguments(
+                          otpAction: OtpAction.FORGOT_PASSWORD,
+                          user: UserModel(
+                            userName: '',
+                            email: '',
+                            phone: '',
+                            password: '',
+                          ),
+                        );
                         Navigator.pushNamed(
                             context, RouteNames.forgotPasswordScreen,
                             arguments: args);

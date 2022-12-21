@@ -130,8 +130,7 @@ class SignUpScreen extends StatelessWidget {
                                 text: "Sign up",
                                 onTap: () async {
                                   if (formKey.currentState!.validate()) {
-                                    await signUpController
-                                        .registerUser(context);
+                                    await signUpController.userCheck(context);
                                   }
                                 },
                               );

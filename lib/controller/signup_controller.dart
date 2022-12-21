@@ -1,8 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/model/sign_up_model.dart';
 import 'package:ecommerce/routes/route_names.dart';
+import 'package:ecommerce/services/forget_password_services.dart';
+import 'package:ecommerce/services/otp_services.dart';
 import 'package:ecommerce/services/signup_services.dart';
+import 'package:ecommerce/utils/app_popups.dart';
 import 'package:ecommerce/view/otp/otp_arguments.dart';
 import 'package:ecommerce/view/otp/utils/otp_enums.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +19,8 @@ class SignUpController extends ChangeNotifier {
   TextEditingController confirmPasswordController = TextEditingController();
 
   SignUpServices signUpServices = SignUpServices();
+  ForgetPasswordServices forgetPasswordServices = ForgetPasswordServices();
+  OtpServices otpServices = OtpServices();
 
   bool isLoading = false;
 
@@ -26,9 +32,10 @@ class SignUpController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> registerUser(BuildContext context) async {
+  Future<void> userCheck(BuildContext context) async {
     isLoading = true;
     notifyListeners();
+
     final user = UserModel(
       userName: userNameController.text,
       email: emailController.text,
@@ -36,14 +43,30 @@ class SignUpController extends ChangeNotifier {
       password: passwordController.text,
     );
 
-    signUpServices.registerUser(user, context).then((value) {
-      isLoading = false;
-      notifyListeners();
+    await forgetPasswordServices
+        .userCheck(emailController.text)
+        .then((value) async {
+      //If null means user with this email is not null ( Already exists )
       if (value != null) {
-        final args = OtpArguments(otpAction: OtpAction.SIGN_UP);
-        Navigator.of(context).pushNamed(RouteNames.otpScreen, arguments: args);
+        AppPopUps.showToast("User already exists", AppColors.errorColor);
+        isLoading = false;
+        notifyListeners();
+        return;
+      } else {
+        await otpServices.sendOtp(emailController.text).then((value) {
+          if (value != null) {
+            final args = OtpArguments(
+              otpAction: OtpAction.SIGN_UP,
+              user: user,
+            );
+            Navigator.of(context)
+                .pushNamed(RouteNames.otpScreen, arguments: args);
+          }
+        });
       }
     });
+    isLoading = false;
+    notifyListeners();
   }
 
   String? usernameValidation(String? value) {
