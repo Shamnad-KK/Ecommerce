@@ -4,6 +4,8 @@ import 'package:ecommerce/helpers/app_spacing.dart';
 import 'package:ecommerce/helpers/apptext_style.dart';
 import 'package:flutter/material.dart';
 
+import '../../../widgets/custom_loading_widget.dart';
+
 class HomeScreenCategoryWidget extends StatelessWidget {
   const HomeScreenCategoryWidget({
     Key? key,
@@ -33,7 +35,7 @@ class HomeScreenCategoryWidget extends StatelessWidget {
               color: AppColors.homeCategoryIcons,
               height: size.height * 0.1,
               width: size.width * 0.1,
-              //placeholder: (context, url) => const CustomLoadingWidget(),
+              placeholder: (context, url) => const CustomLoadingWidget(),
               errorWidget: (context, url, error) => const Icon(
                 Icons.error,
                 color: AppColors.whiteColor,

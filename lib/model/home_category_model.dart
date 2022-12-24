@@ -1,18 +1,17 @@
-class HomeCategoryModel {
-  final String id;
-  final String name;
-  final String image;
-  HomeCategoryModel({
+class CategoryModel {
+  CategoryModel({
     required this.id,
     required this.name,
     required this.image,
   });
 
-  factory HomeCategoryModel.fromJson(Map<String, dynamic> json) {
-    return HomeCategoryModel(
-      id: json['_id'] ?? "0",
-      name: json['category'] ?? "No category",
-      image: json['icon'] ?? "No image",
-    );
-  }
+  final String id;
+  final String name;
+  final String image;
+
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
+        id: json["_id"],
+        name: json["name"],
+        image: json["image"],
+      );
 }

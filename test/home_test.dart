@@ -105,17 +105,17 @@ void main() {
         "get categories",
         () {
           final categoriesFromServices = [
-            HomeCategoryModel(
+            CategoryModel(
               id: "1",
               name: "test category 1",
               image: "test image 1",
             ),
-            HomeCategoryModel(
+            CategoryModel(
               id: "2",
               name: "test category 2",
               image: "test image 2",
             ),
-            HomeCategoryModel(
+            CategoryModel(
               id: "3",
               name: "test category 3",
               image: "test image 3",

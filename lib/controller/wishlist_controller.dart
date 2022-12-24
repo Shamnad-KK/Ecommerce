@@ -1,42 +1,48 @@
 import 'dart:developer';
 
+import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/services/wishlist_service.dart';
+import 'package:ecommerce/utils/app_popups.dart';
+import 'package:ecommerce/view/product_detail/product_detail_arguments.dart';
 import 'package:flutter/material.dart';
 
+import '../model/product_model.dart';
 import '../model/wishlist_model.dart';
 import '../routes/route_names.dart';
 
 class WishlistController extends ChangeNotifier {
   WishlistController() {
-    getAllWishlist();
+    initialCalls();
   }
 
-  num offerPrice = 0;
-  num actualPrice = 0;
+  Future<void> initialCalls() async {
+    await getAllWishlist();
+  }
 
   bool isLoading = false;
 
-  void calculatePrice(WishlistProductElement product) {
-    if (wishlist.isNotEmpty) {
-      offerPrice = product.price * product.offer / 100;
-      actualPrice = product.price - offerPrice;
-    }
-  }
-
   List<WishlistProductElement> wishlist = [];
 
-  void addToWishlist(String productId) async {
+  void addOrRemoveWishlist(String productId) async {
     isLoading = true;
     notifyListeners();
-    await WishListService().addToWishlist(productId).then((value) {
-      if (value == true) {
-        log('added to wishlist');
+    await WishListService().addOrRemoveWishlist(productId).then((value) {
+      if (value != null) {
+        if (value == 201) {
+          AppPopUps.showToast(
+              'Product added to wishlist', AppColors.successColor);
+        } else {
+          AppPopUps.showToast(
+              'Product removed from wishlist', AppColors.successColor);
+        }
       }
     });
-    getAllWishlist();
+    await getAllWishlist();
+    isLoading = false;
+    notifyListeners();
   }
 
-  void getAllWishlist() async {
+  Future<void> getAllWishlist() async {
     isLoading = true;
     notifyListeners();
     await WishListService().getAllWishlist().then((value) {
@@ -49,19 +55,20 @@ class WishlistController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeFromWishlist(String productId) async {
-    await WishListService().removeFromWishlist(productId).then((value) {
-      if (value == true) {
-        log('removed successfully');
-      }
-    });
-    getAllWishlist();
-  }
+  // void removeFromWishlist(String productId) async {
+  //   await WishListService().removeFromWishlist(productId).then((value) {
+  //     if (value == true) {
+  //       log('removed successfully');
+  //     }
+  //   });
+  //   getAllWishlist();
+  // }
 
   void gotoProductDetails(BuildContext context, String productId) {
+    final args = ProductDetailArguments(productId: productId);
     Navigator.of(context).pushNamed(
       RouteNames.productDetail,
-      arguments: {'productId': productId},
+      arguments: args,
     );
   }
 }

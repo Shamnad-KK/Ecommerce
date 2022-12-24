@@ -35,13 +35,13 @@ class ProductPriceWidget extends StatelessWidget {
                   return Row(
                     children: [
                       Text(
-                        "₹${productDetailConsumer.actualPrice.round()}",
+                        "₹${productDetailConsumer.productElement?.discountPrice?.round()}",
                         style: AppTextStyle.titleLarge
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       AppSpacing.kWidth10,
                       Text(
-                        "₹${productDetailConsumer.totalPrice.round()}",
+                        "₹${productDetailConsumer.productElement?.price?.round()}",
                         style: AppTextStyle.headLine6.copyWith(
                             color: AppColors.indicatorInactiveColor,
                             decoration: TextDecoration.lineThrough,

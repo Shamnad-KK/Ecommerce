@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/app_url.dart';
 import '../../../controller/product_detail_controller.dart';
 import '../../../helpers/app_colors.dart';
 import '../../../utils/app_utils.dart';
@@ -19,10 +20,7 @@ class ProductDetailCarouselWidget extends StatelessWidget {
         builder: (BuildContext context, productDetailConsumer, Widget? child) {
       final product = productDetailConsumer.productElement;
       return CarouselSlider.builder(
-        itemCount: product!
-            .colors?[productDetailConsumer.selectedImageListIndex]
-            .images!
-            .length,
+        itemCount: product!.image!.length,
         itemBuilder: (context, index, realIndex) {
           return Container(
             height: size.height * 0.51,
@@ -30,10 +28,8 @@ class ProductDetailCarouselWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.mainColor,
               image: DecorationImage(
-                image: NetworkImage(product
-                        .colors?[productDetailConsumer.selectedImageListIndex]
-                        .images?[index] ??
-                    AppUtils.dummyImage),
+                image: NetworkImage(
+                    "${AppUrls.networkImageUrl}products/${product.image?[index] ?? AppUtils.dummyImage}"),
                 fit: BoxFit.fill,
               ),
             ),
@@ -44,10 +40,7 @@ class ProductDetailCarouselWidget extends StatelessWidget {
                 child: CustomIndicatorWidget(
                     index: index,
                     activeColor: AppColors.mainColor,
-                    count: product
-                        .colors![productDetailConsumer.selectedImageListIndex]
-                        .images!
-                        .length,
+                    count: product.image!.length,
                     inactiveColor: AppColors.indicatorInactiveColor),
               ),
             ),

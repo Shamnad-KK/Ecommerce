@@ -29,15 +29,13 @@ class AddorRemoveFavoriteWidget extends StatelessWidget {
         builder: (BuildContext context, value, Widget? child) {
           List<String> idList = [];
           idList = value.wishlist.map((e) {
-            return e.id;
+            return e.product.id!;
           }).toList();
 
           bool contains = idList.contains(productId);
           return InkWell(
             onTap: () {
-              !contains
-                  ? value.addToWishlist(productId)
-                  : value.removeFromWishlist(productId);
+              value.addOrRemoveWishlist(productId);
             },
             child: Icon(
               CupertinoIcons.heart_fill,

@@ -22,8 +22,6 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // NavigationArguments arguments = NavigationArguments(context);
-    // String productId = arguments.passedData['productId'];
     log(productId);
     final productDetailController =
         Provider.of<ProductDetailController>(context, listen: false);
@@ -31,12 +29,9 @@ class ProductDetailScreen extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) async {
         await productDetailController.getOneProduct(context, productId);
-        productDetailController.calculatePrice();
-        productDetailController
-            .initializeProductPrices(productDetailController.productElement!);
+
         productDetailController.setSizeIndex(0);
-        productDetailController.setColorIndex(0);
-        productDetailController.setInitialQuantity(1);
+        productDetailController.setCarouselImage(0);
       },
     );
     log('product detail build called');
@@ -68,11 +63,11 @@ class ProductDetailScreen extends StatelessWidget {
                                 children: const [
                                   ProductNameRowWidget(),
                                   CustomDivider(color: AppColors.divider),
-                                  ProductionDescriptionWidget(),
+                                  // ProductionDescriptionWidget(),
                                   ProductRatingWidget(),
                                   ProductPriceWidget(),
                                   ProductSizeVariant(),
-                                  ProductColorVariant(),
+                                  // ProductColorVariant(),
                                   //ProductQuantityWidget(),
                                 ],
                               ),

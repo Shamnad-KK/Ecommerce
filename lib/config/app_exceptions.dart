@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:ecommerce/helpers/app_colors.dart';
 import 'package:ecommerce/helpers/nav_key_helper.dart';
+import 'package:ecommerce/helpers/token_manager.dart';
 import 'package:ecommerce/routes/route_names.dart';
 import 'package:ecommerce/utils/app_popups.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,12 +15,15 @@ class AppExceptions {
   static void handleError(Object exception) {
     if (exception is DioError) {
       if (exception.response?.statusCode == 403 &&
-          exception.response?.data["message"] == "forbidden") {
+          exception.response?.data["message"] == "Forbidden") {
+        TokenManager tokenManager = TokenManager();
+        tokenManager.deleteTokens();
         Navigator.of(NavKeyHelper.navigatorKey.currentContext!)
             .pushNamedAndRemoveUntil(
           RouteNames.loginScreen,
           (route) => false,
         );
+        return;
       }
       if (exception.response?.data?['message'] != null) {
         AppPopUps.showToast(

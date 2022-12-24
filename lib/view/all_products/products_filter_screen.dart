@@ -76,8 +76,7 @@ class ProductsFilterScreen extends StatelessWidget {
                                   color: AppColors.mainColor,
                                   image: DecorationImage(
                                     image: CachedNetworkImageProvider(
-                                      product.colors?[0].images?[0] ??
-                                          AppUtils.dummyImage,
+                                      product.image?[0] ?? AppUtils.dummyImage,
                                     ),
                                     fit: BoxFit.fill,
                                   ),

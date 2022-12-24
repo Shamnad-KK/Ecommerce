@@ -12,6 +12,8 @@ import 'package:ecommerce/widgets/add_or_remove_favorite_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/app_url.dart';
+
 class HomeItemCardWidget extends StatelessWidget {
   const HomeItemCardWidget({
     Key? key,
@@ -38,8 +40,6 @@ class HomeItemCardWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             final product = list[index];
 
-            value.calculatePrice(product);
-
             return GestureDetector(
               onTap: () {
                 log(product.id!);
@@ -58,7 +58,7 @@ class HomeItemCardWidget extends StatelessWidget {
                       color: AppColors.mainColor,
                       image: DecorationImage(
                         image: CachedNetworkImageProvider(
-                          product.colors?[0].images?[0] ?? AppUtils.dummyImage,
+                          "${AppUrls.networkImageUrl}products/${product.image?[0] ?? AppUtils.dummyImage}",
                         ),
                         fit: BoxFit.fill,
                       ),
@@ -86,7 +86,7 @@ class HomeItemCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "₹${value.actualPrice.round()}",
+                        "₹${product.discountPrice?.round()}",
                         style: AppTextStyle.body2,
                       ),
                       AppSpacing.kWidth20,

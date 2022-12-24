@@ -20,24 +20,15 @@ class HomeController extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  // bool get showLoading =>
-  //     carousalList.isEmpty ||
-  //     categoryList.isEmpty ||
-  //     products.isEmpty ||
-  //     _isLoading == true;
-
   List<ProductElement> products = [];
 
-  num offerPrice = 0;
-  num actualPrice = 0;
-
-  List<HomeCategoryModel> categoryList = [];
+  List<CategoryModel> categoryList = [];
 
   List<Carrousals> carousalList = [];
 
   void callInit() async {
     log('poooy');
-    await getCarousals();
+    //await getCarousals();
 
     log('hy');
     await getAllCategories();
@@ -83,13 +74,6 @@ class HomeController extends ChangeNotifier {
     await future;
     _isLoading = false;
     notifyListeners();
-  }
-
-  void calculatePrice(ProductElement? product) {
-    if (product != null) {
-      offerPrice = product.price! * product.offer! / 100;
-      actualPrice = product.price! - offerPrice;
-    }
   }
 
   void gotoProductDetails(BuildContext context, String productId) {

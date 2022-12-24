@@ -5,11 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants/app_url.dart';
 import '../../controller/wishlist_controller.dart';
 import '../../helpers/app_colors.dart';
 import '../../helpers/app_padding.dart';
 import '../../helpers/app_spacing.dart';
 import '../../helpers/apptext_style.dart';
+import '../../model/product_model.dart';
+import '../../utils/app_utils.dart';
 import '../home/widgets/product_status_widget.dart';
 
 class WishlistScreen extends StatelessWidget {
@@ -57,13 +60,11 @@ class WishlistScreen extends StatelessWidget {
                           mainAxisSpacing: 30,
                         ),
                         itemBuilder: (context, index) {
-                          final WishlistProductElement product = list[index];
-
-                          value.calculatePrice(product);
+                          final ProductElement product = list[index].product;
 
                           return GestureDetector(
                             onTap: () {
-                              value.gotoProductDetails(context, product.id);
+                              value.gotoProductDetails(context, product.id!);
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +77,7 @@ class WishlistScreen extends StatelessWidget {
                                     color: AppColors.mainColor,
                                     image: DecorationImage(
                                       image: NetworkImage(
-                                        product.colors[0].images[0],
+                                        "${AppUrls.networkImageUrl}products/${product.image?[0] ?? AppUtils.dummyImage}",
                                       ),
                                       fit: BoxFit.fill,
                                     ),
@@ -87,14 +88,14 @@ class WishlistScreen extends StatelessWidget {
                                     child: Align(
                                       alignment: Alignment.topRight,
                                       child: AddorRemoveFavoriteWidget(
-                                        productId: product.id,
+                                        productId: product.id!,
                                       ),
                                     ),
                                   ),
                                 ),
                                 AppSpacing.kHeight5,
                                 Text(
-                                  product.name,
+                                  product.name ?? "",
                                   style: AppTextStyle.body2,
                                 ),
                                 SizedBox(
@@ -104,23 +105,23 @@ class WishlistScreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "₹ ${product.price.round()}",
+                                      "₹${product.discountPrice?.round()}",
+                                      style: AppTextStyle.body2,
+                                    ),
+                                    AppSpacing.kWidth20,
+                                    Text(
+                                      "₹ ${product.price?.round()}",
                                       style: AppTextStyle.body2.copyWith(
                                           color:
                                               AppColors.indicatorInactiveColor,
                                           decoration:
                                               TextDecoration.lineThrough),
                                     ),
-                                    AppSpacing.kWidth30,
-                                    Text(
-                                      "${product.offer.round()}% OFF",
-                                      style: AppTextStyle.bodySmall
-                                          .copyWith(color: Colors.green),
-                                    ),
                                     AppSpacing.kWidth5,
                                     Text(
-                                      "₹${value.actualPrice.round()}",
-                                      style: AppTextStyle.body2,
+                                      "${product.offer?.round()}% OFF",
+                                      style: AppTextStyle.bodySmall
+                                          .copyWith(color: Colors.green),
                                     ),
                                   ],
                                 ),

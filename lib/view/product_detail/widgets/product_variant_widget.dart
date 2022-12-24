@@ -64,68 +64,68 @@ class ProductSizeVariant extends StatelessWidget {
   }
 }
 
-class ProductColorVariant extends StatelessWidget {
-  const ProductColorVariant({super.key});
+// class ProductColorVariant extends StatelessWidget {
+//   const ProductColorVariant({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final product = context.read<ProductDetailController>().productElement;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Color", style: AppTextStyle.body1),
-        AppSpacing.kHeight5,
-        Consumer<ProductDetailController>(
-          builder: (BuildContext context, value, Widget? child) {
-            return SizedBox(
-              height: size.height * 0.05,
-              child: Row(
-                children: [
-                  SizedBox(
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: product!.colors!.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            value.setColorIndex(index);
-                            value.setCarouselImage(index);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: AppColors.whiteColor, width: 1),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: value.selectedColorIndex == index
-                                        ? AppColors.whiteColor
-                                        : AppColors.transparent,
-                                    width: 3),
-                              ),
-                              child: CircleAvatar(
-                                backgroundColor: Color(int.parse(
-                                    product.colors?[index].color ?? "0xFFB")),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-        AppSpacing.kHeight20,
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final size = MediaQuery.of(context).size;
+//     final product = context.read<ProductDetailController>().productElement;
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         const Text("Color", style: AppTextStyle.body1),
+//         AppSpacing.kHeight5,
+//         Consumer<ProductDetailController>(
+//           builder: (BuildContext context, value, Widget? child) {
+//             return SizedBox(
+//               height: size.height * 0.05,
+//               child: Row(
+//                 children: [
+//                   SizedBox(
+//                     child: ListView.builder(
+//                       scrollDirection: Axis.horizontal,
+//                       shrinkWrap: true,
+//                       itemCount: product!.colors!.length,
+//                       itemBuilder: (context, index) {
+//                         return GestureDetector(
+//                           onTap: () {
+//                             value.setColorIndex(index);
+//                             value.setCarouselImage(index);
+//                           },
+//                           child: Container(
+//                             padding: EdgeInsets.zero,
+//                             decoration: BoxDecoration(
+//                               shape: BoxShape.circle,
+//                               border: Border.all(
+//                                   color: AppColors.whiteColor, width: 1),
+//                             ),
+//                             child: Container(
+//                               decoration: BoxDecoration(
+//                                 shape: BoxShape.circle,
+//                                 border: Border.all(
+//                                     color: value.selectedColorIndex == index
+//                                         ? AppColors.whiteColor
+//                                         : AppColors.transparent,
+//                                     width: 3),
+//                               ),
+//                               child: CircleAvatar(
+//                                 backgroundColor: Color(int.parse(
+//                                     product.colors?[index].color ?? "0xFFB")),
+//                               ),
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             );
+//           },
+//         ),
+//         AppSpacing.kHeight20,
+//       ],
+//     );
+//   }
+// }

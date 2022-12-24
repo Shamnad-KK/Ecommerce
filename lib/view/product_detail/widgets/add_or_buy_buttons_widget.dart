@@ -2,7 +2,6 @@ import 'package:ecommerce/controller/product_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controller/cart_controller.dart';
 import '../../../helpers/app_spacing.dart';
 import '../../../routes/route_names.dart';
 import '../../../widgets/custom_button.dart';
@@ -14,7 +13,7 @@ class AddToCartorBuyButtonsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartController = Provider.of<CartController>(context, listen: false);
+    // final cartController = Provider.of<CartController>(context, listen: false);
     return Row(
       children: [
         Expanded(
@@ -23,14 +22,14 @@ class AddToCartorBuyButtonsWidget extends StatelessWidget {
               return CustomButtonWidget(
                 text: "Add to cart",
                 onTap: () {
-                  cartController.addProductToCart(
-                    context: context,
-                    productId: value.productElement!.id!,
-                    selectedColor: value.productElement!
-                        .colors![value.selectedColorIndex].color!,
-                    selectedSize:
-                        value.productElement!.size![value.selectedSizeIndex],
-                  );
+                  // cartController.addProductToCart(
+                  //   context: context,
+                  //   productId: value.productElement!.id!,
+                  //   selectedColor: value.productElement!
+                  //       .colors![value.selectedColorIndex].color!,
+                  //   selectedSize:
+                  //       value.productElement!.size![value.selectedSizeIndex],
+                  // );
                 },
               );
             },
